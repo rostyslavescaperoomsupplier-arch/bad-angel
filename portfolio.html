@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Salon Urody BAD ANGEL Szczecin</title>
+<meta name="description" content="Portfolio prac Salon Urody BAD ANGEL w Szczecinie — manicure, pedicure, rzęsy, brwi.">
+<link rel="icon" href="assets/emblem.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=6">
+<script>document.documentElement.classList.add('js')</script>
+<script defer src="translations.js?v=6"></script>
+<script defer src="app.js?v=6"></script>
+</head>
+<body>
+<header id="topbar">
+  <a href="index.html" class="brand">BAD&nbsp;ANGEL</a>
+  <nav>
+    <a href="index.html#uslugi" data-i18n="nav_services">Usługi</a>
+    <a href="portfolio.html" data-i18n="nav_portfolio">Portfolio</a>
+    <a href="kalkulator.html" data-i18n="nav_calc">Kalkulator</a>
+    <a href="index.html#zespol" data-i18n="nav_team">Zespół</a>
+    <a href="index.html#kontakt" data-i18n="nav_contact">Kontakt</a>
+  </nav>
+  <div class="nav-cta">
+    <div class="lang-switch"><button data-lang="pl" onclick="__setLang('pl')">PL</button><button data-lang="uk" onclick="__setLang('uk')">UA</button><button data-lang="ru" onclick="__setLang('ru')">RU</button><button data-lang="en" onclick="__setLang('en')">EN</button></div>
+    <a class="btn solid sm" href="https://booksy.com/pl-pl/14573_salon-urody-bad-angel_salon-kosmetyczny_18078_szczecin" target="_blank" rel="noopener" data-i18n="btn_book">Rezerwuj</a>
+    <button class="burger" aria-label="Menu" onclick="document.getElementById('drawer').classList.add('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<div class="drawer" id="drawer">
+  <button class="close" onclick="document.getElementById('drawer').classList.remove('open')">&times;</button>
+  <a href="index.html#uslugi" onclick="closeDrawer()" data-i18n="nav_services">Usługi</a>
+  <a href="portfolio.html" onclick="closeDrawer()" data-i18n="nav_portfolio">Portfolio</a>
+  <a href="kalkulator.html" onclick="closeDrawer()" data-i18n="nav_calc">Kalkulator</a>
+  <a href="index.html#zespol" onclick="closeDrawer()" data-i18n="nav_team">Zespół</a>
+  <a href="index.html#opinie" onclick="closeDrawer()" data-i18n="nav_reviews">Opinie</a>
+  <a href="index.html#kontakt" onclick="closeDrawer()" data-i18n="nav_contact">Kontakt</a>
+  <a href="https://booksy.com/pl-pl/14573_salon-urody-bad-angel_salon-kosmetyczny_18078_szczecin" target="_blank" rel="noopener" data-i18n="book_online">Rezerwacja online →</a>
+  <div class="lang-switch"><button data-lang="pl" onclick="__setLang('pl')">PL</button><button data-lang="uk" onclick="__setLang('uk')">UA</button><button data-lang="ru" onclick="__setLang('ru')">RU</button><button data-lang="en" onclick="__setLang('en')">EN</button></div>
+</div>
+<main>
+  <section class="block" style="padding-top:120px;background:#0b0b0c">
+    <div class="wrap">
+      <div class="section-head reveal"><h2 data-i18n="portfolio_title">Portfolio</h2><p data-i18n="portfolio_sub">Nasze prace — wybierz kategorię.</p></div>
+      <div class="filters" id="pfFilters"><button class="active" data-filter="all" data-i18n="filter_all">Wszystko</button><button data-filter="manicure" data-i18n="cat_manicure_name">Manicure</button><button data-filter="pedicure" data-i18n="cat_pedicure_name">Pedicure</button><button data-filter="rzesy" data-i18n="cat_rzesy_name">Przedłużanie rzęs</button><button data-filter="brwi" data-i18n="cat_brwi_name">Brwi i rzęsy</button></div>
+      <div class="gallery"><div class="cols" id="pfGrid"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/01.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/02.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/03.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/04.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/05.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/06.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/07.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/08.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/09.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/10.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/11.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/12.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/13.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/14.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/15.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/16.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/17.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/18.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/19.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/20.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/21.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/22.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/23.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/24.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/25.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/26.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/27.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/28.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/29.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/30.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/31.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/32.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/33.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="manicure" src="assets/gallery/manicure/34.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="pedicure" src="assets/gallery/pedicure/01.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="pedicure" src="assets/gallery/pedicure/02.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="pedicure" src="assets/gallery/pedicure/03.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="pedicure" src="assets/gallery/pedicure/04.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="pedicure" src="assets/gallery/pedicure/05.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="pedicure" src="assets/gallery/pedicure/06.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="pedicure" src="assets/gallery/pedicure/07.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="pedicure" src="assets/gallery/pedicure/08.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="pedicure" src="assets/gallery/pedicure/09.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="pedicure" src="assets/gallery/pedicure/10.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="pedicure" src="assets/gallery/pedicure/11.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="pedicure" src="assets/gallery/pedicure/12.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="pedicure" src="assets/gallery/pedicure/13.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="pedicure" src="assets/gallery/pedicure/14.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="pedicure" src="assets/gallery/pedicure/15.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="rzesy" src="assets/gallery/rzesy/01.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="rzesy" src="assets/gallery/rzesy/02.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="rzesy" src="assets/gallery/rzesy/03.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="rzesy" src="assets/gallery/rzesy/04.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="rzesy" src="assets/gallery/rzesy/05.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="rzesy" src="assets/gallery/rzesy/06.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="brwi" src="assets/gallery/brwi/01.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="brwi" src="assets/gallery/brwi/02.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="brwi" src="assets/gallery/brwi/03.jpg" alt="Salon Urody BAD ANGEL"><img loading="lazy" data-cat="brwi" src="assets/gallery/brwi/04.jpg" alt="Salon Urody BAD ANGEL"></div></div>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="brand">BAD&nbsp;ANGEL</div>
+  <div class="soc">
+    <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://booksy.com/pl-pl/14573_salon-urody-bad-angel_salon-kosmetyczny_18078_szczecin" target="_blank" rel="noopener">Booksy</a>
+  </div>
+  <small>© 2026 Salon Urody BAD ANGEL · aleja Wyzwolenia 5/10, Szczecin</small>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Do góry">↑</button>
+<div class="mcta">
+  <a class="btn solid" href="https://booksy.com/pl-pl/14573_salon-urody-bad-angel_salon-kosmetyczny_18078_szczecin" target="_blank" rel="noopener" data-i18n="btn_book_visit">Zarezerwuj wizytę</a>
+</div>
+<div class="lb" id="lightbox">
+  <button class="lb-close" aria-label="Zamknij">&times;</button>
+  <button class="lb-nav lb-prev" aria-label="Poprzednie">‹</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-nav lb-next" aria-label="Następne">›</button>
+</div>
+<script>
+function closeDrawer(){document.getElementById('drawer').classList.remove('open');}
+var bar=document.getElementById('topbar');
+addEventListener('scroll',function(){bar.classList.toggle('solid',scrollY>60);});
+</script>
+</body>
+</html>

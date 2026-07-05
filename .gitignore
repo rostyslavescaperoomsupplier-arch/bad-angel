@@ -1,0 +1,12 @@
+.DS_Store
+*.zip
+# oryginalne zdjęcia źródłowe w katalogu głównym (nie potrzebne na żywej stronie)
+/IMG_*.JPG
+/IMG_*.PNG
+/*.jpeg
+/2026-*.jpg
+/logo.PNG
+/ангелина
+/виктория.jpg
+# brelok 3D — osobny materiał, nie część strony
+/3д/

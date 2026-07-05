@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angelina — Paznokcie i stylizacja brwi · Salon Urody BAD ANGEL</title>
+<meta name="description" content="Angelina — Paznokcie i stylizacja brwi w Salonie Urody BAD ANGEL w Szczecinie. Poznaj naszą specjalistkę i zarezerwuj wizytę.">
+<link rel="icon" href="assets/emblem.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=6">
+<script>document.documentElement.classList.add('js')</script>
+<script defer src="translations.js?v=6"></script>
+<script defer src="app.js?v=6"></script>
+</head>
+<body>
+<header id="topbar">
+  <a href="index.html" class="brand">BAD&nbsp;ANGEL</a>
+  <nav>
+    <a href="index.html#uslugi" data-i18n="nav_services">Usługi</a>
+    <a href="portfolio.html" data-i18n="nav_portfolio">Portfolio</a>
+    <a href="kalkulator.html" data-i18n="nav_calc">Kalkulator</a>
+    <a href="index.html#zespol" data-i18n="nav_team">Zespół</a>
+    <a href="index.html#kontakt" data-i18n="nav_contact">Kontakt</a>
+  </nav>
+  <div class="nav-cta">
+    <div class="lang-switch"><button data-lang="pl" onclick="__setLang('pl')">PL</button><button data-lang="uk" onclick="__setLang('uk')">UA</button><button data-lang="ru" onclick="__setLang('ru')">RU</button><button data-lang="en" onclick="__setLang('en')">EN</button></div>
+    <a class="btn solid sm" href="https://booksy.com/pl-pl/14573_salon-urody-bad-angel_salon-kosmetyczny_18078_szczecin" target="_blank" rel="noopener" data-i18n="btn_book">Rezerwuj</a>
+    <button class="burger" aria-label="Menu" onclick="document.getElementById('drawer').classList.add('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<div class="drawer" id="drawer">
+  <button class="close" onclick="document.getElementById('drawer').classList.remove('open')">&times;</button>
+  <a href="index.html#uslugi" onclick="closeDrawer()" data-i18n="nav_services">Usługi</a>
+  <a href="portfolio.html" onclick="closeDrawer()" data-i18n="nav_portfolio">Portfolio</a>
+  <a href="kalkulator.html" onclick="closeDrawer()" data-i18n="nav_calc">Kalkulator</a>
+  <a href="index.html#zespol" onclick="closeDrawer()" data-i18n="nav_team">Zespół</a>
+  <a href="index.html#opinie" onclick="closeDrawer()" data-i18n="nav_reviews">Opinie</a>
+  <a href="index.html#kontakt" onclick="closeDrawer()" data-i18n="nav_contact">Kontakt</a>
+  <a href="https://booksy.com/pl-pl/14573_salon-urody-bad-angel_salon-kosmetyczny_18078_szczecin" target="_blank" rel="noopener" data-i18n="book_online">Rezerwacja online →</a>
+  <div class="lang-switch"><button data-lang="pl" onclick="__setLang('pl')">PL</button><button data-lang="uk" onclick="__setLang('uk')">UA</button><button data-lang="ru" onclick="__setLang('ru')">RU</button><button data-lang="en" onclick="__setLang('en')">EN</button></div>
+</div>
+<main>
+  <div class="crumbs" style="position:relative;top:96px;margin:0 auto;max-width:1100px;padding:0 24px">
+    <a href="index.html" data-i18n="crumb_home">Strona główna</a> &nbsp;/&nbsp; <a href="index.html#zespol" data-i18n="nav_team">Zespół</a> &nbsp;/&nbsp; Angelina
+  </div>
+  <section class="master">
+    <div class="portrait" style="background:url('assets/mistrz-angelina.jpg') center/cover, linear-gradient(160deg,#26262c,#0e0e11);"></div>
+    <div>
+      <div class="role" data-i18n="role_angelina">Paznokcie i stylizacja brwi</div>
+      <h1>Angelina</h1>
+      <div class="bio"><p data-i18n="bio_angelina_0">Wykwalifikowana specjalistka beauty, dla której liczą się estetyka i jakość. Łączy techniczną precyzję, artystyczny smak i uważne podejście do każdego klienta.</p><p data-i18n="bio_angelina_1">Manicure i pedicure wykonuje z uwzględnieniem anatomii dłoni i stóp — jej pokrycia są trwałe, wygodne i estetyczne. Biegle włada technikami nail-artu, w tym klasycznym i nowoczesnym frenchem.</p><p data-i18n="bio_angelina_2">Zajmuje się też stylizacją brwi: laminacją z trwałym efektem oraz koloryzacją dobraną indywidualnie do rysów twarzy.</p></div>
+      <div class="serves">
+        <div class="k"><span data-i18n="master_services_by">Usługi u</span> Angeliny</div>
+        <a class="chip" href="usluga-manicure.html" data-i18n="cat_manicure_name">Manicure</a><a class="chip" href="usluga-brwi.html" data-i18n="cat_brwi_name">Brwi i rzęsy</a><a class="chip" href="usluga-spa.html" data-i18n="cat_spa_name">Parafina & SPA dłoni</a>
+      </div>
+      <div class="btns" style="justify-content:flex-start;padding:0;margin-top:40px">
+        <a class="btn solid" href="https://booksy.com/pl-pl/14573_salon-urody-bad-angel_salon-kosmetyczny_18078_szczecin" target="_blank" rel="noopener" data-i18n="btn_book_visit">Zarezerwuj wizytę</a>
+        <a class="btn ghost" href="index.html#zespol" data-i18n="master_all_team">Cały zespół</a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="brand">BAD&nbsp;ANGEL</div>
+  <div class="soc">
+    <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://booksy.com/pl-pl/14573_salon-urody-bad-angel_salon-kosmetyczny_18078_szczecin" target="_blank" rel="noopener">Booksy</a>
+  </div>
+  <small>© 2026 Salon Urody BAD ANGEL · aleja Wyzwolenia 5/10, Szczecin</small>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Do góry">↑</button>
+<div class="mcta">
+  <a class="btn solid" href="https://booksy.com/pl-pl/14573_salon-urody-bad-angel_salon-kosmetyczny_18078_szczecin" target="_blank" rel="noopener" data-i18n="btn_book_visit">Zarezerwuj wizytę</a>
+</div>
+<div class="lb" id="lightbox">
+  <button class="lb-close" aria-label="Zamknij">&times;</button>
+  <button class="lb-nav lb-prev" aria-label="Poprzednie">‹</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-nav lb-next" aria-label="Następne">›</button>
+</div>
+<script>
+function closeDrawer(){document.getElementById('drawer').classList.remove('open');}
+var bar=document.getElementById('topbar');
+addEventListener('scroll',function(){bar.classList.toggle('solid',scrollY>60);});
+</script>
+</body>
+</html>
