@@ -36,6 +36,8 @@ Do czasu dodania plików w tych miejscach wyświetla się elegancki ciemny gradi
 - `assets/mistrz-lidia.jpg` — Lidia (Przedłużanie paznokci)
 - `assets/mistrz-wiktoria.jpg` — Wiktoria (Mikroneedling i zabiegi na skórę)
 - `assets/mistrz-anna.jpg` — Anna (Mistrzyni fryzjerstwa)
+- `assets/mistrz-astgik.jpg` — Astgik (Masaż i zabiegi na ciało)
+- `assets/mistrz-aryna.jpg` — Aryna (Przedłużanie włosów i warkoczyki)
 
 ## Rezerwacja
 Każdy przycisk „Rezerwuj / Zarezerwuj” prowadzi na profil Booksy salonu.

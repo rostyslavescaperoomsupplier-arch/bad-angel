@@ -18,7 +18,7 @@ def P(key):
     return I18N[key]["pl"]
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-VER = "6"  # cache-busting wersja dla styles.css / translations.js / app.js
+VER = "7"  # cache-busting wersja dla styles.css / translations.js / app.js
 BOOKSY = "https://booksy.com/pl-pl/14573_salon-urody-bad-angel_salon-kosmetyczny_18078_szczecin"
 IG = "https://www.instagram.com/"
 FB = "https://www.facebook.com/"
@@ -40,6 +40,8 @@ CATEGORIES = [
              ("Manicure męski", "", "1 g 30 min", "99 zł"),
              ("Manicure japoński", "Pielęgnacja odżywcza pastą i pudrem.", "1 g 30 min", "108 zł"),
              ("Manicure hybryda", "Opracowanie skórek, skrócenie paznokci, odżywka proteinowa.", "1 g 30 min", "od 117 zł"),
+             ("Manicure hybrydowy", "", "2 g", "60 zł"),
+             ("Żel na naturalną płytkę", "Wzmocnienie i wyrównanie naturalnej płytki żelem.", "2 g 30 min", "80 zł"),
              ("Odnowa żelowa długość 1/2", "", "2 g", "od 135 zł"),
              ("Odnowa żelowa długość 3/4", "Skórki, utwardzenie żelowe, lakier hybrydowy.", "2 g 30 min", "od 153 zł"),
              ("Przedłużanie paznokci długość 1", "Utwardzenie żelem i lakier hybrydowy.", "1 g 30 min", "od 153 zł"),
@@ -58,6 +60,9 @@ CATEGORIES = [
              ("Pedicure z lakierem klasycznym", "", "1 g 20 min", "od 108 zł"),
              ("Pedicure hybrydowy (bez pięt)", "", "1 g 20 min", "od 135 zł"),
              ("Pedicure hybrydowy ze stopą", "Pełne opracowanie z pielęgnacją pięt.", "1 g 30 min", "od 153 zł"),
+             ("Pedicure higieniczny", "", "1 g", "50 zł"),
+             ("Pedicure hybrydowy z opracowaniem stopy", "", "2 g 30 min", "120 zł"),
+             ("Pedicure hybryda (bez stóp)", "", "2 g 30 min", "100 zł"),
          ]),
     dict(slug="rzesy", name="Przedłużanie rzęs", tag="Spojrzenie",
          lead="Spojrzenie, które przyciąga uwagę",
@@ -138,15 +143,17 @@ CATEGORIES = [
          ]),
     dict(slug="wlosy", name="Włosy", tag="Fryzjer",
          lead="Fryzury, które podkreślają Twój styl",
-         intro="Strzyżenia damskie i męskie, modelowanie oraz zabiegi głębokiej regeneracji włosów, "
-               "w tym zimne odbudowywanie. Fryzury na każdą okazję, dopasowane do Ciebie.",
+         intro="Przedłużanie włosów (naturalne i syntetyczne), warkoczyki, a także strzyżenia "
+               "damskie i męskie, modelowanie i regeneracja włosów.",
          items=[
+             ("Przedłużanie włosów naturalne (cena bez włosów)", "Zagęszczenie i wydłużenie włosów naturalnymi pasmami.", "4 g", "od 600 zł"),
+             ("Przedłużanie włosów syntetyczne (cena z włosami)", "Przedłużanie z pasmami syntetycznymi w komplecie.", "4 g", "od 600 zł"),
+             ("Warkoczyki syntetyczne", "Pojedyncze warkoczyki syntetyczne.", "30 min", "od 20 zł"),
+             ("Warkoczyki syntetyczne (pełne)", "Pełna głowa warkoczyków.", "2 g", "od 250 zł"),
              ("Strzyżenie damskie", "Strzyżenie z uwzględnieniem cech i kształtu twarzy.", "1 g", "od 80 zł"),
              ("Strzyżenie męskie", "", "45 min", "60 zł"),
-             ("Strzyżenie + modelowanie", "Strzyżenie i stylizacja.", "1 g 15 min", "od 120 zł"),
              ("Modelowanie / stylizacja", "Mycie, suszenie i stylizacja.", "45 min", "od 70 zł"),
              ("Regeneracja włosów (zimna odbudowa)", "Głęboka pielęgnacja i odbudowa struktury włosa.", "1 g", "od 150 zł"),
-             ("Kuracja nawilżająca", "", "45 min", "od 100 zł"),
              ("Upięcie okolicznościowe", "Fryzura na specjalną okazję.", "1 g", "od 150 zł"),
          ]),
 ]
@@ -204,6 +211,24 @@ MASTERS = [
              "oraz w tworzeniu stylowych upięć i stylizacji na każdą okazję.",
              "Odpowiedzialnie podchodzi do jakości usług i pomaga dobrać fryzurę, która podkreśli "
              "indywidualność klienta.",
+         ]),
+    dict(slug="astgik", name="Astgik", gen="Astgik", role="Masaż i zabiegi na ciało",
+         serves=["masaz"],
+         bio=[
+             "Astgik to specjalistka od relaksu i regeneracji ciała. Wykonuje masaże, które "
+             "przynoszą ulgę napiętym mięśniom i pomagają odzyskać równowagę.",
+             "W jej ofercie znajdziesz masaże relaksacyjne, lecznicze i antycellulitowe, a także "
+             "masaż twarzy i pielęgnacyjne rytuały dla całego ciała.",
+             "Dba o komfort podczas każdej wizyty i dobiera technikę do potrzeb oraz samopoczucia klienta.",
+         ]),
+    dict(slug="aryna", name="Aryna", gen="Aryny", role="Przedłużanie włosów i warkoczyki",
+         serves=["wlosy"],
+         bio=[
+             "Aryna to stylistka włosów specjalizująca się w przedłużaniu i zagęszczaniu włosów "
+             "oraz kolorowych warkoczykach.",
+             "Wykonuje przedłużanie włosów naturalnych i syntetycznych, a także efektowne "
+             "warkoczyki — od pojedynczych po pełne, fantazyjne stylizacje.",
+             "Pomaga uzyskać wymarzoną długość, objętość i kolor, dbając o wygodę i trwałość każdej fryzury.",
          ]),
 ]
 
@@ -663,7 +688,7 @@ def build_index():
           <div class="who"><b>{r['who']}</b> · <span data-i18n="rev{i}_svc">{r['svc']['pl']}</span></div></div>"""
 
     html = head("Salon Urody BAD ANGEL — Szczecin",
-                "Salon Urody BAD ANGEL w Szczecinie. Manicure, pedicure, przedłużanie rzęs, masaż, depilacja. Ocena 4.9 — 1239 opinii.")
+                "Salon Urody BAD ANGEL w Szczecinie. Manicure, pedicure, przedłużanie rzęs, masaż, depilacja. Ocena 4.9 — 1246 opinii.")
     html += header_html()
     html += f"""
 <main>

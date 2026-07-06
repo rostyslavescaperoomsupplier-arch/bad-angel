@@ -7,10 +7,10 @@
 <meta name="description" content="Kalkulator orientacyjnych cen usług Salon Urody BAD ANGEL w Szczecinie.">
 <link rel="icon" href="assets/emblem.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=6">
+<link rel="stylesheet" href="styles.css?v=7">
 <script>document.documentElement.classList.add('js')</script>
-<script defer src="translations.js?v=6"></script>
-<script defer src="app.js?v=6"></script>
+<script defer src="translations.js?v=7"></script>
+<script defer src="app.js?v=7"></script>
 </head>
 <body>
 <header id="topbar">
@@ -72,6 +72,14 @@
           <span class="cn">Manicure hybryda</span><span class="cp">od 117 zł</span>
         </label>
         <label class="calc-row">
+          <input type="checkbox" data-price="60.00" data-from="0">
+          <span class="cn">Manicure hybrydowy</span><span class="cp">60 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="80.00" data-from="0">
+          <span class="cn">Żel na naturalną płytkę</span><span class="cp">80 zł</span>
+        </label>
+        <label class="calc-row">
           <input type="checkbox" data-price="135.00" data-from="1">
           <span class="cn">Odnowa żelowa długość 1/2</span><span class="cp">od 135 zł</span>
         </label>
@@ -121,6 +129,18 @@
         <label class="calc-row">
           <input type="checkbox" data-price="153.00" data-from="1">
           <span class="cn">Pedicure hybrydowy ze stopą</span><span class="cp">od 153 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="50.00" data-from="0">
+          <span class="cn">Pedicure higieniczny</span><span class="cp">50 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="120.00" data-from="0">
+          <span class="cn">Pedicure hybrydowy z opracowaniem stopy</span><span class="cp">120 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="100.00" data-from="0">
+          <span class="cn">Pedicure hybryda (bez stóp)</span><span class="cp">100 zł</span>
         </label>
       </details>
       <details class="calc-cat">
@@ -308,6 +328,22 @@
       <details class="calc-cat">
         <summary><span data-i18n="cat_wlosy_name">Włosy</span></summary>
         <label class="calc-row">
+          <input type="checkbox" data-price="600.00" data-from="1">
+          <span class="cn">Przedłużanie włosów naturalne (cena bez włosów)</span><span class="cp">od 600 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="600.00" data-from="1">
+          <span class="cn">Przedłużanie włosów syntetyczne (cena z włosami)</span><span class="cp">od 600 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="20.00" data-from="1">
+          <span class="cn">Warkoczyki syntetyczne</span><span class="cp">od 20 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="250.00" data-from="1">
+          <span class="cn">Warkoczyki syntetyczne (pełne)</span><span class="cp">od 250 zł</span>
+        </label>
+        <label class="calc-row">
           <input type="checkbox" data-price="80.00" data-from="1">
           <span class="cn">Strzyżenie damskie</span><span class="cp">od 80 zł</span>
         </label>
@@ -316,20 +352,12 @@
           <span class="cn">Strzyżenie męskie</span><span class="cp">60 zł</span>
         </label>
         <label class="calc-row">
-          <input type="checkbox" data-price="120.00" data-from="1">
-          <span class="cn">Strzyżenie + modelowanie</span><span class="cp">od 120 zł</span>
-        </label>
-        <label class="calc-row">
           <input type="checkbox" data-price="70.00" data-from="1">
           <span class="cn">Modelowanie / stylizacja</span><span class="cp">od 70 zł</span>
         </label>
         <label class="calc-row">
           <input type="checkbox" data-price="150.00" data-from="1">
           <span class="cn">Regeneracja włosów (zimna odbudowa)</span><span class="cp">od 150 zł</span>
-        </label>
-        <label class="calc-row">
-          <input type="checkbox" data-price="100.00" data-from="1">
-          <span class="cn">Kuracja nawilżająca</span><span class="cp">od 100 zł</span>
         </label>
         <label class="calc-row">
           <input type="checkbox" data-price="150.00" data-from="1">

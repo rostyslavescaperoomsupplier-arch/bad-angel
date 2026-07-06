@@ -16,7 +16,7 @@ UI = {
  "btn_book":     {"pl":"Rezerwuj","uk":"Записатися","ru":"Записаться","en":"Book now"},
  "book_online":  {"pl":"Rezerwacja online →","uk":"Онлайн-запис →","ru":"Онлайн-запись →","en":"Book online →"},
  "hero_eyebrow": {"pl":"Salon Urody · Szczecin","uk":"Салон краси · Щецін","ru":"Салон красоты · Щецин","en":"Beauty Salon · Szczecin"},
- "hero_rating":  {"pl":"4.9 · 1239 opinii","uk":"4.9 · 1239 відгуків","ru":"4.9 · 1239 отзывов","en":"4.9 · 1239 reviews"},
+ "hero_rating":  {"pl":"4.9 · 1246 opinii","uk":"4.9 · 1246 відгуків","ru":"4.9 · 1246 отзывов","en":"4.9 · 1246 reviews"},
  "btn_book_visit":{"pl":"Zarezerwuj wizytę","uk":"Записатися на візит","ru":"Записаться на визит","en":"Book a visit"},
  "btn_see_services":{"pl":"Zobacz usługi","uk":"Переглянути послуги","ru":"Смотреть услуги","en":"See services"},
  "sec_services_title":{"pl":"Usługi","uk":"Послуги","ru":"Услуги","en":"Services"},
@@ -41,8 +41,8 @@ UI = {
    "ru":"Мастера с увлечённостью и индивидуальным подходом к каждому визиту.",
    "en":"Specialists with passion and an individual approach to every visit."},
  "sec_reviews_title":{"pl":"Opinie klientów","uk":"Відгуки клієнтів","ru":"Отзывы клиентов","en":"Client reviews"},
- "sec_reviews_sub":{"pl":"4.9 na podstawie 1239 opinii w Booksy","uk":"4.9 на основі 1239 відгуків у Booksy",
-   "ru":"4.9 на основе 1239 отзывов в Booksy","en":"4.9 based on 1239 reviews on Booksy"},
+ "sec_reviews_sub":{"pl":"4.9 na podstawie 1246 opinii w Booksy","uk":"4.9 на основі 1246 відгуків у Booksy",
+   "ru":"4.9 на основе 1246 отзывов в Booksy","en":"4.9 based on 1246 reviews on Booksy"},
  "all_reviews":{"pl":"Wszystkie opinie","uk":"Всі відгуки","ru":"Все отзывы","en":"All reviews"},
  "sec_contact_title":{"pl":"Odwiedź nas","uk":"Завітайте до нас","ru":"Посетите нас","en":"Visit us"},
  "sec_contact_sub":{"pl":"Zapraszamy do serca Szczecina.","uk":"Запрошуємо в серце Щеціна.","ru":"Приглашаем в сердце Щецина.","en":"Welcome to the heart of Szczecin."},
@@ -207,10 +207,10 @@ CAT = {
    "name":{"pl":"Włosy","uk":"Волосся","ru":"Волосы","en":"Hair"},
    "tag":{"pl":"Fryzjer","uk":"Перукар","ru":"Парикмахер","en":"Hair salon"},
    "lead":{"pl":"Fryzury, które podkreślają Twój styl","uk":"Зачіски, що підкреслюють твій стиль","ru":"Причёски, которые подчёркивают твой стиль","en":"Hairstyles that highlight your style"},
-   "intro":{"pl":"Strzyżenia damskie i męskie, modelowanie oraz zabiegi głębokiej regeneracji włosów, w tym zimne odbudowywanie. Fryzury na każdą okazję, dopasowane do Ciebie.",
-     "uk":"Жіночі та чоловічі стрижки, укладки та процедури глибокого відновлення волосся, зокрема холодне відновлення. Зачіски на будь-яку нагоду, підібрані саме для вас.",
-     "ru":"Женские и мужские стрижки, укладки и процедуры глубокого восстановления волос, включая холодное восстановление. Причёски на любой случай, подобранные под вас.",
-     "en":"Women's and men's haircuts, styling and deep hair-restoration treatments, including cold restoration. Hairstyles for any occasion, tailored to you."}},
+   "intro":{"pl":"Przedłużanie włosów (naturalne i syntetyczne), warkoczyki, a także strzyżenia damskie i męskie, modelowanie i regeneracja włosów.",
+     "uk":"Нарощування волосся (натуральне та синтетичне), косички, а також жіночі та чоловічі стрижки, укладки й відновлення волосся.",
+     "ru":"Наращивание волос (натуральное и синтетическое), косички, а также женские и мужские стрижки, укладки и восстановление волос.",
+     "en":"Hair extensions (natural and synthetic), braids, plus women's and men's haircuts, styling and hair restoration."}},
 }
 
 # ---- mastrzy: role + bio ----
@@ -290,6 +290,36 @@ MASTER = {
       "uk":"Відповідально ставиться до якості послуг і допомагає підібрати зачіску, що підкреслить індивідуальність клієнта.",
       "ru":"Ответственно подходит к качеству услуг и помогает подобрать причёску, которая подчеркнёт индивидуальность клиента.",
       "en":"She takes a responsible approach to service quality and helps choose a hairstyle that highlights each client's individuality."}]},
+ "astgik":{
+   "role":{"pl":"Masaż i zabiegi na ciało","uk":"Масаж та догляд за тілом","ru":"Массаж и уход за телом","en":"Massage & body"},
+   "bio":[
+     {"pl":"Astgik to specjalistka od relaksu i regeneracji ciała. Wykonuje masaże, które przynoszą ulgę napiętym mięśniom i pomagają odzyskać równowagę.",
+      "uk":"Астгік — майстриня релаксу та відновлення тіла. Виконує масажі, що знімають напругу в м'язах і допомагають повернути рівновагу.",
+      "ru":"Астгик — мастер релакса и восстановления тела. Делает массажи, которые снимают напряжение в мышцах и помогают вернуть равновесие.",
+      "en":"Astgik is a specialist in relaxation and body recovery. Her massages relieve tense muscles and help restore balance."},
+     {"pl":"W jej ofercie znajdziesz masaże relaksacyjne, lecznicze i antycellulitowe, a także masaż twarzy i pielęgnacyjne rytuały dla całego ciała.",
+      "uk":"У її пропозиції — розслаблюючі, лікувальні та антицелюлітні масажі, а також масаж обличчя й доглядові ритуали для всього тіла.",
+      "ru":"В её арсенале — расслабляющие, лечебные и антицеллюлитные массажи, а также массаж лица и уходовые ритуалы для всего тела.",
+      "en":"She offers relaxing, therapeutic and anti-cellulite massages, plus facial massage and care rituals for the whole body."},
+     {"pl":"Dba o komfort podczas każdej wizyty i dobiera technikę do potrzeb oraz samopoczucia klienta.",
+      "uk":"Дбає про комфорт під час кожного візиту й підбирає техніку під потреби та самопочуття клієнта.",
+      "ru":"Заботится о комфорте во время каждого визита и подбирает технику под потребности и самочувствие клиента.",
+      "en":"She cares about comfort during every visit and adapts her technique to each client's needs and well-being."}]},
+ "aryna":{
+   "role":{"pl":"Przedłużanie włosów i warkoczyki","uk":"Нарощування волосся та косички","ru":"Наращивание волос и косички","en":"Hair extensions & braids"},
+   "bio":[
+     {"pl":"Aryna to stylistka włosów specjalizująca się w przedłużaniu i zagęszczaniu włosów oraz kolorowych warkoczykach.",
+      "uk":"Арина — стилістка волосся, що спеціалізується на нарощуванні та згущенні волосся, а також кольорових косичках.",
+      "ru":"Арина — стилист по волосам, специализируется на наращивании и уплотнении волос, а также цветных косичках.",
+      "en":"Aryna is a hair stylist specialising in extensions, added volume and colourful braids."},
+     {"pl":"Wykonuje przedłużanie włosów naturalnych i syntetycznych, a także efektowne warkoczyki — od pojedynczych po pełne, fantazyjne stylizacje.",
+      "uk":"Виконує нарощування натурального та синтетичного волосся, а також ефектні косички — від поодиноких до повних, фантазійних укладок.",
+      "ru":"Выполняет наращивание натуральных и синтетических волос, а также эффектные косички — от единичных до полных, фантазийных укладок.",
+      "en":"She does natural and synthetic hair extensions as well as eye-catching braids — from single strands to full, statement styles."},
+     {"pl":"Pomaga uzyskać wymarzoną długość, objętość i kolor, dbając o wygodę i trwałość każdej fryzury.",
+      "uk":"Допомагає отримати омріяну довжину, об'єм і колір, дбаючи про зручність і стійкість кожної зачіски.",
+      "ru":"Помогает получить желаемую длину, объём и цвет, заботясь об удобстве и стойкости каждой причёски.",
+      "en":"She helps you achieve your dream length, volume and colour, ensuring every style is comfortable and long-lasting."}]},
 }
 
 # ---- opinie ----
