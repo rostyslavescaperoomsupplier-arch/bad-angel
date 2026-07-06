@@ -18,7 +18,7 @@ def P(key):
     return I18N[key]["pl"]
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-VER = "7"  # cache-busting wersja dla styles.css / translations.js / app.js
+VER = "8"  # cache-busting wersja dla styles.css / translations.js / app.js
 BOOKSY = "https://booksy.com/pl-pl/14573_salon-urody-bad-angel_salon-kosmetyczny_18078_szczecin"
 IG = "https://www.instagram.com/"
 FB = "https://www.facebook.com/"
@@ -191,7 +191,7 @@ MASTERS = [
              "Atmosfera na jej fotelu jest miła i sympatyczna, a efekt zawsze na miarę oczekiwań.",
          ]),
     dict(slug="wiktoria", name="Wiktoria", gen="Wiktorii", role="Mikroneedling i zabiegi na skórę",
-         serves=["blizny", "masaz", "depilacja"],
+         serves=["blizny", "depilacja"],
          bio=[
              "Specjalistka mikroneedlingu po szkoleniach w Akademii LIBRO w Warszawie. Skupia się "
              "na terapii regeneracyjnej blizn, rozstępów, śladów po trądziku i przebarwień oraz "
@@ -200,6 +200,15 @@ MASTERS = [
              "Creative Masters. Stale podnosi kwalifikacje — m.in. egzosomy i polinukleotydy w mikroneedlingu.",
              "Każdy etap zabiegu dokładnie wyjaśnia, a efekty jej pracy widoczne są już po "
              "pierwszej wizycie.",
+         ]),
+    dict(slug="wiktoria-masaz", name="Wiktoria", gen="Wiktorii", role="Masaż",
+         serves=["masaz"],
+         bio=[
+             "Wiktoria to specjalistka od relaksu i regeneracji ciała. Wykonuje masaże, które "
+             "przynoszą ulgę napiętym mięśniom i pomagają odzyskać równowagę.",
+             "W jej ofercie znajdziesz masaże relaksacyjne, lecznicze i antycellulitowe, a także "
+             "masaż twarzy i pielęgnacyjne rytuały dla całego ciała.",
+             "Każdy etap masażu dopasowuje do potrzeb i samopoczucia klienta.",
          ]),
     dict(slug="anna", name="Anna", gen="Anny", role="Mistrzyni fryzjerstwa",
          serves=["wlosy"],
@@ -212,14 +221,14 @@ MASTERS = [
              "Odpowiedzialnie podchodzi do jakości usług i pomaga dobrać fryzurę, która podkreśli "
              "indywidualność klienta.",
          ]),
-    dict(slug="astgik", name="Astgik", gen="Astgik", role="Masaż i zabiegi na ciało",
-         serves=["masaz"],
+    dict(slug="astgik", name="Astgik", gen="Astgik", role="Pedicure",
+         serves=["pedicure"],
          bio=[
-             "Astgik to specjalistka od relaksu i regeneracji ciała. Wykonuje masaże, które "
-             "przynoszą ulgę napiętym mięśniom i pomagają odzyskać równowagę.",
-             "W jej ofercie znajdziesz masaże relaksacyjne, lecznicze i antycellulitowe, a także "
-             "masaż twarzy i pielęgnacyjne rytuały dla całego ciała.",
-             "Dba o komfort podczas każdej wizyty i dobiera technikę do potrzeb oraz samopoczucia klienta.",
+             "Astgik to specjalistka pedicure. Dba o zdrowy wygląd i pielęgnację stóp, łącząc "
+             "precyzję z komfortem zabiegu.",
+             "Wykonuje pedicure klasyczny, hybrydowy oraz pełne opracowanie stóp z pielęgnacją "
+             "pięt. Efekt jest estetyczny i trwały.",
+             "Do każdej wizyty podchodzi indywidualnie, aby Twoje stopy były zadbane i wypoczęte.",
          ]),
     dict(slug="aryna", name="Aryna", gen="Aryny", role="Przedłużanie włosów i warkoczyki",
          serves=["wlosy"],

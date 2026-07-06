@@ -35,8 +35,9 @@ Do czasu dodania plików w tych miejscach wyświetla się elegancki ciemny gradi
 - `assets/mistrz-weronika.jpg` — Weronika (Manicure, pedicure i brwi)
 - `assets/mistrz-lidia.jpg` — Lidia (Przedłużanie paznokci)
 - `assets/mistrz-wiktoria.jpg` — Wiktoria (Mikroneedling i zabiegi na skórę)
+- `assets/mistrz-wiktoria-masaz.jpg` — Wiktoria (Masaż)
 - `assets/mistrz-anna.jpg` — Anna (Mistrzyni fryzjerstwa)
-- `assets/mistrz-astgik.jpg` — Astgik (Masaż i zabiegi na ciało)
+- `assets/mistrz-astgik.jpg` — Astgik (Pedicure)
 - `assets/mistrz-aryna.jpg` — Aryna (Przedłużanie włosów i warkoczyki)
 
 ## Rezerwacja
