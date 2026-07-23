@@ -19,7 +19,7 @@ def P(key):
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 VER = "8"  # cache-busting wersja dla styles.css / translations.js / app.js
-BOOKSY = "https://booksy.com/pl-pl/14573_salon-urody-bad-angel_salon-kosmetyczny_18078_szczecin"
+BOOKSY = "https://badangel86.booksy.com/a/"
 IG = "https://www.instagram.com/"
 FB = "https://www.facebook.com/"
 
