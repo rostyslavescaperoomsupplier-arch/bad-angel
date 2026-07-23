@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rostyslavescaperoomsupplier-arch.github.io/bad-angel/sitemap.xml

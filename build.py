@@ -9,6 +9,7 @@ Rezerwacja każdej usługi prowadzi na Booksy.
 import os
 import glob
 import json
+from datetime import date
 from i18n import LANGS, LANG_LABEL, HTML_KEYS, REVIEWS, flat as _i18n_flat
 
 I18N = _i18n_flat()
@@ -22,6 +23,12 @@ VER = "9"  # cache-busting wersja dla styles.css / translations.js / app.js
 BOOKSY = "https://badangel86.booksy.com/a/"
 IG = "https://www.instagram.com/"
 FB = "https://www.facebook.com/"
+
+# Po zakupie domeny wpisz ją tutaj (bez https://, np. "badangel.pl") i uruchom build:
+# wygeneruje się CNAME dla GitHub Pages, a canonical/sitemap/OG przełączą się na domenę.
+DOMAIN = ""
+SITE_URL = f"https://{DOMAIN}" if DOMAIN else "https://rostyslavescaperoomsupplier-arch.github.io/bad-angel"
+OG_IMAGE = f"{SITE_URL}/assets/feature-nails.jpg"
 
 # ---------------------------------------------------------------------------
 # DANE
@@ -563,7 +570,8 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
          '&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">')
 
 
-def head(title, desc):
+def head(title, desc, page="", extra=""):
+    canonical = f"{SITE_URL}/{page}" if page else f"{SITE_URL}/"
     return f"""<!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -571,13 +579,23 @@ def head(title, desc):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content="{desc}">
+<link rel="canonical" href="{canonical}">
+<meta name="theme-color" content="#0a0a0a">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Salon Urody BAD ANGEL">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{desc}">
+<meta property="og:url" content="{canonical}">
+<meta property="og:image" content="{OG_IMAGE}">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/emblem.png">
 {FONTS}
 <link rel="stylesheet" href="styles.css?v={VER}">
 <script>document.documentElement.classList.add('js')</script>
 <script defer src="translations.js?v={VER}"></script>
 <script defer src="app.js?v={VER}"></script>
-</head>
+{extra}</head>
 <body>"""
 
 
@@ -698,8 +716,26 @@ def build_index():
         <div class="review"><div class="stars">★★★★★</div><p>„<span data-i18n="rev{i}_text">{r['text']['pl']}</span>”</p>
           <div class="who"><b>{r['who']}</b> · <span data-i18n="rev{i}_svc">{r['svc']['pl']}</span></div></div>"""
 
+    jsonld = {
+        "@context": "https://schema.org",
+        "@type": "BeautySalon",
+        "name": "Salon Urody BAD ANGEL",
+        "url": f"{SITE_URL}/",
+        "image": OG_IMAGE,
+        "address": {"@type": "PostalAddress", "streetAddress": "aleja Wyzwolenia 5/10",
+                    "postalCode": "70-552", "addressLocality": "Szczecin", "addressCountry": "PL"},
+        "openingHoursSpecification": [{"@type": "OpeningHoursSpecification",
+                                       "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday",
+                                                     "Friday", "Saturday", "Sunday"],
+                                       "opens": "09:00", "closes": "20:00"}],
+        "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "1246"},
+        "priceRange": "50-600 PLN",
+        "sameAs": [BOOKSY],
+    }
+    extra = f'<script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>\n'
     html = head("Salon Urody BAD ANGEL — Szczecin",
-                "Salon Urody BAD ANGEL w Szczecinie. Manicure, pedicure, przedłużanie rzęs, masaż, depilacja. Ocena 4.9 — 1246 opinii.")
+                "Salon Urody BAD ANGEL w Szczecinie. Manicure, pedicure, przedłużanie rzęs, masaż, depilacja. Ocena 4.9 — 1246 opinii.",
+                extra=extra)
     html += header_html()
     html += f"""
 <main>
@@ -829,7 +865,8 @@ def build_service(c):
       </div>"""
 
     html = head(f"{c['name']} — Salon Urody BAD ANGEL Szczecin",
-                f"{c['name']} w Salonie Urody BAD ANGEL w Szczecinie. {c['intro']}")
+                f"{c['name']} w Salonie Urody BAD ANGEL w Szczecinie. {c['intro']}",
+                page=f"usluga-{c['slug']}.html")
     html += header_html()
     # Galeria — zdjęcia z assets/gallery/<slug>/
     gdir = os.path.join(ROOT, "assets", "gallery", c["slug"])
@@ -885,7 +922,8 @@ def build_master(m):
     bio = "".join(f'<p data-i18n="bio_{m["slug"]}_{i}">{p}</p>' for i, p in enumerate(m["bio"]))
 
     html = head(f"{m['name']} — {m['role']} · Salon Urody BAD ANGEL",
-                f"{m['name']} — {m['role']} w Salonie Urody BAD ANGEL w Szczecinie. Poznaj naszą specjalistkę i zarezerwuj wizytę.")
+                f"{m['name']} — {m['role']} w Salonie Urody BAD ANGEL w Szczecinie. Poznaj naszą specjalistkę i zarezerwuj wizytę.",
+                page=f"mistrz-{m['slug']}.html")
     html += header_html()
     html += f"""
 <main>
@@ -932,7 +970,8 @@ def build_calculator():
         <summary><span data-i18n="cat_{c['slug']}_name">{c['name']}</span></summary>{rows}
       </details>"""
     html = head("Kalkulator cen — Salon Urody BAD ANGEL",
-                "Kalkulator orientacyjnych cen usług Salon Urody BAD ANGEL w Szczecinie.")
+                "Kalkulator orientacyjnych cen usług Salon Urody BAD ANGEL w Szczecinie.",
+                page="kalkulator.html")
     html += header_html()
     html += f"""
 <main>
@@ -971,7 +1010,8 @@ def build_portfolio():
     imgs = "".join(f'<img loading="lazy" data-cat="{s}" src="assets/gallery/{s}/{fn}" alt="Salon Urody BAD ANGEL">'
                    for s, fn in items)
     html = head("Portfolio — Salon Urody BAD ANGEL Szczecin",
-                "Portfolio prac Salon Urody BAD ANGEL w Szczecinie — manicure, pedicure, rzęsy, brwi.")
+                "Portfolio prac Salon Urody BAD ANGEL w Szczecinie — manicure, pedicure, rzęsy, brwi.",
+                page="portfolio.html")
     html += header_html()
     html += f"""
 <main>
@@ -1170,8 +1210,28 @@ def w(path, content):
     print("napisano", path)
 
 
+def build_sitemap():
+    pages = ["", "portfolio.html", "kalkulator.html"]
+    pages += [f"usluga-{c['slug']}.html" for c in CATEGORIES]
+    pages += [f"mistrz-{m['slug']}.html" for m in MASTERS]
+    today = date.today().isoformat()
+    urls = "".join(
+        f"  <url><loc>{SITE_URL}/{p}</loc><lastmod>{today}</lastmod></url>\n" for p in pages)
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            f"{urls}</urlset>\n")
+
+
+def build_robots():
+    return f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n"
+
+
 def main():
     os.makedirs(os.path.join(ROOT, "assets"), exist_ok=True)
+    w("sitemap.xml", build_sitemap())
+    w("robots.txt", build_robots())
+    if DOMAIN:
+        w("CNAME", DOMAIN + "\n")
     w("styles.css", CSS.strip() + "\n")
     w("translations.js", build_translations_js())
     w("app.js", build_app_js())
