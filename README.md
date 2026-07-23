@@ -31,13 +31,13 @@ Do czasu dodania plików w tych miejscach wyświetla się elegancki ciemny gradi
 - `assets/usluga-wlosy.jpg` — Włosy
 
 **Mastrzy (kafelek + portret na podstronie):**
-- `assets/mistrz-angelina.jpg` — Angelina (Paznokcie i stylizacja brwi)
-- `assets/mistrz-weronika.jpg` — Weronika (Manicure, pedicure i brwi)
+- `assets/mistrz-angelina.jpg` — Angelina (Manicure, pedicure, brwi i rzęsy)
+- `assets/mistrz-weronika.jpg` — Weronika (Manicure, pedicure, brwi, SPA i depilacja)
 - `assets/mistrz-lidia.jpg` — Lidia (Przedłużanie paznokci)
-- `assets/mistrz-wiktoria.jpg` — Wiktoria (Mikroneedling i zabiegi na skórę)
+- `assets/mistrz-wiktoria.jpg` — Wiktoria (Mikroneedling, blizny i warkoczyki)
 - `assets/mistrz-wiktoria-masaz.jpg` — Wiktoria (Masaż)
 - `assets/mistrz-anna.jpg` — Anna (Mistrzyni fryzjerstwa)
-- `assets/mistrz-astgik.jpg` — Astgik (Pedicure)
+- `assets/mistrz-astgik.jpg` — Astgik (Pedicure i manicure)
 - `assets/mistrz-aryna.jpg` — Aryna (Przedłużanie włosów i warkoczyki)
 
 ## Rezerwacja

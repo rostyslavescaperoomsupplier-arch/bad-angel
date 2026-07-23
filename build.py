@@ -18,7 +18,7 @@ def P(key):
     return I18N[key]["pl"]
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-VER = "8"  # cache-busting wersja dla styles.css / translations.js / app.js
+VER = "9"  # cache-busting wersja dla styles.css / translations.js / app.js
 BOOKSY = "https://badangel86.booksy.com/a/"
 IG = "https://www.instagram.com/"
 FB = "https://www.facebook.com/"
@@ -160,29 +160,29 @@ CATEGORIES = [
 
 # Mastrzy. slug -> mistrz-<slug>.html, zdjęcie assets/mistrz-<slug>.jpg
 MASTERS = [
-    dict(slug="angelina", name="Angelina", gen="Angeliny", role="Paznokcie i stylizacja brwi",
-         serves=["manicure", "brwi", "spa"],
+    dict(slug="angelina", name="Angelina", gen="Angeliny", role="Manicure, pedicure, brwi i rzęsy",
+         serves=["manicure", "pedicure", "spa", "brwi"],
          bio=[
              "Wykwalifikowana specjalistka beauty, dla której liczą się estetyka i jakość. "
              "Łączy techniczną precyzję, artystyczny smak i uważne podejście do każdego klienta.",
              "Manicure i pedicure wykonuje z uwzględnieniem anatomii dłoni i stóp — jej pokrycia są "
              "trwałe, wygodne i estetyczne. Biegle włada technikami nail-artu, w tym klasycznym i "
              "nowoczesnym frenchem.",
-             "Zajmuje się też stylizacją brwi: laminacją z trwałym efektem oraz koloryzacją dobraną "
-             "indywidualnie do rysów twarzy.",
+             "Zajmuje się też stylizacją brwi i rzęs: laminacją z trwałym efektem oraz koloryzacją "
+             "dobraną indywidualnie do rysów twarzy.",
          ]),
-    dict(slug="weronika", name="Weronika", gen="Weroniki", role="Manicure, pedicure i brwi",
-         serves=["manicure", "pedicure", "brwi"],
+    dict(slug="weronika", name="Weronika", gen="Weroniki", role="Manicure, pedicure, brwi, SPA i depilacja",
+         serves=["manicure", "pedicure", "brwi", "spa", "depilacja"],
          bio=[
              "Mistrzyni manicure i pedicure oraz stylistka brwi. Stawia na estetyczny, naturalny "
-             "efekt i komfort podczas każdej wizyty.",
+             "efekt i komfort podczas każdej wizyty. Wykonuje także zabiegi SPA dłoni i depilację.",
              "Manicure i pedicure wykonuje od dwóch lat, a od roku zajmuje się laminacją i "
              "koloryzacją brwi — z dbałością o detal i kondycję włosków.",
              "Do każdej klientki podchodzi indywidualnie, dobierając pielęgnację i stylizację do "
              "jej potrzeb.",
          ]),
     dict(slug="lidia", name="Lidia", gen="Lidii", role="Przedłużanie paznokci",
-         serves=["manicure", "pedicure"],
+         serves=["manicure", "pedicure", "spa"],
          bio=[
              "Lidia to specjalistka od długich, efektownych form. Buduje paznokcie z dbałością "
              "o architekturę i idealny łuk.",
@@ -190,8 +190,8 @@ MASTERS = [
              "Chętnie pracuje z modelkami i cierpliwie dopracowuje każdy detal.",
              "Atmosfera na jej fotelu jest miła i sympatyczna, a efekt zawsze na miarę oczekiwań.",
          ]),
-    dict(slug="wiktoria", name="Wiktoria", gen="Wiktorii", role="Mikroneedling i zabiegi na skórę",
-         serves=["blizny", "depilacja"],
+    dict(slug="wiktoria", name="Wiktoria", gen="Wiktorii", role="Mikroneedling, blizny i warkoczyki",
+         serves=["blizny", "wlosy"],
          bio=[
              "Specjalistka mikroneedlingu po szkoleniach w Akademii LIBRO w Warszawie. Skupia się "
              "na terapii regeneracyjnej blizn, rozstępów, śladów po trądziku i przebarwień oraz "
@@ -200,6 +200,8 @@ MASTERS = [
              "Creative Masters. Stale podnosi kwalifikacje — m.in. egzosomy i polinukleotydy w mikroneedlingu.",
              "Każdy etap zabiegu dokładnie wyjaśnia, a efekty jej pracy widoczne są już po "
              "pierwszej wizycie.",
+             "Oprócz zabiegów na skórę wykonuje także efektowne warkoczyki — od pojedynczych "
+             "po pełne stylizacje.",
          ]),
     dict(slug="wiktoria-masaz", name="Wiktoria", gen="Wiktorii", role="Masaż",
          serves=["masaz"],
@@ -221,11 +223,11 @@ MASTERS = [
              "Odpowiedzialnie podchodzi do jakości usług i pomaga dobrać fryzurę, która podkreśli "
              "indywidualność klienta.",
          ]),
-    dict(slug="astgik", name="Astgik", gen="Astgik", role="Pedicure",
-         serves=["pedicure"],
+    dict(slug="astgik", name="Astgik", gen="Astgik", role="Pedicure i manicure",
+         serves=["pedicure", "manicure", "spa"],
          bio=[
-             "Astgik to specjalistka pedicure. Dba o zdrowy wygląd i pielęgnację stóp, łącząc "
-             "precyzję z komfortem zabiegu.",
+             "Astgik to specjalistka pedicure i manicure. Dba o zdrowy wygląd i pielęgnację dłoni "
+             "oraz stóp, łącząc precyzję z komfortem zabiegu.",
              "Wykonuje pedicure klasyczny, hybrydowy oraz pełne opracowanie stóp z pielęgnacją "
              "pięt. Efekt jest estetyczny i trwały.",
              "Do każdej wizyty podchodzi indywidualnie, aby Twoje stopy były zadbane i wypoczęte.",

@@ -216,7 +216,7 @@ CAT = {
 # ---- mastrzy: role + bio ----
 MASTER = {
  "angelina":{
-   "role":{"pl":"Paznokcie i stylizacja brwi","uk":"Нігті та стилізація брів","ru":"Ногти и стилизация бровей","en":"Nails & brow styling"},
+   "role":{"pl":"Manicure, pedicure, brwi i rzęsy","uk":"Манікюр, педикюр, брови та вії","ru":"Маникюр, педикюр, брови и ресницы","en":"Manicure, pedicure, brows & lashes"},
    "bio":[
      {"pl":"Wykwalifikowana specjalistka beauty, dla której liczą się estetyka i jakość. Łączy techniczną precyzję, artystyczny smak i uważne podejście do każdego klienta.",
       "uk":"Кваліфікована beauty-майстриня, для якої важливі естетика та якість. Поєднує технічну точність, художній смак і уважне ставлення до кожного клієнта.",
@@ -226,17 +226,17 @@ MASTER = {
       "uk":"Манікюр і педикюр виконує з урахуванням анатомії рук і стоп — її покриття стійкі, зручні та естетичні. Досконало володіє техніками нейл-арту, зокрема класичним і сучасним френчем.",
       "ru":"Маникюр и педикюр выполняет с учётом анатомии рук и стоп — её покрытия стойкие, удобные и эстетичные. Владеет техниками нейл-арта, включая классический и современный френч.",
       "en":"She does manicure and pedicure with attention to the anatomy of hands and feet — her coatings are durable, comfortable and elegant. She is fluent in nail-art, including classic and modern French."},
-     {"pl":"Zajmuje się też stylizacją brwi: laminacją z trwałym efektem oraz koloryzacją dobraną indywidualnie do rysów twarzy.",
-      "uk":"Також займається стилізацією брів: ламінуванням зі стійким ефектом та фарбуванням, підібраним індивідуально до рис обличчя.",
-      "ru":"Также занимается стилизацией бровей: ламинированием со стойким эффектом и окрашиванием, подобранным индивидуально под черты лица.",
-      "en":"She also styles brows: lamination with a lasting effect and tinting chosen individually to suit your facial features."}]},
+     {"pl":"Zajmuje się też stylizacją brwi i rzęs: laminacją z trwałym efektem oraz koloryzacją dobraną indywidualnie do rysów twarzy.",
+      "uk":"Також займається стилізацією брів і вій: ламінуванням зі стійким ефектом та фарбуванням, підібраним індивідуально до рис обличчя.",
+      "ru":"Также занимается стилизацией бровей и ресниц: ламинированием со стойким эффектом и окрашиванием, подобранным индивидуально под черты лица.",
+      "en":"She also styles brows and lashes: lamination with a lasting effect and tinting chosen individually to suit your facial features."}]},
  "weronika":{
-   "role":{"pl":"Manicure, pedicure i brwi","uk":"Манікюр, педикюр та брови","ru":"Маникюр, педикюр и брови","en":"Manicure, pedicure & brows"},
+   "role":{"pl":"Manicure, pedicure, brwi, SPA i depilacja","uk":"Манікюр, педикюр, брови, SPA та депіляція","ru":"Маникюр, педикюр, брови, SPA и депиляция","en":"Manicure, pedicure, brows, SPA & waxing"},
    "bio":[
-     {"pl":"Mistrzyni manicure i pedicure oraz stylistka brwi. Stawia na estetyczny, naturalny efekt i komfort podczas każdej wizyty.",
-      "uk":"Майстриня манікюру та педикюру, а також бровист. Робить ставку на естетичний, природний ефект і комфорт під час кожного візиту.",
-      "ru":"Мастер маникюра и педикюра, а также бровист. Делает ставку на эстетичный, естественный эффект и комфорт во время каждого визита.",
-      "en":"A master of manicure and pedicure and a brow artist. She focuses on an elegant, natural effect and comfort during every visit."},
+     {"pl":"Mistrzyni manicure i pedicure oraz stylistka brwi. Stawia na estetyczny, naturalny efekt i komfort podczas każdej wizyty. Wykonuje także zabiegi SPA dłoni i depilację.",
+      "uk":"Майстриня манікюру та педикюру, а також бровист. Робить ставку на естетичний, природний ефект і комфорт під час кожного візиту. Також виконує SPA-догляд за руками та депіляцію.",
+      "ru":"Мастер маникюра и педикюра, а также бровист. Делает ставку на эстетичный, естественный эффект и комфорт во время каждого визита. Также выполняет SPA-уход за руками и депиляцию.",
+      "en":"A master of manicure and pedicure and a brow artist. She focuses on an elegant, natural effect and comfort during every visit. She also offers hand SPA treatments and waxing."},
      {"pl":"Manicure i pedicure wykonuje od dwóch lat, a od roku zajmuje się laminacją i koloryzacją brwi — z dbałością o detal i kondycję włosków.",
       "uk":"Манікюр і педикюр виконує два роки, а рік займається ламінуванням і фарбуванням брів — з увагою до деталей і стану волосків.",
       "ru":"Маникюр и педикюр выполняет два года, а год занимается ламинированием и окрашиванием бровей — с вниманием к деталям и состоянию волосков.",
@@ -261,7 +261,7 @@ MASTER = {
       "ru":"Атмосфера в её кресле приятная и дружелюбная, а результат всегда оправдывает ожидания.",
       "en":"The atmosphere in her chair is warm and friendly, and the result always meets expectations."}]},
  "wiktoria":{
-   "role":{"pl":"Mikroneedling i zabiegi na skórę","uk":"Мікронідлінг та догляд за шкірою","ru":"Микронидлинг и уход за кожей","en":"Microneedling & skin treatments"},
+   "role":{"pl":"Mikroneedling, blizny i warkoczyki","uk":"Мікронідлінг, шрами та косички","ru":"Микронидлинг, шрамы и косички","en":"Microneedling, scars & braids"},
    "bio":[
      {"pl":"Specjalistka mikroneedlingu po szkoleniach w Akademii LIBRO w Warszawie. Skupia się na terapii regeneracyjnej blizn, rozstępów, śladów po trądziku i przebarwień oraz poprawie jakości i gęstości skóry.",
       "uk":"Спеціалістка з мікронідлінгу після навчання в Академії LIBRO у Варшаві. Зосереджена на регенеративній терапії шрамів, розтяжок, слідів від акне та пігментації, а також на покращенні якості й щільності шкіри.",
@@ -274,7 +274,11 @@ MASTER = {
      {"pl":"Każdy etap zabiegu dokładnie wyjaśnia, a efekty jej pracy widoczne są już po pierwszej wizycie.",
       "uk":"Кожен етап процедури детально пояснює, а результати її роботи помітні вже після першого візиту.",
       "ru":"Каждый этап процедуры подробно объясняет, а результаты её работы заметны уже после первого визита.",
-      "en":"She explains every step of the treatment in detail, and the results of her work are visible after the very first visit."}]},
+      "en":"She explains every step of the treatment in detail, and the results of her work are visible after the very first visit."},
+     {"pl":"Oprócz zabiegów na skórę wykonuje także efektowne warkoczyki — od pojedynczych po pełne stylizacje.",
+      "uk":"Окрім процедур для шкіри, плете також ефектні косички — від поодиноких до повних укладок.",
+      "ru":"Помимо процедур для кожи, плетёт также эффектные косички — от единичных до полных укладок.",
+      "en":"Besides skin treatments, she also creates striking braids — from single strands to full styles."}]},
  "anna":{
    "role":{"pl":"Mistrzyni fryzjerstwa","uk":"Майстриня-перукар","ru":"Мастер-парикмахер","en":"Master hairdresser"},
    "bio":[
@@ -306,12 +310,12 @@ MASTER = {
       "ru":"Каждый этап массажа подстраивает под потребности и самочувствие клиента.",
       "en":"She tailors every stage of the massage to the client's needs and well-being."}]},
  "astgik":{
-   "role":{"pl":"Pedicure","uk":"Педикюр","ru":"Педикюр","en":"Pedicure"},
+   "role":{"pl":"Pedicure i manicure","uk":"Педикюр та манікюр","ru":"Педикюр и маникюр","en":"Pedicure & manicure"},
    "bio":[
-     {"pl":"Astgik to specjalistka pedicure. Dba o zdrowy wygląd i pielęgnację stóp, łącząc precyzję z komfortem zabiegu.",
-      "uk":"Астгік — майстриня педикюру. Дбає про здоровий вигляд і догляд за стопами, поєднуючи точність із комфортом процедури.",
-      "ru":"Астгик — мастер педикюра. Заботится о здоровом виде и уходе за стопами, сочетая точность с комфортом процедуры.",
-      "en":"Astgik is a pedicure specialist. She cares for the healthy look and condition of your feet, combining precision with a comfortable treatment."},
+     {"pl":"Astgik to specjalistka pedicure i manicure. Dba o zdrowy wygląd i pielęgnację dłoni oraz stóp, łącząc precyzję z komfortem zabiegu.",
+      "uk":"Астгік — майстриня педикюру та манікюру. Дбає про здоровий вигляд і догляд за руками та стопами, поєднуючи точність із комфортом процедури.",
+      "ru":"Астгик — мастер педикюра и маникюра. Заботится о здоровом виде и уходе за руками и стопами, сочетая точность с комфортом процедуры.",
+      "en":"Astgik is a pedicure and manicure specialist. She cares for the healthy look of your hands and feet, combining precision with a comfortable treatment."},
      {"pl":"Wykonuje pedicure klasyczny, hybrydowy oraz pełne opracowanie stóp z pielęgnacją pięt. Efekt jest estetyczny i trwały.",
       "uk":"Виконує класичний і гібридний педикюр та повну обробку стоп із доглядом за п'ятами. Результат естетичний і стійкий.",
       "ru":"Выполняет классический и гибридный педикюр и полную обработку стоп с уходом за пятками. Результат эстетичный и стойкий.",
