@@ -457,5 +457,132 @@
     "od 150 zł"
    ]
   ]
- }
+ },
+ "masters": [
+  {
+   "slug": "angelina",
+   "name": "Angelina",
+   "gen": "Angeliny",
+   "role": "Manicure, pedicure, brwi i rzęsy",
+   "serves": [
+    "manicure",
+    "pedicure",
+    "spa",
+    "brwi"
+   ],
+   "bio": [
+    "Wykwalifikowana specjalistka beauty, dla której liczą się estetyka i jakość. Łączy techniczną precyzję, artystyczny smak i uważne podejście do każdego klienta.",
+    "Manicure i pedicure wykonuje z uwzględnieniem anatomii dłoni i stóp — jej pokrycia są trwałe, wygodne i estetyczne. Biegle włada technikami nail-artu, w tym klasycznym i nowoczesnym frenchem.",
+    "Zajmuje się też stylizacją brwi i rzęs: laminacją z trwałym efektem oraz koloryzacją dobraną indywidualnie do rysów twarzy."
+   ]
+  },
+  {
+   "slug": "weronika",
+   "name": "Weronika",
+   "gen": "Weroniki",
+   "role": "Manicure, pedicure, brwi, SPA i depilacja",
+   "serves": [
+    "manicure",
+    "pedicure",
+    "brwi",
+    "spa",
+    "depilacja"
+   ],
+   "bio": [
+    "Mistrzyni manicure i pedicure oraz stylistka brwi. Stawia na estetyczny, naturalny efekt i komfort podczas każdej wizyty. Wykonuje także zabiegi SPA dłoni i depilację.",
+    "Manicure i pedicure wykonuje od dwóch lat, a od roku zajmuje się laminacją i koloryzacją brwi — z dbałością o detal i kondycję włosków.",
+    "Do każdej klientki podchodzi indywidualnie, dobierając pielęgnację i stylizację do jej potrzeb."
+   ]
+  },
+  {
+   "slug": "lidia",
+   "name": "Lidia",
+   "gen": "Lidii",
+   "role": "Przedłużanie paznokci",
+   "serves": [
+    "manicure",
+    "pedicure",
+    "spa"
+   ],
+   "bio": [
+    "Lidia to specjalistka od długich, efektownych form. Buduje paznokcie z dbałością o architekturę i idealny łuk.",
+    "Wykonuje przedłużanie żelem w każdej długości, odnowy oraz pełny pedicure. Chętnie pracuje z modelkami i cierpliwie dopracowuje każdy detal.",
+    "Atmosfera na jej fotelu jest miła i sympatyczna, a efekt zawsze na miarę oczekiwań."
+   ]
+  },
+  {
+   "slug": "wiktoria",
+   "name": "Wiktoria",
+   "gen": "Wiktorii",
+   "role": "Mikroneedling, blizny i warkoczyki",
+   "serves": [
+    "blizny",
+    "wlosy"
+   ],
+   "bio": [
+    "Specjalistka mikroneedlingu po szkoleniach w Akademii LIBRO w Warszawie. Skupia się na terapii regeneracyjnej blizn, rozstępów, śladów po trądziku i przebarwień oraz poprawie jakości i gęstości skóry.",
+    "Posiada międzynarodową akredytację KCCK z wyróżnieniem oraz certyfikat Global Creative Masters. Stale podnosi kwalifikacje — m.in. egzosomy i polinukleotydy w mikroneedlingu.",
+    "Każdy etap zabiegu dokładnie wyjaśnia, a efekty jej pracy widoczne są już po pierwszej wizycie.",
+    "Oprócz zabiegów na skórę wykonuje także efektowne warkoczyki — od pojedynczych po pełne stylizacje."
+   ]
+  },
+  {
+   "slug": "wiktoria-masaz",
+   "name": "Wiktoria",
+   "gen": "Wiktorii",
+   "role": "Masaż",
+   "serves": [
+    "masaz"
+   ],
+   "bio": [
+    "Wiktoria to specjalistka od relaksu i regeneracji ciała. Wykonuje masaże, które przynoszą ulgę napiętym mięśniom i pomagają odzyskać równowagę.",
+    "W jej ofercie znajdziesz masaże relaksacyjne, lecznicze i antycellulitowe, a także masaż twarzy i pielęgnacyjne rytuały dla całego ciała.",
+    "Każdy etap masażu dopasowuje do potrzeb i samopoczucia klienta."
+   ]
+  },
+  {
+   "slug": "anna",
+   "name": "Anna",
+   "gen": "Anny",
+   "role": "Mistrzyni fryzjerstwa",
+   "serves": [
+    "wlosy"
+   ],
+   "bio": [
+    "Doświadczona fryzjerka z ponad 20-letnim stażem w branży beauty. Profesjonalnie włada technikami nowoczesnych strzyżeń, realizując prace o każdym stopniu trudności z uwzględnieniem indywidualnych cech klienta.",
+    "Specjalizuje się w zabiegach głębokiej pielęgnacji, w tym zimnej regeneracji włosów, oraz w tworzeniu stylowych upięć i stylizacji na każdą okazję.",
+    "Odpowiedzialnie podchodzi do jakości usług i pomaga dobrać fryzurę, która podkreśli indywidualność klienta."
+   ]
+  },
+  {
+   "slug": "astgik",
+   "name": "Astgik",
+   "gen": "Astgik",
+   "role": "Pedicure i manicure",
+   "serves": [
+    "pedicure",
+    "manicure",
+    "spa"
+   ],
+   "bio": [
+    "Astgik to specjalistka pedicure i manicure. Dba o zdrowy wygląd i pielęgnację dłoni oraz stóp, łącząc precyzję z komfortem zabiegu.",
+    "Wykonuje pedicure klasyczny, hybrydowy oraz pełne opracowanie stóp z pielęgnacją pięt. Efekt jest estetyczny i trwały.",
+    "Do każdej wizyty podchodzi indywidualnie, aby Twoje stopy były zadbane i wypoczęte."
+   ]
+  },
+  {
+   "slug": "aryna",
+   "name": "Aryna",
+   "gen": "Aryny",
+   "role": "Przedłużanie włosów i warkoczyki",
+   "serves": [
+    "wlosy"
+   ],
+   "bio": [
+    "Aryna to stylistka włosów specjalizująca się w przedłużaniu i zagęszczaniu włosów oraz kolorowych warkoczykach.",
+    "Wykonuje przedłużanie włosów naturalnych i syntetycznych, a także efektowne warkoczyki — od pojedynczych po pełne, fantazyjne stylizacje.",
+    "Pomaga uzyskać wymarzoną długość, objętość i kolor, dbając o wygodę i trwałość każdej fryzury."
+   ]
+  }
+ ]
 }

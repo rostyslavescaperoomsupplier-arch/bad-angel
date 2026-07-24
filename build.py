@@ -179,6 +179,16 @@ for _c in CATEGORIES:
     if _c["slug"] in SITE_DATA.get("services", {}):
         _c["items"] = [tuple(_i) for _i in SITE_DATA["services"][_c["slug"]]]
 
+def _masters_from_site_data():
+    out = []
+    for m in SITE_DATA["masters"]:
+        m = dict(m)
+        m.setdefault("gen", m["name"])
+        m.setdefault("bio", [])
+        m.setdefault("serves", [])
+        out.append(m)
+    return out
+
 # Mastrzy. slug -> mistrz-<slug>.html, zdjęcie assets/mistrz-<slug>.jpg
 MASTERS = [
     dict(slug="angelina", name="Angelina", gen="Angeliny", role="Manicure, pedicure, brwi i rzęsy",
@@ -263,6 +273,10 @@ MASTERS = [
              "Pomaga uzyskać wymarzoną długość, objętość i kolor, dbając o wygodę i trwałość każdej fryzury.",
          ]),
 ]
+
+# Mistrzynie też edytowalne przez bota: site_data.json["masters"] nadpisuje listę wyżej.
+if "masters" in SITE_DATA:
+    MASTERS = _masters_from_site_data()
 
 # ---------------------------------------------------------------------------
 # CSS
@@ -1283,6 +1297,12 @@ def main():
         w(f"usluga-{c['slug']}.html", build_service(c))
     for m in MASTERS:
         w(f"mistrz-{m['slug']}.html", build_master(m))
+    # sprzątanie stron po usuniętych mistrzyniach/usługach
+    valid = {f"usluga-{c['slug']}.html" for c in CATEGORIES} | {f"mistrz-{m['slug']}.html" for m in MASTERS}
+    for p in glob.glob(os.path.join(ROOT, "usluga-*.html")) + glob.glob(os.path.join(ROOT, "mistrz-*.html")):
+        if os.path.basename(p) not in valid:
+            os.remove(p)
+            print("usunięto", os.path.basename(p))
     w("README.md", build_readme())
     print("Gotowe.")
 

@@ -64,10 +64,59 @@ export default {
 const MAIN_KB = {
   inline_keyboard: [
     [{ text: "💰 Прайс", callback_data: "price:cats" }],
+    [{ text: "👩‍🎨 Мастера", callback_data: "masters:list" }],
     [{ text: "📸 Добавить фото", callback_data: "photo:cats" }],
     [{ text: "⭐ Число отзывов", callback_data: "reviews:ask" }],
   ],
 };
+
+function translitSlug(name, existing) {
+  const map = { а:"a",б:"b",в:"v",г:"g",д:"d",е:"e",ё:"e",ж:"zh",з:"z",и:"i",й:"i",к:"k",л:"l",м:"m",н:"n",о:"o",п:"p",р:"r",с:"s",т:"t",у:"u",ф:"f",х:"h",ц:"c",ч:"ch",ш:"sh",щ:"sch",ъ:"",ы:"y",ь:"",э:"e",ю:"yu",я:"ya",і:"i",ї:"yi",є:"ye",ґ:"g" };
+  let s = name.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/ł/g, "l");
+  s = [...s].map(c => map[c] !== undefined ? map[c] : c).join("");
+  s = s.replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "mistrz";
+  let slug = s, n = 2;
+  while (existing.includes(slug)) slug = `${s}-${n++}`;
+  return slug;
+}
+
+function masterListKb(masters) {
+  const rows = masters.map(m => [{ text: `${m.name} — ${m.role}`.slice(0, 60), callback_data: `masters:view:${m.slug}` }]);
+  rows.push([{ text: "➕ Добавить мастера", callback_data: "masters:add" }]);
+  rows.push([{ text: "⬅️ Меню", callback_data: "menu" }]);
+  return { inline_keyboard: rows };
+}
+
+function masterText(m) {
+  const cats = (m.serves || []).map(s => CATEGORY_RU[s] || s).join(", ") || "—";
+  return `👩‍🎨 <b>${m.name}</b>\n${m.role}\nУслуги: ${cats}` + (m.bio && m.bio.length ? `\n\n${m.bio.join("\n\n")}` : "");
+}
+
+function masterKb(slug) {
+  return {
+    inline_keyboard: [
+      [{ text: "✏️ Услуги", callback_data: `masters:srv:${slug}` },
+       { text: "✏️ Роль", callback_data: `masters:role:${slug}` }],
+      [{ text: "📷 Фото", callback_data: `masters:photo:${slug}` },
+       { text: "✏️ Описание", callback_data: `masters:bio:${slug}` }],
+      [{ text: "🗑 Удалить", callback_data: `masters:del:${slug}` }],
+      [{ text: "⬅️ Мастера", callback_data: "masters:list" }],
+    ],
+  };
+}
+
+function servesKb(slug, serves) {
+  const slugs = Object.keys(CATEGORY_RU);
+  const rows = [];
+  for (let i = 0; i < slugs.length; i += 3)
+    rows.push(slugs.slice(i, i + 3).map(s => ({
+      text: (serves.includes(s) ? "✅ " : "▫️ ") + CATEGORY_RU[s],
+      callback_data: `masters:srvt:${slug}:${s}`,
+    })));
+  rows.push([{ text: "💾 Сохранить", callback_data: `masters:srvs:${slug}` },
+             { text: "Отмена", callback_data: `masters:view:${slug}` }]);
+  return { inline_keyboard: rows };
+}
 
 function catGrid(prefix) {
   const slugs = Object.keys(CATEGORY_RU);
@@ -210,6 +259,102 @@ async function handleCallback(cb, env) {
     await send(env, chatId, "⭐ Напиши новое число отзывов (например <code>1300</code>):");
     await ack();
 
+  } else if (d === "masters:list") {
+    const { data } = await getSiteData(env);
+    await edit(env, chatId, msgId, "👩‍🎨 Мастера:", masterListKb(data.masters || []));
+    await ack();
+
+  } else if (d === "masters:add") {
+    await env.STATE.put(`pending:${userId}`, JSON.stringify({ action: "newmaster" }), { expirationTtl: 1800 });
+    await send(env, chatId, "➕ Новый мастер. Напиши одной строкой:\n<code>Имя | Роль</code>\nнапример: <code>Ольга | Manicure i pedicure</code>\n(роль лучше по-польски — она видна на сайте)");
+    await ack();
+
+  } else if (d.startsWith("masters:view:")) {
+    const slug = d.split(":")[2];
+    const { data } = await getSiteData(env);
+    const m = (data.masters || []).find(x => x.slug === slug);
+    if (!m) { await ack("Не найден"); return; }
+    await edit(env, chatId, msgId, masterText(m), masterKb(slug));
+    await ack();
+
+  } else if (d.startsWith("masters:srvt:")) {
+    const [, , slug, cat] = d.split(":");
+    const key = `srvdraft:${userId}:${slug}`;
+    let draft = JSON.parse((await env.STATE.get(key)) || "null");
+    if (!draft) {
+      const { data } = await getSiteData(env);
+      draft = ((data.masters || []).find(x => x.slug === slug) || {}).serves || [];
+    }
+    draft = draft.includes(cat) ? draft.filter(x => x !== cat) : [...draft, cat];
+    await env.STATE.put(key, JSON.stringify(draft), { expirationTtl: 1800 });
+    await edit(env, chatId, msgId, "✏️ Отметь услуги мастера и нажми «Сохранить»:", servesKb(slug, draft));
+    await ack();
+
+  } else if (d.startsWith("masters:srvs:")) {
+    const slug = d.split(":")[2];
+    const key = `srvdraft:${userId}:${slug}`;
+    const draft = JSON.parse((await env.STATE.get(key)) || "null");
+    const { data, sha } = await getSiteData(env);
+    const m = (data.masters || []).find(x => x.slug === slug);
+    if (!m) { await ack("Не найден"); return; }
+    if (draft) {
+      m.serves = draft;
+      await putSiteData(env, data, sha, `Bot: usługi mistrzyni ${m.name}`);
+      await env.STATE.delete(key);
+    }
+    await edit(env, chatId, msgId, `✅ Сохранено. Сайт обновится через ~2 минуты.\n\n` + masterText(m), masterKb(slug));
+    await ack();
+
+  } else if (d.startsWith("masters:srv:")) {
+    const slug = d.split(":")[2];
+    const { data } = await getSiteData(env);
+    const m = (data.masters || []).find(x => x.slug === slug);
+    if (!m) { await ack("Не найден"); return; }
+    await env.STATE.put(`srvdraft:${userId}:${slug}`, JSON.stringify(m.serves || []), { expirationTtl: 1800 });
+    await edit(env, chatId, msgId, "✏️ Отметь услуги мастера и нажми «Сохранить»:", servesKb(slug, m.serves || []));
+    await ack();
+
+  } else if (d.startsWith("masters:role:")) {
+    const slug = d.split(":")[2];
+    await env.STATE.put(`pending:${userId}`, JSON.stringify({ action: "role", slug }), { expirationTtl: 1800 });
+    await send(env, chatId, "✏️ Напиши новую роль (видна на сайте, лучше по-польски), например: <code>Manicure i stylizacja brwi</code>");
+    await ack();
+
+  } else if (d.startsWith("masters:bio:")) {
+    const slug = d.split(":")[2];
+    await env.STATE.put(`pending:${userId}`, JSON.stringify({ action: "bio", slug }), { expirationTtl: 1800 });
+    await send(env, chatId, "✏️ Напиши описание мастера (можно несколько абзацев — раздели пустой строкой):");
+    await ack();
+
+  } else if (d.startsWith("masters:photo:")) {
+    const slug = d.split(":")[2];
+    await env.STATE.put(`pending:${userId}`, JSON.stringify({ action: "masterphoto", slug }), { expirationTtl: 1800 });
+    await send(env, chatId, "📷 Пришли фото мастера (портрет, вертикальное лучше):");
+    await ack();
+
+  } else if (d.startsWith("masters:del:")) {
+    const slug = d.split(":")[2];
+    const { data } = await getSiteData(env);
+    const m = (data.masters || []).find(x => x.slug === slug);
+    if (!m) { await ack("Не найден"); return; }
+    await edit(env, chatId, msgId, `Удалить мастера «${m.name}» с сайта?`, {
+      inline_keyboard: [[
+        { text: "❌ Да, удалить", callback_data: `masters:delok:${slug}` },
+        { text: "Отмена", callback_data: `masters:view:${slug}` },
+      ]],
+    });
+    await ack();
+
+  } else if (d.startsWith("masters:delok:")) {
+    const slug = d.split(":")[2];
+    const { data, sha } = await getSiteData(env);
+    const i = (data.masters || []).findIndex(x => x.slug === slug);
+    if (i < 0) { await ack("Не найден"); return; }
+    const [removed] = data.masters.splice(i, 1);
+    await putSiteData(env, data, sha, `Bot: usunięta mistrzyni ${removed.name}`);
+    await edit(env, chatId, msgId, `✅ «${removed.name}» удалена с сайта. Обновится через ~2 минуты.`, masterListKb(data.masters));
+    await ack();
+
   } else {
     await ack();
   }
@@ -234,7 +379,14 @@ async function handleMessage(msg, env) {
   }
 
   if (msg.photo) {
-    await handlePhoto(msg, text, env, chatId, userId);
+    const pendingRaw = await env.STATE.get(`pending:${userId}`);
+    const pending = pendingRaw ? JSON.parse(pendingRaw) : null;
+    if (pending && pending.action === "masterphoto") {
+      await env.STATE.delete(`pending:${userId}`);
+      await handleMasterPhoto(msg, pending.slug, env, chatId);
+    } else {
+      await handlePhoto(msg, text, env, chatId, userId);
+    }
     return;
   }
 
@@ -272,7 +424,38 @@ async function handleMessage(msg, env) {
 }
 
 async function handlePending(pending, text, env, chatId) {
-  if (pending.action === "reviews") {
+  if (pending.action === "newmaster") {
+    const parts = text.split("|").map(s => s.trim());
+    const name = parts[0];
+    const role = parts[1] || "";
+    if (!name || !role) {
+      await send(env, chatId, "Нужно имя и роль через |, например: <code>Ольга | Manicure i pedicure</code>. Попробуй ещё раз через меню.");
+      return;
+    }
+    const { data, sha } = await getSiteData(env);
+    data.masters = data.masters || [];
+    const slug = translitSlug(name, data.masters.map(m => m.slug));
+    const m = { slug, name, gen: name, role, serves: [], bio: [] };
+    data.masters.push(m);
+    await putSiteData(env, data, sha, `Bot: nowa mistrzyni ${name}`);
+    await send(env, chatId,
+      `✅ Мастер «${name}» добавлен. Теперь отметь услуги и пришли фото:`, masterKb(slug));
+  } else if (pending.action === "role") {
+    const { data, sha } = await getSiteData(env);
+    const m = (data.masters || []).find(x => x.slug === pending.slug);
+    if (!m) { await send(env, chatId, "Мастер не найден."); return; }
+    const old = m.role;
+    m.role = text;
+    await putSiteData(env, data, sha, `Bot: rola ${m.name}: ${text}`);
+    await send(env, chatId, `✅ Роль «${m.name}»: ${old} → <b>${text}</b>. Сайт обновится через ~2 минуты.`, masterKb(m.slug));
+  } else if (pending.action === "bio") {
+    const { data, sha } = await getSiteData(env);
+    const m = (data.masters || []).find(x => x.slug === pending.slug);
+    if (!m) { await send(env, chatId, "Мастер не найден."); return; }
+    m.bio = text.split(/\n\s*\n/).map(s => s.replace(/\s*\n\s*/g, " ").trim()).filter(Boolean);
+    await putSiteData(env, data, sha, `Bot: bio ${m.name}`);
+    await send(env, chatId, `✅ Описание «${m.name}» обновлено (${m.bio.length} абз.). Сайт обновится через ~2 минуты.`, masterKb(m.slug));
+  } else if (pending.action === "reviews") {
     await handleReviews("отзывы " + text, env, chatId);
   } else if (pending.action === "price") {
     const price = normalizePrice(text);
@@ -334,6 +517,30 @@ async function handlePhoto(msg, caption, env, chatId, userId) {
     content: btoa(bin),
   });
   await send(env, chatId, `✅ Фото добавлено в галерею «${CATEGORY_RU[slug] || slug}». Сайт обновится через ~2 минуты.`);
+}
+
+async function downloadPhotoB64(msg, env) {
+  const photo = msg.photo.reduce((a, b) => ((a.file_size || 0) > (b.file_size || 0) ? a : b));
+  const info = await tg(env, "getFile", { file_id: photo.file_id });
+  const fileResp = await fetch(`https://api.telegram.org/file/bot${env.TELEGRAM_TOKEN}/${info.result.file_path}`);
+  const bytes = new Uint8Array(await fileResp.arrayBuffer());
+  let bin = "";
+  const CHUNK = 0x8000;
+  for (let i = 0; i < bytes.length; i += CHUNK)
+    bin += String.fromCharCode(...bytes.subarray(i, i + CHUNK));
+  return btoa(bin);
+}
+
+async function handleMasterPhoto(msg, slug, env, chatId) {
+  const path = `assets/mistrz-${slug}.jpg`;
+  let sha;
+  try { sha = (await gh(env, `contents/${path}`, "GET")).sha; } catch {}
+  await gh(env, `contents/${path}`, "PUT", {
+    message: `Bot: zdjęcie mistrzyni ${slug}`,
+    content: await downloadPhotoB64(msg, env),
+    ...(sha ? { sha } : {}),
+  });
+  await send(env, chatId, `✅ Фото мастера сохранено. Сайт обновится через ~2 минуты.`, masterKb(slug));
 }
 
 // ---------- opinie ----------
