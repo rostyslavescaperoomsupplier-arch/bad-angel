@@ -12,7 +12,16 @@ import json
 from datetime import date
 from i18n import LANGS, LANG_LABEL, HTML_KEYS, REVIEWS, flat as _i18n_flat
 
+_ROOT = os.path.dirname(os.path.abspath(__file__))
+with open(os.path.join(_ROOT, "site_data.json"), encoding="utf-8") as _f:
+    SITE_DATA = json.load(_f)
+REVIEWS_COUNT = str(SITE_DATA["reviews"])
+
 I18N = _i18n_flat()
+for _key, _langs in I18N.items():
+    for _lang, _text in _langs.items():
+        if isinstance(_text, str) and "{REVIEWS}" in _text:
+            _langs[_lang] = _text.replace("{REVIEWS}", REVIEWS_COUNT)
 
 def P(key):
     """Polski tekst domyslny (inline w HTML)."""
@@ -733,7 +742,7 @@ def build_index():
                                        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday",
                                                      "Friday", "Saturday", "Sunday"],
                                        "opens": "09:00", "closes": "20:00"}],
-        "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "1246"},
+        "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": REVIEWS_COUNT},
         "priceRange": "50-600 PLN",
         "sameAs": [BOOKSY],
     }
@@ -749,7 +758,7 @@ def build_index():
     extra = (f'<script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>\n'
              f'<script type="application/ld+json">{json.dumps(faq_ld, ensure_ascii=False)}</script>\n')
     html = head("Salon Urody BAD ANGEL Szczecin — manicure, pedicure, rzęsy, brwi, masaż",
-                "Salon Urody BAD ANGEL w Szczecinie, aleja Wyzwolenia 5/10. Manicure, pedicure, przedłużanie rzęs, brwi, masaż, depilacja, włosy. Ocena 4.9 — 1246 opinii. Rezerwacja online.",
+                f"Salon Urody BAD ANGEL w Szczecinie, aleja Wyzwolenia 5/10. Manicure, pedicure, przedłużanie rzęs, brwi, masaż, depilacja, włosy. Ocena 4.9 — {REVIEWS_COUNT} opinii. Rezerwacja online.",
                 extra=extra)
     html += header_html()
     html += f"""
