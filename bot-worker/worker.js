@@ -28,6 +28,12 @@ const HELP =
   "📸 <b>Добавить фото работы в галерею:</b>\n" +
   "Пришли фото (можно несколько сразу), в подписи укажи категорию:\n" +
   `<i>${CATEGORY_LIST}</i>\n\n` +
+  "💰 <b>Прайс:</b>\n" +
+  "<code>цены маникюр</code> — показать услуги с номерами\n" +
+  "<code>цена маникюр 3 120</code> — услуге №3 цену 120 zł (можно «от 120»)\n" +
+  "<code>услуга маникюр Название | 120 | 1 г 30 мин | Описание</code> — добавить услугу " +
+  "(время и описание можно не писать)\n" +
+  "<code>удалить маникюр 3</code> — убрать услугу №3\n\n" +
   "⭐ <b>Обновить число отзывов:</b>\n" +
   "напиши: <code>отзывы 1300</code>\n\n" +
   "После моего ✅ сайт обновляется ещё около 2 минут.";
@@ -73,6 +79,14 @@ async function handleMessage(msg, env) {
     await handlePhoto(msg, text, env, chatId);
   } else if (low.startsWith("отзыв") || low.startsWith("opinie")) {
     await handleReviews(text, env, chatId);
+  } else if (low.startsWith("цены") || low.startsWith("прайс")) {
+    await handlePriceList(text, env, chatId);
+  } else if (low.startsWith("цена")) {
+    await handlePriceSet(text, env, chatId);
+  } else if (low.startsWith("услуга")) {
+    await handleServiceAdd(text, env, chatId);
+  } else if (low.startsWith("удалить")) {
+    await handleServiceDelete(text, env, chatId);
   } else if (low.startsWith("разрешить") || low.startsWith("allow")) {
     const m = text.match(/\d{5,}/);
     if (m) {
@@ -128,19 +142,113 @@ async function handleReviews(text, env, chatId) {
     return;
   }
   const n = Number(m[0]);
-  const cur = await gh(env, "contents/site_data.json", "GET");
-  const data = JSON.parse(atob(cur.content));
+  const { data, sha } = await getSiteData(env);
   if (data.reviews === n) {
     await send(env, chatId, `Число отзывов уже ${n} — ничего не меняю.`);
     return;
   }
   data.reviews = n;
-  await gh(env, "contents/site_data.json", "PUT", {
-    message: `Bot: liczba opinii ${n}`,
-    content: btoa(JSON.stringify(data, null, 2) + "\n"),
-    sha: cur.sha,
-  });
+  await putSiteData(env, data, sha, `Bot: liczba opinii ${n}`);
   await send(env, chatId, `✅ Число отзывов обновлено: ${n}. Сайт обновится через ~2 минуты.`);
+}
+
+// ---------- cennik (site_data.json["services"]) ----------
+
+async function getSiteData(env) {
+  const cur = await gh(env, "contents/site_data.json", "GET");
+  const bytes = Uint8Array.from(atob(cur.content.replace(/\n/g, "")), c => c.charCodeAt(0));
+  return { data: JSON.parse(new TextDecoder().decode(bytes)), sha: cur.sha };
+}
+
+async function putSiteData(env, data, sha, message) {
+  const bytes = new TextEncoder().encode(JSON.stringify(data, null, 1) + "\n");
+  let bin = "";
+  for (const b of bytes) bin += String.fromCharCode(b);
+  await gh(env, "contents/site_data.json", "PUT", { message, content: btoa(bin), sha });
+}
+
+function parseCategoryArg(text) {
+  // "цена маникюр ..." -> ["маникюр", reszta]
+  const parts = text.trim().split(/\s+/);
+  const slug = parts.length > 1 ? CATEGORY_ALIASES[parts[1].toLowerCase()] : null;
+  return { slug, rest: parts.slice(2) };
+}
+
+function normalizePrice(raw) {
+  const s = raw.trim();
+  if (/zł/i.test(s)) return s;
+  const od = /^(от|od)[\s\d]/i.test(s);
+  const num = (s.match(/\d+/) || [null])[0];
+  if (!num) return null;
+  return (od ? "od " : "") + num + " zł";
+}
+
+async function handlePriceList(text, env, chatId) {
+  const { slug } = parseCategoryArg(text);
+  if (!slug) {
+    await send(env, chatId, `Напиши так: <code>цены маникюр</code>\nКатегории: ${CATEGORY_LIST}`);
+    return;
+  }
+  const { data } = await getSiteData(env);
+  const items = data.services[slug] || [];
+  const lines = items.map((it, i) => `${i + 1}. ${it[0]} — <b>${it[3]}</b>${it[2] ? ` (${it[2]})` : ""}`);
+  await send(env, chatId, `💰 <b>${slug}</b>:\n` + (lines.join("\n") || "пусто"));
+}
+
+async function handlePriceSet(text, env, chatId) {
+  const { slug, rest } = parseCategoryArg(text);
+  const idx = rest.length ? parseInt(rest[0], 10) : NaN;
+  const price = normalizePrice(rest.slice(1).join(" "));
+  if (!slug || !idx || !price) {
+    await send(env, chatId, "Напиши так: <code>цена маникюр 3 120</code> или <code>цена маникюр 3 от 120</code>\n(номер услуги смотри через <code>цены маникюр</code>)");
+    return;
+  }
+  const { data, sha } = await getSiteData(env);
+  const items = data.services[slug] || [];
+  if (idx < 1 || idx > items.length) {
+    await send(env, chatId, `В «${slug}» только ${items.length} услуг. Посмотри номера: <code>цены ${slug}</code>`);
+    return;
+  }
+  const old = items[idx - 1][3];
+  items[idx - 1][3] = price;
+  await putSiteData(env, data, sha, `Bot: cena "${items[idx - 1][0]}" ${old} -> ${price}`);
+  await send(env, chatId, `✅ «${items[idx - 1][0]}»: ${old} → <b>${price}</b>. Сайт обновится через ~2 минуты.`);
+}
+
+async function handleServiceAdd(text, env, chatId) {
+  const { slug } = parseCategoryArg(text);
+  const afterCat = text.trim().split(/\s+/).slice(2).join(" ");
+  const parts = afterCat.split("|").map(s => s.trim());
+  const name = parts[0];
+  const price = parts[1] ? normalizePrice(parts[1]) : null;
+  if (!slug || !name || !price) {
+    await send(env, chatId, "Напиши так: <code>услуга маникюр Название | 120 | 1 г 30 мин | Описание</code>\n(время и описание — по желанию)");
+    return;
+  }
+  const time = parts[2] || "";
+  const desc = parts[3] || "";
+  const { data, sha } = await getSiteData(env);
+  (data.services[slug] = data.services[slug] || []).push([name, desc, time, price]);
+  await putSiteData(env, data, sha, `Bot: nowa usługa "${name}" (${slug})`);
+  await send(env, chatId, `✅ Добавлена услуга «${name}» — ${price} в «${slug}». Сайт обновится через ~2 минуты.`);
+}
+
+async function handleServiceDelete(text, env, chatId) {
+  const { slug, rest } = parseCategoryArg(text);
+  const idx = rest.length ? parseInt(rest[0], 10) : NaN;
+  if (!slug || !idx) {
+    await send(env, chatId, "Напиши так: <code>удалить маникюр 3</code> (номер — из <code>цены маникюр</code>)");
+    return;
+  }
+  const { data, sha } = await getSiteData(env);
+  const items = data.services[slug] || [];
+  if (idx < 1 || idx > items.length) {
+    await send(env, chatId, `В «${slug}» только ${items.length} услуг.`);
+    return;
+  }
+  const [removed] = items.splice(idx - 1, 1);
+  await putSiteData(env, data, sha, `Bot: usunięta usługa "${removed[0]}" (${slug})`);
+  await send(env, chatId, `✅ Услуга «${removed[0]}» удалена из «${slug}». Сайт обновится через ~2 минуты.`);
 }
 
 async function tg(env, method, params) {

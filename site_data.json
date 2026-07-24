@@ -1,1 +1,461 @@
-{"reviews": 1246}
+{
+ "reviews": 1246,
+ "services": {
+  "manicure": [
+   [
+    "Manicure klasyczny",
+    "Opiłowanie, odsunięcie i usunięcie skórek, emulsja zmiękczająca.",
+    "1 g",
+    "od 90 zł"
+   ],
+   [
+    "Manicure + lakier",
+    "Obrobienie skórek, baza i lakier hybrydowy.",
+    "1 g 30 min",
+    "od 99 zł"
+   ],
+   [
+    "Manicure higieniczny",
+    "",
+    "1 g 30 min",
+    "99 zł"
+   ],
+   [
+    "Manicure męski",
+    "",
+    "1 g 30 min",
+    "99 zł"
+   ],
+   [
+    "Manicure japoński",
+    "Pielęgnacja odżywcza pastą i pudrem.",
+    "1 g 30 min",
+    "108 zł"
+   ],
+   [
+    "Manicure hybryda",
+    "Opracowanie skórek, skrócenie paznokci, odżywka proteinowa.",
+    "1 g 30 min",
+    "od 117 zł"
+   ],
+   [
+    "Manicure hybrydowy",
+    "",
+    "2 g",
+    "60 zł"
+   ],
+   [
+    "Żel na naturalną płytkę",
+    "Wzmocnienie i wyrównanie naturalnej płytki żelem.",
+    "2 g 30 min",
+    "80 zł"
+   ],
+   [
+    "Odnowa żelowa długość 1/2",
+    "",
+    "2 g",
+    "od 135 zł"
+   ],
+   [
+    "Odnowa żelowa długość 3/4",
+    "Skórki, utwardzenie żelowe, lakier hybrydowy.",
+    "2 g 30 min",
+    "od 153 zł"
+   ],
+   [
+    "Przedłużanie paznokci długość 1",
+    "Utwardzenie żelem i lakier hybrydowy.",
+    "1 g 30 min",
+    "od 153 zł"
+   ],
+   [
+    "Przedłużenie paznokci długość 2/3",
+    "",
+    "2 g",
+    "171 zł"
+   ],
+   [
+    "Przedłużenie paznokci długość 3/4",
+    "",
+    "2 g 30 min",
+    "180 zł"
+   ],
+   [
+    "Przedłużenie paznokci długość 4/5",
+    "",
+    "3 g",
+    "189 zł"
+   ],
+   [
+    "Rekonstrukcja jednego paznokcia",
+    "Piłowanie, utwardzanie, polerowanie, lakier hybrydowy.",
+    "15 min",
+    "od 9 zł"
+   ]
+  ],
+  "pedicure": [
+   [
+    "Pedicure klasyczny z obramieniem skórek",
+    "Opracowanie palców i skórek.",
+    "1 g",
+    "od 99 zł"
+   ],
+   [
+    "Pedicure męski",
+    "",
+    "1 g",
+    "108 zł"
+   ],
+   [
+    "Pedicure z lakierem klasycznym",
+    "",
+    "1 g 20 min",
+    "od 108 zł"
+   ],
+   [
+    "Pedicure hybrydowy (bez pięt)",
+    "",
+    "1 g 20 min",
+    "od 135 zł"
+   ],
+   [
+    "Pedicure hybrydowy ze stopą",
+    "Pełne opracowanie z pielęgnacją pięt.",
+    "1 g 30 min",
+    "od 153 zł"
+   ],
+   [
+    "Pedicure higieniczny",
+    "",
+    "1 g",
+    "50 zł"
+   ],
+   [
+    "Pedicure hybrydowy z opracowaniem stopy",
+    "",
+    "2 g 30 min",
+    "120 zł"
+   ],
+   [
+    "Pedicure hybryda (bez stóp)",
+    "",
+    "2 g 30 min",
+    "100 zł"
+   ]
+  ],
+  "rzesy": [
+   [
+    "Metoda 1:1",
+    "Efekt naturalny.",
+    "1 g 50 min",
+    "135 zł"
+   ],
+   [
+    "Metoda 2:1",
+    "",
+    "2 g",
+    "144 zł"
+   ],
+   [
+    "Metoda 3:1",
+    "",
+    "2 g 15 min",
+    "153 zł"
+   ],
+   [
+    "Metoda 4:1",
+    "",
+    "2 g 30 min",
+    "od 162 zł"
+   ],
+   [
+    "Metoda 5:1",
+    "Efekt maksymalnej objętości.",
+    "2 g 30 min",
+    "171 zł"
+   ],
+   [
+    "Uzupełnienie 1:1 (do 3 tygodni)",
+    "",
+    "1 g 50 min",
+    "126 zł"
+   ],
+   [
+    "Ściągnięcie rzęs (bez założenia)",
+    "",
+    "15 min",
+    "od 36 zł"
+   ]
+  ],
+  "brwi": [
+   [
+    "Regulacja brwi + geometria",
+    "Wosk lub pęseta, korekta kształtu.",
+    "20 min",
+    "od 45 zł"
+   ],
+   [
+    "Regulacja brwi + geometria + farbka",
+    "Henna marokańska / pudrowa.",
+    "45 min",
+    "od 72 zł"
+   ],
+   [
+    "Korekta brwi (bez farbowania)",
+    "Geometria bez regulacji.",
+    "25 min",
+    "od 45 zł"
+   ],
+   [
+    "Laminacja brwi + botox",
+    "",
+    "1 g",
+    "od 90 zł"
+   ],
+   [
+    "Laminacja brwi + botox + koloryzacja",
+    "Stylizacja i regeneracja włosków.",
+    "1 g",
+    "od 117 zł"
+   ],
+   [
+    "Laminacja rzęs",
+    "",
+    "1 g 30 min",
+    "144 zł"
+   ]
+  ],
+  "masaz": [
+   [
+    "Masaż kręgosłupa (kobiety)",
+    "",
+    "30 min",
+    "72 zł"
+   ],
+   [
+    "Masaż kręgosłupa (mężczyźni)",
+    "",
+    "45 min",
+    "117 zł"
+   ],
+   [
+    "Masaż całego ciała (kobiety)",
+    "",
+    "1 g 30 min",
+    "162 zł"
+   ],
+   [
+    "Masaż całego ciała (mężczyźni)",
+    "",
+    "1 g 30 min",
+    "207 zł"
+   ],
+   [
+    "Masaż miodem",
+    "Detoksykacja i ujędrnienie.",
+    "30 min",
+    "117 zł"
+   ],
+   [
+    "Masaż twarzy + peeling + maska + krem",
+    "",
+    "50 min",
+    "144 zł"
+   ],
+   [
+    "Masaż antycellulitowy",
+    "",
+    "1 g",
+    "162 zł"
+   ],
+   [
+    "Masaż karku, głowy i szyi",
+    "",
+    "30 min",
+    "72 zł"
+   ],
+   [
+    "Masaż stóp",
+    "",
+    "20 min",
+    "72 zł"
+   ],
+   [
+    "Masaż rąk",
+    "",
+    "20 min",
+    "72 zł"
+   ],
+   [
+    "Masaż twarzy",
+    "",
+    "30 min",
+    "81 zł"
+   ]
+  ],
+  "depilacja": [
+   [
+    "Broda",
+    "",
+    "30 min",
+    "45 zł"
+   ],
+   [
+    "Pachy",
+    "",
+    "30 min",
+    "54 zł"
+   ],
+   [
+    "Bikini pełne",
+    "",
+    "1 g 15 min",
+    "od 135 zł"
+   ],
+   [
+    "Nogi całe",
+    "",
+    "1 g 15 min",
+    "144 zł"
+   ],
+   [
+    "Bikini + nogi + pachy",
+    "Pakiet kompletny.",
+    "2 g 30 min",
+    "315 zł"
+   ]
+  ],
+  "spa": [
+   [
+    "SPA parafinowe po innej usłudze",
+    "Kąpiel parafinowa i krem regenerujący.",
+    "30 min",
+    "od 72 zł"
+   ],
+   [
+    "SPA (peeling, parafina, masaż, krem)",
+    "Pełny rytuał pielęgnacyjny dłoni.",
+    "50 min",
+    "od 90 zł"
+   ]
+  ],
+  "blizny": [
+   [
+    "Redukcja blizn do 5 cm",
+    "",
+    "45 min",
+    "359,10 zł"
+   ],
+   [
+    "Redukcja blizn do 10 cm",
+    "",
+    "1 g",
+    "449,10 zł"
+   ],
+   [
+    "Redukcja blizn większych",
+    "",
+    "1 g 30 min",
+    "539,10 zł"
+   ],
+   [
+    "Redukcja rozstępów biustu",
+    "",
+    "45 min",
+    "449,10 zł"
+   ],
+   [
+    "Redukcja rozstępów pośladki",
+    "",
+    "1 g 30 min",
+    "490,50 zł"
+   ],
+   [
+    "Redukcja rozstępów ręce",
+    "",
+    "1 g",
+    "494,10 zł"
+   ],
+   [
+    "Redukcja rozstępów uda",
+    "",
+    "1 g 10 min",
+    "584,10 zł"
+   ],
+   [
+    "Redukcja rozstępów boki",
+    "",
+    "1 g 30 min",
+    "629,10 zł"
+   ],
+   [
+    "Redukcja rozstępów brzucha",
+    "",
+    "1 g 30 min",
+    "670,50 zł"
+   ],
+   [
+    "Redukcja rozstępów brzuch + boki",
+    "",
+    "2 g 30 min",
+    "989,10 zł"
+   ]
+  ],
+  "wlosy": [
+   [
+    "Przedłużanie włosów naturalne (cena bez włosów)",
+    "Zagęszczenie i wydłużenie włosów naturalnymi pasmami.",
+    "4 g",
+    "od 600 zł"
+   ],
+   [
+    "Przedłużanie włosów syntetyczne (cena z włosami)",
+    "Przedłużanie z pasmami syntetycznymi w komplecie.",
+    "4 g",
+    "od 600 zł"
+   ],
+   [
+    "Warkoczyki syntetyczne",
+    "Pojedyncze warkoczyki syntetyczne.",
+    "30 min",
+    "od 20 zł"
+   ],
+   [
+    "Warkoczyki syntetyczne (pełne)",
+    "Pełna głowa warkoczyków.",
+    "2 g",
+    "od 250 zł"
+   ],
+   [
+    "Strzyżenie damskie",
+    "Strzyżenie z uwzględnieniem cech i kształtu twarzy.",
+    "1 g",
+    "od 80 zł"
+   ],
+   [
+    "Strzyżenie męskie",
+    "",
+    "45 min",
+    "60 zł"
+   ],
+   [
+    "Modelowanie / stylizacja",
+    "Mycie, suszenie i stylizacja.",
+    "45 min",
+    "od 70 zł"
+   ],
+   [
+    "Regeneracja włosów (zimna odbudowa)",
+    "Głęboka pielęgnacja i odbudowa struktury włosa.",
+    "1 g",
+    "od 150 zł"
+   ],
+   [
+    "Upięcie okolicznościowe",
+    "Fryzura na specjalną okazję.",
+    "1 g",
+    "od 150 zł"
+   ]
+  ]
+ }
+}

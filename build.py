@@ -173,6 +173,12 @@ CATEGORIES = [
          ]),
 ]
 
+# Cennik jest edytowalny przez bota Telegram: site_data.json["services"] nadpisuje
+# inline'owe items (te wyżej to tylko wartości startowe / fallback).
+for _c in CATEGORIES:
+    if _c["slug"] in SITE_DATA.get("services", {}):
+        _c["items"] = [tuple(_i) for _i in SITE_DATA["services"][_c["slug"]]]
+
 # Mastrzy. slug -> mistrz-<slug>.html, zdjęcie assets/mistrz-<slug>.jpg
 MASTERS = [
     dict(slug="angelina", name="Angelina", gen="Angeliny", role="Manicure, pedicure, brwi i rzęsy",
