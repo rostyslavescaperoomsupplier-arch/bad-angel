@@ -580,6 +580,10 @@ def head(title, desc, page="", extra=""):
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{canonical}">
 <meta name="theme-color" content="#0a0a0a">
+<meta name="geo.region" content="PL-ZP">
+<meta name="geo.placename" content="Szczecin">
+<meta name="geo.position" content="53.4337;14.5518">
+<meta name="ICBM" content="53.4337, 14.5518">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Salon Urody BAD ANGEL">
 <meta property="og:locale" content="pl_PL">
@@ -723,6 +727,8 @@ def build_index():
         "image": OG_IMAGE,
         "address": {"@type": "PostalAddress", "streetAddress": "aleja Wyzwolenia 5/10",
                     "postalCode": "70-552", "addressLocality": "Szczecin", "addressCountry": "PL"},
+        "geo": {"@type": "GeoCoordinates", "latitude": 53.4337, "longitude": 14.5518},
+        "hasMap": "https://www.google.com/maps/search/?api=1&query=Salon+Urody+BAD+ANGEL+aleja+Wyzwolenia+5%2F10+Szczecin",
         "openingHoursSpecification": [{"@type": "OpeningHoursSpecification",
                                        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday",
                                                      "Friday", "Saturday", "Sunday"],
@@ -731,9 +737,19 @@ def build_index():
         "priceRange": "50-600 PLN",
         "sameAs": [BOOKSY],
     }
-    extra = f'<script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>\n'
-    html = head("Salon Urody BAD ANGEL — Szczecin",
-                "Salon Urody BAD ANGEL w Szczecinie. Manicure, pedicure, przedłużanie rzęs, masaż, depilacja. Ocena 4.9 — 1246 opinii.",
+    faq_ld = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {"@type": "Question", "name": I18N[f"faq_q{i}"]["pl"],
+             "acceptedAnswer": {"@type": "Answer", "text": I18N[f"faq_a{i}"]["pl"]}}
+            for i in range(4) if f"faq_q{i}" in I18N
+        ],
+    }
+    extra = (f'<script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>\n'
+             f'<script type="application/ld+json">{json.dumps(faq_ld, ensure_ascii=False)}</script>\n')
+    html = head("Salon Urody BAD ANGEL Szczecin — manicure, pedicure, rzęsy, brwi, masaż",
+                "Salon Urody BAD ANGEL w Szczecinie, aleja Wyzwolenia 5/10. Manicure, pedicure, przedłużanie rzęs, brwi, masaż, depilacja, włosy. Ocena 4.9 — 1246 opinii. Rezerwacja online.",
                 extra=extra)
     html += header_html()
     html += f"""
@@ -863,9 +879,20 @@ def build_service(c):
         <div class="book"><a class="btn solid sm" href="{BOOKSY}" target="_blank" rel="noopener" data-i18n="btn_book">{P('btn_book')}</a></div>
       </div>"""
 
-    html = head(f"{c['name']} — Salon Urody BAD ANGEL Szczecin",
-                f"{c['name']} w Salonie Urody BAD ANGEL w Szczecinie. {c['intro']}",
-                page=f"usluga-{c['slug']}.html")
+    svc_ld = {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": f"{c['name']} Szczecin",
+        "provider": {"@type": "BeautySalon", "name": "Salon Urody BAD ANGEL",
+                     "address": {"@type": "PostalAddress", "streetAddress": "aleja Wyzwolenia 5/10",
+                                 "postalCode": "70-552", "addressLocality": "Szczecin", "addressCountry": "PL"}},
+        "areaServed": "Szczecin",
+        "url": f"{SITE_URL}/usluga-{c['slug']}.html",
+    }
+    html = head(f"{c['name']} Szczecin — Salon Urody BAD ANGEL",
+                f"{c['name']} w Szczecinie — Salon Urody BAD ANGEL, aleja Wyzwolenia 5/10. {c['intro']} Rezerwacja online przez Booksy.",
+                page=f"usluga-{c['slug']}.html",
+                extra=f'<script type="application/ld+json">{json.dumps(svc_ld, ensure_ascii=False)}</script>\n')
     html += header_html()
     # Galeria — zdjęcia z assets/gallery/<slug>/
     gdir = os.path.join(ROOT, "assets", "gallery", c["slug"])
@@ -1006,7 +1033,7 @@ def build_portfolio():
     name_by = {c["slug"]: c["name"] for c in CATEGORIES}
     for s in present:
         fbtns += f'<button data-filter="{s}" data-i18n="cat_{s}_name">{name_by[s]}</button>'
-    imgs = "".join(f'<img loading="lazy" data-cat="{s}" src="assets/gallery/{s}/{fn}" alt="Salon Urody BAD ANGEL">'
+    imgs = "".join(f'<img loading="lazy" data-cat="{s}" src="assets/gallery/{s}/{fn}" alt="{name_by[s]} Szczecin — Salon Urody BAD ANGEL">'
                    for s, fn in items)
     html = head("Portfolio — Salon Urody BAD ANGEL Szczecin",
                 "Portfolio prac Salon Urody BAD ANGEL w Szczecinie — manicure, pedicure, rzęsy, brwi.",
