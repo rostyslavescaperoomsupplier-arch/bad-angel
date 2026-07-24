@@ -1,0 +1,7 @@
+name = "badangel-bot"
+main = "worker.js"
+compatibility_date = "2026-07-01"
+
+[[kv_namespaces]]
+binding = "STATE"
+id = "58d87d64f2a6408eba1e231334ac4bc7"
