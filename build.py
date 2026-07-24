@@ -24,9 +24,8 @@ BOOKSY = "https://badangel86.booksy.com/a/"
 IG = "https://www.instagram.com/"
 FB = "https://www.facebook.com/"
 
-# Po zakupie domeny wpisz ją tutaj (bez https://, np. "badangel.pl") i uruchom build:
-# wygeneruje się CNAME dla GitHub Pages, a canonical/sitemap/OG przełączą się na domenę.
-DOMAIN = ""
+# Domena własna: badangelsalonpiękności.pl (punycode dla DNS/GitHub Pages).
+DOMAIN = "xn--badangelsalonpiknoci-iwc96l.pl"
 SITE_URL = f"https://{DOMAIN}" if DOMAIN else "https://rostyslavescaperoomsupplier-arch.github.io/bad-angel"
 OG_IMAGE = f"{SITE_URL}/assets/feature-nails.jpg"
 
