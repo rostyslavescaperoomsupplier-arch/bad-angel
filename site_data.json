@@ -676,6 +676,14 @@
     "Manicure i pedicure wykonuje z uwzględnieniem anatomii dłoni i stóp — jej pokrycia są trwałe, wygodne i estetyczne. Biegle włada technikami nail-artu, w tym klasycznym i nowoczesnym frenchem.",
     "Zajmuje się też stylizacją brwi i rzęs: laminacją z trwałym efektem oraz koloryzacją dobraną indywidualnie do rysów twarzy."
    ]
+  },
+  {
+   "slug": "fabian",
+   "name": "Fabian",
+   "gen": "Fabian",
+   "role": "fizjoterapeuta , masażysta",
+   "serves": [],
+   "bio": []
   }
  ]
 }
