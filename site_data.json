@@ -574,23 +574,6 @@
  },
  "masters": [
   {
-   "slug": "angelina",
-   "name": "Angelina",
-   "gen": "Angeliny",
-   "role": "Anastazja \nManicure , pedicure , brwi i rzęsy ( laminacja)",
-   "serves": [
-    "manicure",
-    "pedicure",
-    "spa",
-    "brwi"
-   ],
-   "bio": [
-    "Wykwalifikowana specjalistka beauty, dla której liczą się estetyka i jakość. Łączy techniczną precyzję, artystyczny smak i uważne podejście do każdego klienta.",
-    "Manicure i pedicure wykonuje z uwzględnieniem anatomii dłoni i stóp — jej pokrycia są trwałe, wygodne i estetyczne. Biegle włada technikami nail-artu, w tym klasycznym i nowoczesnym frenchem.",
-    "Zajmuje się też stylizacją brwi i rzęs: laminacją z trwałym efektem oraz koloryzacją dobraną indywidualnie do rysów twarzy."
-   ]
-  },
-  {
    "slug": "weronika",
    "name": "Weronika",
    "gen": "Weroniki",
