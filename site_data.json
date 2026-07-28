@@ -682,7 +682,9 @@
    "name": "Fabian",
    "gen": "Fabian",
    "role": "fizjoterapeuta , masażysta",
-   "serves": [],
+   "serves": [
+    "masaz"
+   ],
    "bio": []
   }
  ]
