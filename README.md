@@ -31,14 +31,14 @@ Do czasu dodania plików w tych miejscach wyświetla się elegancki ciemny gradi
 - `assets/usluga-wlosy.jpg` — Włosy
 
 **Mastrzy (kafelek + portret na podstronie):**
-- `assets/mistrz-angelina.jpg` — Angelina (Manicure, pedicure, brwi i rzęsy)
 - `assets/mistrz-weronika.jpg` — Weronika (Manicure, pedicure, brwi, SPA i depilacja)
 - `assets/mistrz-lidia.jpg` — Lidia (Przedłużanie paznokci)
 - `assets/mistrz-wiktoria.jpg` — Wiktoria (Mikroneedling, blizny i warkoczyki)
 - `assets/mistrz-wiktoria-masaz.jpg` — Wiktoria (Masaż)
 - `assets/mistrz-anna.jpg` — Anna (Mistrzyni fryzjerstwa)
-- `assets/mistrz-astgik.jpg` — Astgik (Pedicure i manicure)
 - `assets/mistrz-aryna.jpg` — Aryna (Przedłużanie włosów i warkoczyki)
+- `assets/mistrz-anastazja.jpg` — Anastazja (manicure i pedicure ( kreatywny inspiracje))
+- `assets/mistrz-fabian.jpg` — Fabian (fizjoterapeuta , masażysta)
 
 ## Rezerwacja
 Każdy przycisk „Rezerwuj / Zarezerwuj” prowadzi na profil Booksy salonu.
