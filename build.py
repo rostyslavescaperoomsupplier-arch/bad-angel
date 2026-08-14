@@ -28,7 +28,7 @@ def P(key):
     return I18N[key]["pl"]
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-VER = "9"  # cache-busting wersja dla styles.css / translations.js / app.js
+VER = "10"  # cache-busting wersja dla styles.css / translations.js / app.js
 BOOKSY = "https://badangel86.booksy.com/a/"
 IG = "https://www.instagram.com/"
 FB = "https://www.facebook.com/"
@@ -283,9 +283,14 @@ if "masters" in SITE_DATA:
 # ---------------------------------------------------------------------------
 CSS = """
 :root{
-  --black:#0a0a0a;--white:#fff;--grey:#8a8a8a;--line:rgba(255,255,255,.14);
+  /* Neutrale ciepłe, dobrane pod złoty wordmark — czyste #fff na #000 czytało się
+     jak dowolny ciemny szablon i wychłodzało logo. */
+  --black:#08080a;--ink-2:#0e0e11;--white:#f4f1ea;--grey:#8d8880;
+  --gold:#c2a066;--line:rgba(244,241,234,.11);
   --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
   --serif:'Cormorant Garamond',Georgia,serif;
+  /* jedna skala odstępów — sekcje wcześniej miały przypadkowe wartości */
+  --sp-1:8px;--sp-2:16px;--sp-3:28px;--sp-4:48px;--sp-5:80px;--sp-6:120px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -294,9 +299,14 @@ a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 
 /* NAV */
+/* Bez mix-blend-mode: difference — nad jasnym zdjęciem odwracał kolory, linki
+   robiły się cyjanowe a wordmark praktycznie znikał. Zamiast tego stały scrim. */
 header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
-  padding:18px 28px;transition:background .4s,box-shadow .4s;mix-blend-mode:difference}
-header.solid{mix-blend-mode:normal;background:rgba(8,8,9,.82);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(255,255,255,.08)}
+  padding:18px 28px;transition:background .4s,box-shadow .4s;color:var(--white)}
+header::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(6,6,8,.72),rgba(6,6,8,.28) 62%,transparent);transition:opacity .4s}
+header.solid::before{opacity:0}
+header.solid{background:rgba(8,8,10,.86);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line)}
 header .brand{font-family:var(--serif);font-size:22px;letter-spacing:.32em;font-weight:500;padding-left:.32em}
 header nav{display:flex;gap:30px}
 header nav a{font-size:13px;font-weight:500;letter-spacing:.02em;padding:6px 4px;opacity:.95;transition:opacity .2s}
@@ -322,10 +332,11 @@ header nav a:hover{opacity:.6}
 
 .btn{display:inline-block;min-width:264px;padding:13px 24px;border-radius:4px;font-size:13px;font-weight:600;
   letter-spacing:.06em;text-transform:uppercase;transition:all .25s;cursor:pointer;text-align:center;backdrop-filter:blur(4px)}
-.btn.solid{background:rgba(255,255,255,.92);color:#111}
+.btn.solid{background:rgba(244,241,234,.94);color:#111}
 .btn.solid:hover{background:#fff}
-.btn.ghost{background:rgba(30,30,30,.5);color:#fff}
-.btn.ghost:hover{background:rgba(60,60,60,.7)}
+/* Ghost nad ścianą zdjęć: .5 alfa nie wystarczało, tekst gubił się na jaśniejszym kadrze. */
+.btn.ghost{background:rgba(14,14,17,.72);color:var(--white);border:1px solid var(--line)}
+.btn.ghost:hover{background:rgba(30,30,34,.85);border-color:rgba(244,241,234,.24)}
 .btn.sm{min-width:auto;padding:9px 20px}
 .btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;padding:0 20px}
 
@@ -347,20 +358,54 @@ header nav a:hover{opacity:.6}
   background:linear-gradient(180deg,#eef1f6,#aeb4c0 40%,#6a6f7a 60%,#e6e9ef);-webkit-background-clip:text;background-clip:text;color:transparent;
   opacity:.9;position:absolute;top:50%;left:50%;transform:translate(-50%,-52%);z-index:-1;filter:drop-shadow(0 8px 40px rgba(0,0,0,.6));pointer-events:none}
 #hero.has-photo .monogram{display:none}
-#hero .logo{width:min(720px,90vw);margin:0 auto;filter:drop-shadow(0 6px 30px rgba(0,0,0,.5))}
-.panel .top{padding-top:22vh}
-.panel .bottom{margin-top:auto;padding-bottom:56px;width:100%}
+#hero .logo{width:min(680px,86vw);margin:0 auto;filter:drop-shadow(0 6px 30px rgba(0,0,0,.5))}
+
+/* ŚCIANA PRAC — sygnaturowy element strony głównej.
+   Zamiast pustego czarnego gradientu tłem hero są prawdziwe zdjęcia z salonu:
+   trzy kolumny przesuwające się w różnym tempie. Tylko desktop — na telefonie
+   zostaje lekki gradient, żeby nie psuć LCP. */
+#hero .wall{position:absolute;inset:-10% -2%;z-index:-3;display:none;grid-template-columns:repeat(5,1fr);gap:8px}
+#hero .wall .col{display:flex;flex-direction:column;gap:8px;will-change:transform;animation:wallDrift 78s linear infinite}
+#hero .wall .col:nth-child(2){animation-duration:104s;animation-direction:reverse}
+#hero .wall .col:nth-child(3){animation-duration:88s}
+#hero .wall .col:nth-child(4){animation-duration:118s;animation-direction:reverse}
+#hero .wall .col:nth-child(5){animation-duration:94s}
+#hero .wall img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:2px;filter:grayscale(.18) contrast(1.03)}
+@keyframes wallDrift{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+#hero.has-wall .wall{display:grid}
+/* Scrim: najciemniej w środku, pod wordmarkiem — na brzegach prace zostają widoczne.
+   Odwrotnie niż intuicja podpowiada; jaśniejszy środek zabijał czytelność logo. */
+#hero.has-wall .bg{background:
+  radial-gradient(52% 42% at 50% 47%,rgba(8,8,10,.97) 0%,rgba(8,8,10,.93) 52%,rgba(8,8,10,.5) 100%),
+  radial-gradient(120% 100% at 50% 50%,transparent 40%,rgba(8,8,10,.55) 100%),
+  linear-gradient(180deg,rgba(8,8,10,.92) 0%,rgba(8,8,10,.34) 30%,rgba(8,8,10,.34) 68%,rgba(8,8,10,.96) 100%)}
+#hero.has-wall .bg::after{content:none}
+@media (min-width:1500px){#hero .wall{grid-template-columns:repeat(6,1fr)}}
+@media (max-width:1100px){#hero .wall{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:860px){#hero.has-wall .wall{display:none}
+  #hero.has-wall .bg{background:radial-gradient(120% 90% at 50% 0%,#22222a 0%,#121216 45%,#08080a 100%)}}
+
+/* Jeden wyśrodkowany stos zamiast top/bottom — wcześniej logo trzymało się góry,
+   przyciski dna, a między nimi zostawało ~450px pustki. */
+.panel{justify-content:center;gap:0}
+.panel .top{padding-top:96px}
+.panel .bottom{padding-top:var(--sp-4);padding-bottom:0;width:100%}
+#hero .cue{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);display:flex;flex-direction:column;
+  align-items:center;gap:8px;font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--grey)}
+#hero .cue i{display:block;width:1px;height:42px;background:linear-gradient(180deg,var(--gold),transparent);animation:cueDrop 2.6s ease-in-out infinite}
+@keyframes cueDrop{0%,100%{opacity:.25;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
 .panel h1{font-family:var(--serif);font-size:clamp(48px,9vw,104px);font-weight:400;letter-spacing:.02em;line-height:1.02}
 #hero .rating{margin-top:14px;font-size:14px;letter-spacing:.06em;opacity:.9}
 
 /* SECTION headers */
-.section-head{text-align:center;margin-bottom:64px}
-.section-head h2{font-family:var(--serif);font-size:clamp(36px,5vw,60px);font-weight:400}
+.section-head{text-align:center;margin-bottom:var(--sp-5)}
+.section-head h2{font-family:var(--serif);font-size:clamp(36px,5vw,60px);font-weight:400;letter-spacing:-.01em}
 .section-head p{margin-top:14px;color:var(--grey);font-weight:300;letter-spacing:.03em}
-section.block{padding:120px 24px}
+section.block{padding:var(--sp-6) 24px}
 
-/* SERVICE CARDS (photo) */
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+/* SERVICE CARDS (photo) — 9 kategorii, więc 3 kolumny dają pełne 3x3.
+   Przy 4 kolumnach ostatnia karta zostawała sama w rzędzie. */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#0b0b0c;
   transition:transform .3s,border-color .3s;text-decoration:none}
 .card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.32)}
@@ -483,7 +528,15 @@ footer small{color:#4a4a50;font-size:12px}
 .reveal{transition:opacity .7s ease,transform .7s ease}
 .js .reveal{opacity:0;transform:translateY(26px)}
 .js .reveal.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}}
+@media(prefers-reduced-motion:reduce){
+  .js .reveal{opacity:1;transform:none;transition:none}
+  #hero .wall .col,#hero .cue i{animation:none}
+}
+
+/* ---- FOKUS KLAWIATURY ----
+   Nic wcześniej nie pokazywało, gdzie jest fokus przy nawigacji tabem. */
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+.btn:focus-visible,.card:focus-visible,.member:focus-visible{outline-offset:4px}
 
 /* ---- BACK TO TOP + MOBILE CTA ---- */
 .to-top{position:fixed;right:20px;bottom:20px;z-index:90;width:46px;height:46px;border-radius:50%;
@@ -717,7 +770,51 @@ def parse_price(s):
 # ---------------------------------------------------------------------------
 # STRONA GŁÓWNA
 # ---------------------------------------------------------------------------
+def hero_wall_html(cols=5):
+    """Ściana prac w hero: kolumny zdjęć z assets/wall.
+
+    Każda kolumna jest renderowana dwa razy, bo animacja przesuwa ją o -50% —
+    druga kopia domyka pętlę bez skoku. To te same pliki, więc nic nie dociąga.
+    """
+    files = sorted(glob.glob(os.path.join(ROOT, "assets", "wall", "*.jpg")))
+    if not files:
+        return ""
+    names = [os.path.basename(f) for f in files]
+    out = ""
+    for ci in range(cols):
+        mine = names[ci::cols]
+        if not mine:
+            continue
+        imgs = "".join(
+            f'<img src="assets/wall/{n}" alt="" decoding="async" width="360" height="450">'
+            for n in mine + mine)
+        out += f'<div class="col">{imgs}</div>'
+    return out
+
+
+# Karty, na których stockowe assets/usluga-<slug>.jpg zamieniamy na prawdziwą
+# pracę z galerii. Tylko tam, gdzie realne zdjęcie jest mocniejsze od stocku —
+# masaz/depilacja/spa nadal czekają na własne zdjęcia z salonu.
+CARD_OVERRIDE = {
+    "wlosy": "assets/gallery/wlosy/01.jpg",
+    "blizny": "assets/gallery/blizny/06.jpg",
+    # usluga-pedicure.jpg (746x1280) i usluga-brwi.jpg (651x1280) to pionowe
+    # składanki dwóch zdjęć. Kadr 4/5 wypadał na szwie i karta pokazywała pół
+    # jednego zdjęcia i pół drugiego — tu pojedyncze ujęcia.
+    "pedicure": "assets/gallery/pedicure/07.jpg",
+    "brwi": "assets/gallery/brwi/06.jpg",
+}
+
+
+def category_card_image(slug, fallback_grad):
+    override = CARD_OVERRIDE.get(slug)
+    if override and os.path.exists(os.path.join(ROOT, override)):
+        return bg(override, fallback_grad)
+    return bg(f"assets/usluga-{slug}.jpg", fallback_grad)
+
+
 def build_index():
+    wall = hero_wall_html()
     cards = ""
     grads = ["linear-gradient(150deg,#26201d,#0a0a0c)", "linear-gradient(150deg,#1d2226,#0a0a0c)",
              "linear-gradient(150deg,#231d24,#0a0a0c)", "linear-gradient(150deg,#20261f,#0a0a0c)"]
@@ -726,7 +823,7 @@ def build_index():
         s = c['slug']
         cards += f"""
         <a class="card" href="usluga-{s}.html">
-          <div class="thumb" style="{bg('assets/usluga-'+s+'.jpg', g)}"></div>
+          <div class="thumb" style="{category_card_image(s, g)}"></div>
           <div class="cap">
             <h3 data-i18n="cat_{s}_name">{c['name']}</h3>
             <div class="price">{len(c['items'])} <span data-i18n="unit_uslug">{P('unit_uslug')}</span> · {c['items'][0][3]}</div>
@@ -783,7 +880,8 @@ def build_index():
     html += header_html()
     html += f"""
 <main>
-  <section class="panel" id="hero">
+  <section class="panel has-wall" id="hero">
+    <div class="wall" aria-hidden="true">{wall}</div>
     <div class="bg"></div>
     <div class="top">
       <div class="eyebrow" data-i18n="hero_eyebrow">{P('hero_eyebrow')}</div>
@@ -794,6 +892,7 @@ def build_index():
       <a class="btn solid" href="{BOOKSY}" target="_blank" rel="noopener" data-i18n="btn_book_visit">{P('btn_book_visit')}</a>
       <a class="btn ghost" href="#uslugi" data-i18n="btn_see_services">{P('btn_see_services')}</a>
     </div></div>
+    <div class="cue" aria-hidden="true"><i></i><span data-i18n="hero_cue">{P('hero_cue')}</span></div>
   </section>
 
   <section class="block" id="uslugi" style="background:#0b0b0c">

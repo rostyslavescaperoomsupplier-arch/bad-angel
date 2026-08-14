@@ -16,6 +16,7 @@ UI = {
  "btn_book":     {"pl":"Rezerwuj","uk":"Записатися","ru":"Записаться","en":"Book now"},
  "book_online":  {"pl":"Rezerwacja online →","uk":"Онлайн-запис →","ru":"Онлайн-запись →","en":"Book online →"},
  "hero_eyebrow": {"pl":"Salon Urody · Szczecin","uk":"Салон краси · Щецін","ru":"Салон красоты · Щецин","en":"Beauty Salon · Szczecin"},
+ "hero_cue": {"pl":"Usługi","uk":"Послуги","ru":"Услуги","en":"Services"},
  "hero_rating":  {"pl":"4.9 · {REVIEWS} opinii","uk":"4.9 · {REVIEWS} відгуків","ru":"4.9 · {REVIEWS} отзывов","en":"4.9 · {REVIEWS} reviews"},
  "btn_book_visit":{"pl":"Zarezerwuj wizytę","uk":"Записатися на візит","ru":"Записаться на визит","en":"Book a visit"},
  "btn_see_services":{"pl":"Zobacz usługi","uk":"Переглянути послуги","ru":"Смотреть услуги","en":"See services"},
@@ -131,8 +132,10 @@ UI = {
  "filter_all":{"pl":"Wszystko","uk":"Все","ru":"Все","en":"All"},
  # --- przed / po ---
  "ba_title":{"pl":"Efekty: przed i po","uk":"Ефекти: до і після","ru":"Эффект: до и после","en":"Results: before & after"},
- "ba_sub":{"pl":"Przeciągnij suwak, aby zobaczyć różnicę.","uk":"Перетягніть повзунок, щоб побачити різницю.",
-   "ru":"Потяните ползунок, чтобы увидеть разницу.","en":"Drag the slider to see the difference."},
+ "ba_sub":{"pl":"Mikroneedling. Przeciągnij suwak, aby zobaczyć różnicę.",
+   "uk":"Мікронідлінг. Перетягніть повзунок, щоб побачити різницю.",
+   "ru":"Микронидлинг. Потяните ползунок, чтобы увидеть разницу.",
+   "en":"Microneedling. Drag the slider to see the difference."},
  "ba_before":{"pl":"PRZED","uk":"ДО","ru":"ДО","en":"BEFORE"},
  "ba_after":{"pl":"PO","uk":"ПІСЛЯ","ru":"ПОСЛЕ","en":"AFTER"},
 }
