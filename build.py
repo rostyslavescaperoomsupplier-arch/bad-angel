@@ -258,15 +258,6 @@ MASTERS = [
              "Oprócz zabiegów na skórę wykonuje także efektowne warkoczyki — od pojedynczych "
              "po pełne stylizacje.",
          ]),
-    dict(slug="wiktoria-masaz", name="Wiktoria", gen="Wiktorii", role="Masaż",
-         serves=["masaz"],
-         bio=[
-             "Wiktoria to specjalistka od relaksu i regeneracji ciała. Wykonuje masaże, które "
-             "przynoszą ulgę napiętym mięśniom i pomagają odzyskać równowagę.",
-             "W jej ofercie znajdziesz masaże relaksacyjne, lecznicze i antycellulitowe, a także "
-             "masaż twarzy i pielęgnacyjne rytuały dla całego ciała.",
-             "Każdy etap masażu dopasowuje do potrzeb i samopoczucia klienta.",
-         ]),
     dict(slug="anna", name="Anna", gen="Anny", role="Mistrzyni fryzjerstwa",
          serves=["wlosy"],
          bio=[

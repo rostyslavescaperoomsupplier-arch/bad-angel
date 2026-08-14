@@ -321,21 +321,6 @@ MASTER = {
       "uk":"Відповідально ставиться до якості послуг і допомагає підібрати зачіску, що підкреслить індивідуальність клієнта.",
       "ru":"Ответственно подходит к качеству услуг и помогает подобрать причёску, которая подчеркнёт индивидуальность клиента.",
       "en":"She takes a responsible approach to service quality and helps choose a hairstyle that highlights each client's individuality."}]},
- "wiktoria-masaz":{
-   "role":{"pl":"Masaż","uk":"Масаж","ru":"Массаж","en":"Massage"},
-   "bio":[
-     {"pl":"Wiktoria to specjalistka od relaksu i regeneracji ciała. Wykonuje masaże, które przynoszą ulgę napiętym mięśniom i pomagają odzyskać równowagę.",
-      "uk":"Вікторія — майстриня релаксу та відновлення тіла. Виконує масажі, що знімають напругу в м'язах і допомагають повернути рівновагу.",
-      "ru":"Виктория — мастер релакса и восстановления тела. Делает массажи, которые снимают напряжение в мышцах и помогают вернуть равновесие.",
-      "en":"Wiktoria is a specialist in relaxation and body recovery. Her massages relieve tense muscles and help restore balance."},
-     {"pl":"W jej ofercie znajdziesz masaże relaksacyjne, lecznicze i antycellulitowe, a także masaż twarzy i pielęgnacyjne rytuały dla całego ciała.",
-      "uk":"У її пропозиції — розслаблюючі, лікувальні та антицелюлітні масажі, а також масаж обличчя й доглядові ритуали для всього тіла.",
-      "ru":"В её арсенале — расслабляющие, лечебные и антицеллюлитные массажи, а также массаж лица и уходовые ритуалы для всего тела.",
-      "en":"She offers relaxing, therapeutic and anti-cellulite massages, plus facial massage and care rituals for the whole body."},
-     {"pl":"Każdy etap masażu dopasowuje do potrzeb i samopoczucia klienta.",
-      "uk":"Кожен етап масажу підлаштовує під потреби та самопочуття клієнта.",
-      "ru":"Каждый этап массажа подстраивает под потребности и самочувствие клиента.",
-      "en":"She tailors every stage of the massage to the client's needs and well-being."}]},
  "astgik":{
    "role":{"pl":"Pedicure i manicure","uk":"Педикюр та манікюр","ru":"Педикюр и маникюр","en":"Pedicure & manicure"},
    "bio":[
