@@ -23,12 +23,36 @@ for _key, _langs in I18N.items():
         if isinstance(_text, str) and "{REVIEWS}" in _text:
             _langs[_lang] = _text.replace("{REVIEWS}", REVIEWS_COUNT)
 
+# Jezyk aktualnie generowanej strony. Polski jest jezykiem glownym: lezy
+# w korzeniu (te same nazwy plikow co dotad, zeby nie stracic zaindeksowanych
+# adresow), reszta w /uk/, /ru/, /en/.
+CUR = "pl"
+OG_LOCALE = {"pl": "pl_PL", "uk": "uk_UA", "ru": "ru_RU", "en": "en_US"}
+
+
 def P(key):
-    """Polski tekst domyslny (inline w HTML)."""
-    return I18N[key]["pl"]
+    """Tekst w jezyku aktualnie budowanej strony (z fallbackiem na polski)."""
+    e = I18N.get(key)
+    if not e:
+        return ""
+    return e.get(CUR) or e.get("pl", "")
+
+
+def U(page=""):
+    """Adres strony w aktualnym jezyku, np. U('portfolio.html') -> /uk/portfolio.html"""
+    return ("/" if CUR == "pl" else f"/{CUR}/") + page
+
+
+def U_lang(lang, page=""):
+    return ("/" if lang == "pl" else f"/{lang}/") + page
+
+
+def A(path):
+    """Zasoby sa wspolne dla wszystkich jezykow, wiec zawsze absolutnie."""
+    return "/" + path.lstrip("/")
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-VER = "11"  # cache-busting wersja dla styles.css / translations.js / app.js
+VER = "12"  # cache-busting wersja dla styles.css / translations.js / app.js
 BOOKSY = "https://badangel86.booksy.com/a/"
 IG = "https://www.instagram.com/"
 FB = "https://www.facebook.com/"
@@ -313,14 +337,15 @@ header nav a{font-size:13px;font-weight:500;letter-spacing:.02em;padding:6px 4px
 header nav a:hover{opacity:.6}
 .nav-cta{display:flex;gap:14px;align-items:center}
 .lang-switch{display:flex;align-items:center;gap:2px}
-.lang-switch button{appearance:none;-webkit-appearance:none;background:transparent;border:0;color:currentColor;
-  font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.12em;padding:5px 7px;cursor:pointer;
+/* Przelacznik to teraz linki (kazdy jezyk ma wlasny URL), a nie <button>. */
+.lang-switch a{display:inline-block;color:currentColor;text-decoration:none;
+  font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.12em;padding:5px 7px;
   opacity:.42;transition:opacity .2s;line-height:1}
-.lang-switch button:hover{opacity:.8}
-.lang-switch button.active{opacity:1;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
+.lang-switch a:hover{opacity:.8}
+.lang-switch a.active{opacity:1;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
 .drawer .lang-switch{margin-top:28px;gap:10px;justify-content:flex-start}
-.drawer .lang-switch button{font-size:15px;letter-spacing:.14em;padding:8px 12px;border:1px solid var(--line);border-radius:40px;opacity:.6}
-.drawer .lang-switch button.active{opacity:1;text-decoration:none;background:#fff;color:#111;border-color:#fff}
+.drawer .lang-switch a{font-size:15px;letter-spacing:.14em;padding:8px 12px;border:1px solid var(--line);border-radius:40px;opacity:.6}
+.drawer .lang-switch a.active{opacity:1;text-decoration:none;background:var(--white);color:#111;border-color:var(--white)}
 .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:0}
 .burger span{width:22px;height:2px;background:currentColor;display:block}
 .drawer{position:fixed;inset:0;z-index:200;background:rgba(10,10,10,.97);backdrop-filter:blur(8px);
@@ -610,7 +635,7 @@ body.past-hero .mcta{transform:none}
 .gift-body{padding:clamp(36px,5vw,60px);background:#0d0d0f}
 .gift-body h2{font-family:var(--serif);font-size:clamp(30px,4vw,48px);font-weight:400}
 .gift-body p{margin:18px 0 32px;color:#b9b9bf;font-weight:300;line-height:1.7;font-size:16px}
-.gift-art{background:url('assets/emblem.png') center/58% no-repeat, radial-gradient(120% 120% at 30% 20%,#241d14,#0a0a0c);
+.gift-art{background:url('/assets/emblem.png') center/58% no-repeat, radial-gradient(120% 120% at 30% 20%,#241d14,#0a0a0c);
   min-height:240px}
 @media(max-width:760px){.gift-wrap{grid-template-columns:1fr}.gift-art{min-height:170px}}
 
@@ -689,56 +714,71 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
 
 
 def head(title, desc, page="", extra=""):
-    canonical = f"{SITE_URL}/{page}" if page else f"{SITE_URL}/"
+    canonical = SITE_URL + U(page)
+    # hreflang dla wszystkich wersji + x-default na polska (jezyk glowny)
+    alts = "".join(
+        f'<link rel="alternate" hreflang="{l}" href="{SITE_URL}{U_lang(l, page)}">\n'
+        for l in LANGS)
+    alts += f'<link rel="alternate" hreflang="x-default" href="{SITE_URL}{U_lang("pl", page)}">'
     return f"""<!DOCTYPE html>
-<html lang="pl">
+<html lang="{CUR}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{canonical}">
-<meta name="theme-color" content="#0a0a0a">
+{alts}
+<meta name="theme-color" content="#08080a">
 <meta name="geo.region" content="PL-ZP">
 <meta name="geo.placename" content="Szczecin">
 <meta name="geo.position" content="53.4337;14.5518">
 <meta name="ICBM" content="53.4337, 14.5518">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Salon Urody BAD ANGEL">
-<meta property="og:locale" content="pl_PL">
+<meta property="og:locale" content="{OG_LOCALE[CUR]}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{canonical}">
 <meta property="og:image" content="{OG_IMAGE}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="assets/emblem.png">
+<link rel="icon" href="{A('assets/emblem.png')}">
 {FONTS}
-<link rel="stylesheet" href="styles.css?v={VER}">
+<link rel="stylesheet" href="{A('styles.css')}?v={VER}">
 <script>document.documentElement.classList.add('js')</script>
-<script defer src="translations.js?v={VER}"></script>
-<script defer src="app.js?v={VER}"></script>
+<script defer src="{A('translations.js')}?v={VER}"></script>
+<script defer src="{A('app.js')}?v={VER}"></script>
 {extra}</head>
 <body>"""
 
 
-def lang_switch():
-    btns = "".join(f'<button data-lang="{l}" onclick="__setLang(\'{l}\')">{LANG_LABEL[l]}</button>' for l in LANGS)
-    return f'<div class="lang-switch">{btns}</div>'
+def lang_switch(page=""):
+    """Przelacznik jezyka jako linki.
+
+    Wczesniej podmienial teksty w JS na jednym adresie — Google widzial wtedy
+    tylko polska wersje. Teraz kazdy jezyk ma wlasny URL, wiec to zwykle <a>.
+    """
+    out = ""
+    for l in LANGS:
+        cls = ' class="active"' if l == CUR else ""
+        out += (f'<a href="{U_lang(l, page)}" hreflang="{l}" data-lang="{l}"{cls}'
+                f' rel="alternate">{LANG_LABEL[l]}</a>')
+    return f'<div class="lang-switch">{out}</div>'
 
 
-def header_html():
+def header_html(page=""):
     return f"""
 <header id="topbar">
-  <a href="index.html" class="brand">BAD&nbsp;ANGEL</a>
+  <a href="{U()}" class="brand">BAD&nbsp;ANGEL</a>
   <nav>
-    <a href="index.html#uslugi" data-i18n="nav_services">{P('nav_services')}</a>
-    <a href="portfolio.html" data-i18n="nav_portfolio">{P('nav_portfolio')}</a>
-    <a href="kalkulator.html" data-i18n="nav_calc">{P('nav_calc')}</a>
-    <a href="index.html#zespol" data-i18n="nav_team">{P('nav_team')}</a>
-    <a href="index.html#kontakt" data-i18n="nav_contact">{P('nav_contact')}</a>
+    <a href="{U()}#uslugi" data-i18n="nav_services">{P('nav_services')}</a>
+    <a href="{U('portfolio.html')}" data-i18n="nav_portfolio">{P('nav_portfolio')}</a>
+    <a href="{U('kalkulator.html')}" data-i18n="nav_calc">{P('nav_calc')}</a>
+    <a href="{U()}#zespol" data-i18n="nav_team">{P('nav_team')}</a>
+    <a href="{U()}#kontakt" data-i18n="nav_contact">{P('nav_contact')}</a>
   </nav>
   <div class="nav-cta">
-    {lang_switch()}
+    {lang_switch(page)}
     <a class="btn solid sm" href="{BOOKSY}" target="_blank" rel="noopener" data-i18n="btn_book">{P('btn_book')}</a>
     <button class="burger" aria-label="Menu" onclick="document.getElementById('drawer').classList.add('open')">
       <span></span><span></span><span></span>
@@ -747,14 +787,14 @@ def header_html():
 </header>
 <div class="drawer" id="drawer">
   <button class="close" onclick="document.getElementById('drawer').classList.remove('open')">&times;</button>
-  <a href="index.html#uslugi" onclick="closeDrawer()" data-i18n="nav_services">{P('nav_services')}</a>
-  <a href="portfolio.html" onclick="closeDrawer()" data-i18n="nav_portfolio">{P('nav_portfolio')}</a>
-  <a href="kalkulator.html" onclick="closeDrawer()" data-i18n="nav_calc">{P('nav_calc')}</a>
-  <a href="index.html#zespol" onclick="closeDrawer()" data-i18n="nav_team">{P('nav_team')}</a>
-  <a href="index.html#opinie" onclick="closeDrawer()" data-i18n="nav_reviews">{P('nav_reviews')}</a>
-  <a href="index.html#kontakt" onclick="closeDrawer()" data-i18n="nav_contact">{P('nav_contact')}</a>
+  <a href="{U()}#uslugi" onclick="closeDrawer()" data-i18n="nav_services">{P('nav_services')}</a>
+  <a href="{U('portfolio.html')}" onclick="closeDrawer()" data-i18n="nav_portfolio">{P('nav_portfolio')}</a>
+  <a href="{U('kalkulator.html')}" onclick="closeDrawer()" data-i18n="nav_calc">{P('nav_calc')}</a>
+  <a href="{U()}#zespol" onclick="closeDrawer()" data-i18n="nav_team">{P('nav_team')}</a>
+  <a href="{U()}#opinie" onclick="closeDrawer()" data-i18n="nav_reviews">{P('nav_reviews')}</a>
+  <a href="{U()}#kontakt" onclick="closeDrawer()" data-i18n="nav_contact">{P('nav_contact')}</a>
   <a href="{BOOKSY}" target="_blank" rel="noopener" data-i18n="book_online">{P('book_online')}</a>
-  {lang_switch()}
+  {lang_switch(page)}
 </div>"""
 
 
@@ -791,7 +831,7 @@ addEventListener('scroll',function(){{bar.classList.toggle('solid',scrollY>60);}
 
 def bg(img_path, fallback):
     """Warstwa: zdjęcie (gdy istnieje) nad gradientem-fallbackiem."""
-    return f"background:url('{img_path}') center/cover, {fallback};"
+    return f"background:url('{A(img_path)}') center/cover, {fallback};"
 
 
 def parse_price(s):
@@ -823,7 +863,7 @@ def hero_wall_html(cols=5):
         if not mine:
             continue
         imgs = "".join(
-            f'<img src="assets/wall/{n}" alt="" loading="lazy" decoding="async" '
+            f'<img src="/assets/wall/{n}" alt="" loading="lazy" decoding="async" '
             f'width="300" height="375">'
             for n in mine + mine)
         out += f'<div class="col">{imgs}</div>'
@@ -859,11 +899,12 @@ def build_index():
     for i, c in enumerate(CATEGORIES):
         g = grads[i % len(grads)]
         s = c['slug']
+        surl = U(f"usluga-{s}.html")
         cards += f"""
-        <a class="card" href="usluga-{s}.html">
+        <a class="card" href="{surl}">
           <div class="thumb" style="{category_card_image(s, g)}"></div>
           <div class="cap">
-            <h3 data-i18n="cat_{s}_name">{c['name']}</h3>
+            <h3 data-i18n="cat_{s}_name">{P(f"cat_{s}_name") or c['name']}</h3>
             <div class="price">{len(c['items'])} <span data-i18n="unit_uslug">{P('unit_uslug')}</span> · {c['items'][0][3]}</div>
             <div class="go" data-i18n="card_cta">{P('card_cta')}</div>
           </div>
@@ -871,10 +912,12 @@ def build_index():
 
     members = ""
     for m in MASTERS:
+        murl = U("mistrz-" + m['slug'] + ".html")
+        mrole = P("role_" + m['slug']) or m['role']
         members += f"""
-        <a class="member" href="mistrz-{m['slug']}.html">
+        <a class="member" href="{murl}">
           <div class="ph" data-i="{m['name'][0]}" style="{bg('assets/mistrz-'+m['slug']+'.jpg','linear-gradient(160deg,#26262c,#0e0e11)')}"></div>
-          <h4>{m['name']}</h4><span data-i18n="role_{m['slug']}">{m['role']}</span>
+          <h4>{m['name']}</h4><span data-i18n="role_{m['slug']}">{mrole}</span>
         </a>"""
 
     rv = ""
@@ -912,10 +955,11 @@ def build_index():
     }
     extra = (f'<script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>\n'
              f'<script type="application/ld+json">{json.dumps(faq_ld, ensure_ascii=False)}</script>\n')
-    html = head("Salon Urody BAD ANGEL Szczecin — manicure, pedicure, rzęsy, brwi, masaż",
-                f"Salon Urody BAD ANGEL w Szczecinie, aleja Wyzwolenia 5/10. Manicure, pedicure, przedłużanie rzęs, brwi, masaż, depilacja, włosy. Ocena 4.9 — {REVIEWS_COUNT} opinii. Rezerwacja online.",
+    page = ""
+    html = head(P('seo_home_title'),
+                P('seo_home_desc').replace("{n}", REVIEWS_COUNT),
                 extra=extra)
-    html += header_html()
+    html += header_html("")
     html += f"""
 <main>
   <section class="panel has-wall" id="hero">
@@ -923,7 +967,7 @@ def build_index():
     <div class="bg"></div>
     <div class="top">
       <div class="eyebrow" data-i18n="hero_eyebrow">{P('hero_eyebrow')}</div>
-      <img class="logo" src="assets/logo.png" alt="BAD ANGEL Beauty Salon">
+      <img class="logo" src="/assets/logo.png" alt="BAD ANGEL Beauty Salon">
       <div class="rating"><span class="stars">★★★★★</span> &nbsp;<span data-i18n="hero_rating">{P('hero_rating')}</span></div>
     </div>
     <div class="bottom"><div class="btns">
@@ -946,7 +990,7 @@ def build_index():
       <div class="eyebrow">Manicure &amp; Nails</div>
       <h2 data-i18n="feat1_title">{P('feat1_title')}</h2>
       <p data-i18n="feat1_text">{P('feat1_text')}</p>
-      <div class="btns"><a class="btn solid" href="usluga-manicure.html" data-i18n="btn_see_services">{P('btn_see_services')}</a></div>
+      <div class="btns"><a class="btn solid" href="{U('usluga-manicure.html')}" data-i18n="btn_see_services">{P('btn_see_services')}</a></div>
     </div>
   </section>
   <section class="split reveal">
@@ -954,7 +998,7 @@ def build_index():
       <div class="eyebrow" data-i18n="feat2_eyebrow">{P('feat2_eyebrow')}</div>
       <h2 data-i18n="feat2_title">{P('feat2_title')}</h2>
       <p data-i18n="feat2_text">{P('feat2_text')}</p>
-      <div class="btns"><a class="btn solid" href="usluga-rzesy.html" data-i18n="btn_see_services">{P('btn_see_services')}</a></div>
+      <div class="btns"><a class="btn solid" href="{U('usluga-rzesy.html')}" data-i18n="btn_see_services">{P('btn_see_services')}</a></div>
     </div>
     <div class="media" style="{bg('assets/feature-lashes.jpg','linear-gradient(135deg,#221a1f,#0a0a0c)')}"></div>
   </section>
@@ -963,8 +1007,8 @@ def build_index():
     <div class="wrap">
       <div class="section-head reveal"><h2 data-i18n="ba_title">{P('ba_title')}</h2><p data-i18n="ba_sub">{P('ba_sub')}</p></div>
       <div class="ba reveal" id="baSlider">
-        <div class="ba-img ba-before" style="background-image:url('assets/ba-before.jpg')"></div>
-        <div class="ba-img ba-after" style="background-image:url('assets/ba-after.jpg')"></div>
+        <div class="ba-img ba-before" style="background-image:url('/assets/ba-before.jpg')"></div>
+        <div class="ba-img ba-after" style="background-image:url('/assets/ba-after.jpg')"></div>
         <span class="ba-tag l" data-i18n="ba_before">{P('ba_before')}</span>
         <span class="ba-tag r" data-i18n="ba_after">{P('ba_after')}</span>
         <div class="ba-line"></div>
@@ -1055,18 +1099,20 @@ def build_service(c):
         "areaServed": "Szczecin",
         "url": f"{SITE_URL}/usluga-{c['slug']}.html",
     }
-    html = head(f"{c['name']} Szczecin — Salon Urody BAD ANGEL",
-                f"{c['name']} w Szczecinie — Salon Urody BAD ANGEL, aleja Wyzwolenia 5/10. {c['intro']} Rezerwacja online przez Booksy.",
+    cname = P(f"cat_{c['slug']}_name") or c['name']
+    cintro = P(f"cat_{c['slug']}_intro") or c['intro']
+    html = head(f"{cname} Szczecin — Salon Urody BAD ANGEL",
+                f"{cname} {P('seo_in_szczecin')} — Salon Urody BAD ANGEL, aleja Wyzwolenia 5/10. {cintro} {P('seo_booksy')}",
                 page=f"usluga-{c['slug']}.html",
                 extra=f'<script type="application/ld+json">{json.dumps(svc_ld, ensure_ascii=False)}</script>\n')
-    html += header_html()
+    html += header_html(f"usluga-{c['slug']}.html")
     # Galeria — zdjęcia z assets/gallery/<slug>/
     gdir = os.path.join(ROOT, "assets", "gallery", c["slug"])
     gfiles = sorted(os.path.basename(p) for p in glob.glob(os.path.join(gdir, "*.jpg")))
     gallery = ""
     if gfiles:
         imgs = "".join(
-            f'<img loading="lazy" src="assets/gallery/{c["slug"]}/{fn}" alt="{c["name"]} — Salon Urody BAD ANGEL Szczecin">'
+            f'<img loading="lazy" src="/assets/gallery/{c["slug"]}/{fn}" alt="{c["name"]} — Salon Urody BAD ANGEL Szczecin">'
             for fn in gfiles)
         gallery = f"""
   <section class="block" style="background:#000;padding-top:40px">
@@ -1079,10 +1125,10 @@ def build_service(c):
   <section class="subhero">
     <div class="bg" style="{bg('assets/usluga-'+c['slug']+'.jpg','linear-gradient(150deg,#20202a,#0a0a0c)')}"></div>
     <div class="scrim"></div>
-    <div class="crumbs"><a href="index.html" data-i18n="crumb_home">{P('crumb_home')}</a> &nbsp;/&nbsp; <a href="index.html#uslugi" data-i18n="nav_services">{P('nav_services')}</a> &nbsp;/&nbsp; <span data-i18n="cat_{c['slug']}_name">{c['name']}</span></div>
+    <div class="crumbs"><a href="{U()}" data-i18n="crumb_home">{P('crumb_home')}</a> &nbsp;/&nbsp; <a href="{U()}#uslugi" data-i18n="nav_services">{P('nav_services')}</a> &nbsp;/&nbsp; <span data-i18n="cat_{c['slug']}_name">{cname}</span></div>
     <div class="inner">
       <div class="eyebrow" data-i18n="cat_{c['slug']}_tag">{c['tag']}</div>
-      <h1 data-i18n="cat_{c['slug']}_name">{c['name']}</h1>
+      <h1 data-i18n="cat_{c['slug']}_name">{cname}</h1>
       <p class="lead" data-i18n="cat_{c['slug']}_lead">{c['lead']}</p>
     </div>
   </section>
@@ -1093,7 +1139,7 @@ def build_service(c):
     {rows}
     <div class="btns" style="margin-top:50px">
       <a class="btn solid" href="{BOOKSY}" target="_blank" rel="noopener" data-i18n="svc_book_booksy">{P('svc_book_booksy')}</a>
-      <a class="btn ghost" href="index.html#uslugi" data-i18n="svc_other">{P('svc_other')}</a>
+      <a class="btn ghost" href="{U()}#uslugi" data-i18n="svc_other">{P('svc_other')}</a>
     </div>
   </section>
 {gallery}
@@ -1106,26 +1152,28 @@ def build_service(c):
 # STRONA MASTRA
 # ---------------------------------------------------------------------------
 def build_master(m):
+    mrole = P("role_" + m['slug']) or m['role']
     cat_by_slug = {c["slug"]: c for c in CATEGORIES}
     chips = ""
     for s in m["serves"]:
         if s in cat_by_slug:
-            chips += f'<a class="chip" href="usluga-{s}.html" data-i18n="cat_{s}_name">{cat_by_slug[s]["name"]}</a>'
+            churl = U("usluga-" + s + ".html")
+            chips += f'<a class="chip" href="{churl}" data-i18n="cat_{s}_name">{P("cat_" + s + "_name") or cat_by_slug[s]["name"]}</a>'
     bio = "".join(f'<p data-i18n="bio_{m["slug"]}_{i}">{p}</p>' for i, p in enumerate(m["bio"]))
 
-    html = head(f"{m['name']} — {m['role']} · Salon Urody BAD ANGEL",
+    html = head(f"{m['name']} — {P('role_' + m['slug']) or m['role']} · Salon Urody BAD ANGEL",
                 f"{m['name']} — {m['role']} w Salonie Urody BAD ANGEL w Szczecinie. Poznaj naszą specjalistkę i zarezerwuj wizytę.",
                 page=f"mistrz-{m['slug']}.html")
-    html += header_html()
+    html += header_html(f"mistrz-{m['slug']}.html")
     html += f"""
 <main>
   <div class="crumbs" style="position:relative;top:96px;margin:0 auto;max-width:1100px;padding:0 24px">
-    <a href="index.html" data-i18n="crumb_home">{P('crumb_home')}</a> &nbsp;/&nbsp; <a href="index.html#zespol" data-i18n="nav_team">{P('nav_team')}</a> &nbsp;/&nbsp; {m['name']}
+    <a href="{U()}" data-i18n="crumb_home">{P('crumb_home')}</a> &nbsp;/&nbsp; <a href="{U()}#zespol" data-i18n="nav_team">{P('nav_team')}</a> &nbsp;/&nbsp; {m['name']}
   </div>
   <section class="master">
     <div class="portrait" style="{bg('assets/mistrz-'+m['slug']+'.jpg','linear-gradient(160deg,#26262c,#0e0e11)')}"></div>
     <div>
-      <div class="role" data-i18n="role_{m['slug']}">{m['role']}</div>
+      <div class="role" data-i18n="role_{m['slug']}">{mrole}</div>
       <h1>{m['name']}</h1>
       <div class="bio">{bio}</div>
       <div class="serves">
@@ -1134,7 +1182,7 @@ def build_master(m):
       </div>
       <div class="btns" style="justify-content:flex-start;padding:0;margin-top:40px">
         <a class="btn solid" href="{BOOKSY}" target="_blank" rel="noopener" data-i18n="btn_book_visit">{P('btn_book_visit')}</a>
-        <a class="btn ghost" href="index.html#zespol" data-i18n="master_all_team">{P('master_all_team')}</a>
+        <a class="btn ghost" href="{U()}#zespol" data-i18n="master_all_team">{P('master_all_team')}</a>
       </div>
     </div>
   </section>
@@ -1159,12 +1207,12 @@ def build_calculator():
         </label>"""
         cats += f"""
       <details class="calc-cat">
-        <summary><span data-i18n="cat_{c['slug']}_name">{c['name']}</span></summary>{rows}
+        <summary><span data-i18n="cat_{c['slug']}_name">{P("cat_" + c["slug"] + "_name") or c['name']}</span></summary>{rows}
       </details>"""
-    html = head("Kalkulator cen — Salon Urody BAD ANGEL",
-                "Kalkulator orientacyjnych cen usług Salon Urody BAD ANGEL w Szczecinie.",
+    html = head(P('seo_calc_title'),
+                P('seo_calc_desc'),
                 page="kalkulator.html")
-    html += header_html()
+    html += header_html("kalkulator.html")
     html += f"""
 <main>
   <section id="kalk">
@@ -1198,13 +1246,12 @@ def build_portfolio():
     fbtns = f'<button class="active" data-filter="all" data-i18n="filter_all">{P("filter_all")}</button>'
     name_by = {c["slug"]: c["name"] for c in CATEGORIES}
     for s in present:
-        fbtns += f'<button data-filter="{s}" data-i18n="cat_{s}_name">{name_by[s]}</button>'
-    imgs = "".join(f'<img loading="lazy" data-cat="{s}" src="assets/gallery/{s}/{fn}" alt="{name_by[s]} Szczecin — Salon Urody BAD ANGEL">'
+        fbtns += f'<button data-filter="{s}" data-i18n="cat_{s}_name">{P("cat_" + s + "_name") or name_by[s]}</button>'
+    imgs = "".join(f'<img loading="lazy" data-cat="{s}" src="/assets/gallery/{s}/{fn}" alt="{name_by[s]} Szczecin — Salon Urody BAD ANGEL">'
                    for s, fn in items)
-    html = head("Portfolio — Salon Urody BAD ANGEL Szczecin",
-                "Portfolio prac Salon Urody BAD ANGEL w Szczecinie — manicure, pedicure, rzęsy, brwi.",
+    html = head(P('seo_portfolio_title'), P('seo_portfolio_desc'),
                 page="portfolio.html")
-    html += header_html()
+    html += header_html("portfolio.html")
     html += f"""
 <main>
   <section class="block" style="padding-top:120px;background:#0b0b0c">
@@ -1252,42 +1299,28 @@ def build_readme():
 def build_translations_js():
     data = json.dumps(I18N, ensure_ascii=False)
     langs = json.dumps(LANGS)
-    return f"""// Auto-generowane przez build.py — tlumaczenia i przelacznik jezyka.
+    return f"""// Auto-generowane przez build.py.
+// Kazdy jezyk ma teraz wlasny URL i gotowy tekst w HTML, wiec nic tu nie
+// podmieniamy — inaczej skrypt nadpisalby to, co widzi Google. Zostaje
+// slownik dla rzeczy liczonych w przegladarce (badge "otwarte teraz").
 window.I18N = {data};
 (function(){{
-  var LS = "ba_lang", LANGS = {langs};
-  function apply(lang){{
-    if(LANGS.indexOf(lang) < 0) lang = "pl";
-    document.documentElement.lang = lang;
+  var LANGS = {langs};
+  var lang = (document.documentElement.lang || "pl").slice(0,2).toLowerCase();
+  if(LANGS.indexOf(lang) < 0) lang = "pl";
+  window.__lang = lang;
+
+  function openBadge(){{
     var T = window.I18N;
-    document.querySelectorAll("[data-i18n]").forEach(function(e){{
-      var t = T[e.getAttribute("data-i18n")]; if(t && t[lang] != null) e.textContent = t[lang];
-    }});
-    document.querySelectorAll("[data-i18n-html]").forEach(function(e){{
-      var t = T[e.getAttribute("data-i18n-html")]; if(t && t[lang] != null) e.innerHTML = t[lang];
-    }});
-    document.querySelectorAll(".lang-switch button").forEach(function(b){{
-      b.classList.toggle("active", b.getAttribute("data-lang") === lang);
-    }});
-    // badge "otwarte teraz" (09:00-20:00 codziennie)
     document.querySelectorAll("[data-open-badge]").forEach(function(e){{
       var hh = new Date().getHours(), open = hh >= 9 && hh < 20, k = open ? "open_now" : "closed_now";
-      if(T[k]) e.textContent = T[k][lang];
+      if(T[k] && T[k][lang]) e.textContent = T[k][lang];
       e.classList.toggle("open", open); e.classList.toggle("closed", !open);
     }});
-    window.__lang = lang;
     if(window.__afterLang) window.__afterLang(lang);
-    try{{ localStorage.setItem(LS, lang); }}catch(e){{}}
   }}
-  window.__setLang = apply;
-  var saved = null;
-  try{{ saved = localStorage.getItem(LS); }}catch(e){{}}
-  if(!saved){{
-    var nl = (navigator.language || "pl").slice(0,2).toLowerCase();
-    saved = LANGS.indexOf(nl) >= 0 ? nl : "pl";
-  }}
-  if(document.readyState !== "loading") apply(saved);
-  else document.addEventListener("DOMContentLoaded", function(){{ apply(saved); }});
+  if(document.readyState !== "loading") openBadge();
+  else document.addEventListener("DOMContentLoaded", openBadge);
 }})();
 """
 
@@ -1411,15 +1444,29 @@ def w(path, content):
     print("napisano", path)
 
 
-def build_sitemap():
+def all_pages():
     pages = ["", "portfolio.html", "kalkulator.html"]
     pages += [f"usluga-{c['slug']}.html" for c in CATEGORIES]
     pages += [f"mistrz-{m['slug']}.html" for m in MASTERS]
+    return pages
+
+
+def build_sitemap():
+    """Sitemap ze wszystkimi jezykami i wzajemnymi hreflang-ami."""
     today = date.today().isoformat()
-    urls = "".join(
-        f"  <url><loc>{SITE_URL}/{p}</loc><lastmod>{today}</lastmod></url>\n" for p in pages)
+    urls = ""
+    for p in all_pages():
+        links = "".join(
+            f'    <xhtml:link rel="alternate" hreflang="{l}" href="{SITE_URL}{U_lang(l, p)}"/>\n'
+            for l in LANGS)
+        links += (f'    <xhtml:link rel="alternate" hreflang="x-default"'
+                  f' href="{SITE_URL}{U_lang("pl", p)}"/>\n')
+        for l in LANGS:
+            urls += (f"  <url>\n    <loc>{SITE_URL}{U_lang(l, p)}</loc>\n"
+                     f"    <lastmod>{today}</lastmod>\n{links}  </url>\n")
     return ('<?xml version="1.0" encoding="UTF-8"?>\n'
-            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
+            '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
             f"{urls}</urlset>\n")
 
 
@@ -1427,8 +1474,43 @@ def build_robots():
     return f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n"
 
 
+def build_lang(lang):
+    """Generuje komplet stron dla jednego jezyka.
+
+    Polski (jezyk glowny) laduje w korzeniu pod tymi samymi nazwami plikow co
+    dotad — zaindeksowane adresy zostaja bez zmian. Reszta w /uk/, /ru/, /en/.
+    """
+    global CUR
+    CUR = lang
+    sub = "" if lang == "pl" else lang
+    if sub:
+        os.makedirs(os.path.join(ROOT, sub), exist_ok=True)
+
+    def wl(name, content):
+        w(os.path.join(sub, name) if sub else name, content)
+
+    wl("index.html", build_index())
+    wl("portfolio.html", build_portfolio())
+    wl("kalkulator.html", build_calculator())
+    for c in CATEGORIES:
+        wl(f"usluga-{c['slug']}.html", build_service(c))
+    for m in MASTERS:
+        wl(f"mistrz-{m['slug']}.html", build_master(m))
+
+    # sprzatanie stron po usunietych mistrzyniach/uslugach
+    valid = ({f"usluga-{c['slug']}.html" for c in CATEGORIES}
+             | {f"mistrz-{m['slug']}.html" for m in MASTERS})
+    base = os.path.join(ROOT, sub) if sub else ROOT
+    for p in glob.glob(os.path.join(base, "usluga-*.html")) + glob.glob(os.path.join(base, "mistrz-*.html")):
+        if os.path.basename(p) not in valid:
+            os.remove(p)
+            print("usunięto", os.path.relpath(p, ROOT))
+
+
 def main():
+    global CUR
     os.makedirs(os.path.join(ROOT, "assets"), exist_ok=True)
+    CUR = "pl"
     w("sitemap.xml", build_sitemap())
     w("robots.txt", build_robots())
     if DOMAIN:
@@ -1436,21 +1518,11 @@ def main():
     w("styles.css", CSS.strip() + "\n")
     w("translations.js", build_translations_js())
     w("app.js", build_app_js())
-    w("index.html", build_index())
-    w("portfolio.html", build_portfolio())
-    w("kalkulator.html", build_calculator())
-    for c in CATEGORIES:
-        w(f"usluga-{c['slug']}.html", build_service(c))
-    for m in MASTERS:
-        w(f"mistrz-{m['slug']}.html", build_master(m))
-    # sprzątanie stron po usuniętych mistrzyniach/usługach
-    valid = {f"usluga-{c['slug']}.html" for c in CATEGORIES} | {f"mistrz-{m['slug']}.html" for m in MASTERS}
-    for p in glob.glob(os.path.join(ROOT, "usluga-*.html")) + glob.glob(os.path.join(ROOT, "mistrz-*.html")):
-        if os.path.basename(p) not in valid:
-            os.remove(p)
-            print("usunięto", os.path.basename(p))
+    for lang in LANGS:
+        build_lang(lang)
+    CUR = "pl"
     w("README.md", build_readme())
-    print("Gotowe.")
+    print(f"Gotowe — {len(LANGS)} jezyki x {len(all_pages())} stron.")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Калькулятор цен — салон красоты BAD ANGEL</title>
+<meta name="description" content="Калькулятор ориентировочных цен услуг салона красоты BAD ANGEL в Щецине.">
+<link rel="canonical" href="https://xn--badangelsalonpiknoci-iwc96l.pl/ru/kalkulator.html">
+<link rel="alternate" hreflang="pl" href="https://xn--badangelsalonpiknoci-iwc96l.pl/kalkulator.html">
+<link rel="alternate" hreflang="uk" href="https://xn--badangelsalonpiknoci-iwc96l.pl/uk/kalkulator.html">
+<link rel="alternate" hreflang="ru" href="https://xn--badangelsalonpiknoci-iwc96l.pl/ru/kalkulator.html">
+<link rel="alternate" hreflang="en" href="https://xn--badangelsalonpiknoci-iwc96l.pl/en/kalkulator.html">
+<link rel="alternate" hreflang="x-default" href="https://xn--badangelsalonpiknoci-iwc96l.pl/kalkulator.html">
+<meta name="theme-color" content="#08080a">
+<meta name="geo.region" content="PL-ZP">
+<meta name="geo.placename" content="Szczecin">
+<meta name="geo.position" content="53.4337;14.5518">
+<meta name="ICBM" content="53.4337, 14.5518">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Salon Urody BAD ANGEL">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Калькулятор цен — салон красоты BAD ANGEL">
+<meta property="og:description" content="Калькулятор ориентировочных цен услуг салона красоты BAD ANGEL в Щецине.">
+<meta property="og:url" content="https://xn--badangelsalonpiknoci-iwc96l.pl/ru/kalkulator.html">
+<meta property="og:image" content="https://xn--badangelsalonpiknoci-iwc96l.pl/assets/feature-nails.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/emblem.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css?v=12">
+<script>document.documentElement.classList.add('js')</script>
+<script defer src="/translations.js?v=12"></script>
+<script defer src="/app.js?v=12"></script>
+</head>
+<body>
+<header id="topbar">
+  <a href="/ru/" class="brand">BAD&nbsp;ANGEL</a>
+  <nav>
+    <a href="/ru/#uslugi" data-i18n="nav_services">Услуги</a>
+    <a href="/ru/portfolio.html" data-i18n="nav_portfolio">Портфолио</a>
+    <a href="/ru/kalkulator.html" data-i18n="nav_calc">Калькулятор</a>
+    <a href="/ru/#zespol" data-i18n="nav_team">Команда</a>
+    <a href="/ru/#kontakt" data-i18n="nav_contact">Контакты</a>
+  </nav>
+  <div class="nav-cta">
+    <div class="lang-switch"><a href="/kalkulator.html" hreflang="pl" data-lang="pl" rel="alternate">PL</a><a href="/uk/kalkulator.html" hreflang="uk" data-lang="uk" rel="alternate">UA</a><a href="/ru/kalkulator.html" hreflang="ru" data-lang="ru" class="active" rel="alternate">RU</a><a href="/en/kalkulator.html" hreflang="en" data-lang="en" rel="alternate">EN</a></div>
+    <a class="btn solid sm" href="https://badangel86.booksy.com/a/" target="_blank" rel="noopener" data-i18n="btn_book">Записаться</a>
+    <button class="burger" aria-label="Menu" onclick="document.getElementById('drawer').classList.add('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<div class="drawer" id="drawer">
+  <button class="close" onclick="document.getElementById('drawer').classList.remove('open')">&times;</button>
+  <a href="/ru/#uslugi" onclick="closeDrawer()" data-i18n="nav_services">Услуги</a>
+  <a href="/ru/portfolio.html" onclick="closeDrawer()" data-i18n="nav_portfolio">Портфолио</a>
+  <a href="/ru/kalkulator.html" onclick="closeDrawer()" data-i18n="nav_calc">Калькулятор</a>
+  <a href="/ru/#zespol" onclick="closeDrawer()" data-i18n="nav_team">Команда</a>
+  <a href="/ru/#opinie" onclick="closeDrawer()" data-i18n="nav_reviews">Отзывы</a>
+  <a href="/ru/#kontakt" onclick="closeDrawer()" data-i18n="nav_contact">Контакты</a>
+  <a href="https://badangel86.booksy.com/a/" target="_blank" rel="noopener" data-i18n="book_online">Онлайн-запись →</a>
+  <div class="lang-switch"><a href="/kalkulator.html" hreflang="pl" data-lang="pl" rel="alternate">PL</a><a href="/uk/kalkulator.html" hreflang="uk" data-lang="uk" rel="alternate">UA</a><a href="/ru/kalkulator.html" hreflang="ru" data-lang="ru" class="active" rel="alternate">RU</a><a href="/en/kalkulator.html" hreflang="en" data-lang="en" rel="alternate">EN</a></div>
+</div>
+<main>
+  <section id="kalk">
+    <div class="section-head reveal"><h2 data-i18n="calc_title">Калькулятор цен</h2><p data-i18n="calc_sub">Отметьте услуги и посмотрите ориентировочную стоимость визита.</p></div>
+    <div class="calc" id="calc">
+      <details class="calc-cat">
+        <summary><span data-i18n="cat_manicure_name">Маникюр</span></summary>
+        <label class="calc-row">
+          <input type="checkbox" data-price="110.00" data-from="0">
+          <span class="cn">Manicure higieniczny</span><span class="cp">110 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="0.00" data-from="1">
+          <span class="cn">Manicure hybrydowy</span><span class="cp">130 zł ( 1 godzina )</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="110.00" data-from="0">
+          <span class="cn">Manicure klasyczny ze zwykłym lakierem</span><span class="cp">110 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="110.00" data-from="0">
+          <span class="cn">Manicure metodą suchą</span><span class="cp">110 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="130.00" data-from="0">
+          <span class="cn">Manicure japoński</span><span class="cp">130 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="120.00" data-from="0">
+          <span class="cn">Manicure męski</span><span class="cp">120 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="150.00" data-from="0">
+          <span class="cn">Manicure i pedicure dla dzieci</span><span class="cp">150 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="280.00" data-from="0">
+          <span class="cn">Manicure + pedicure</span><span class="cp">280 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="130.00" data-from="1">
+          <span class="cn">Odnowa żelowa</span><span class="cp">od 130 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="150.00" data-from="0">
+          <span class="cn">Paznokcie żelowe długość 1-2</span><span class="cp">150 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="170.00" data-from="0">
+          <span class="cn">Paznokcie żelowe długość 2-3</span><span class="cp">170 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="180.00" data-from="0">
+          <span class="cn">Paznokcie żelowe długość 3-4</span><span class="cp">180 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="190.00" data-from="0">
+          <span class="cn">Paznokcie żelowe długość 8-9</span><span class="cp">190 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="150.00" data-from="0">
+          <span class="cn">Przedłużanie paznokci 1-2 (dual formy)</span><span class="cp">150 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="170.00" data-from="0">
+          <span class="cn">Przedłużanie paznokci 2-3 (dual formy)</span><span class="cp">170 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="170.00" data-from="0">
+          <span class="cn">Przedłużanie paznokci 3-4 (dual formy)</span><span class="cp">170 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="200.00" data-from="0">
+          <span class="cn">Przedłużanie paznokci 8-9 (dual formy)</span><span class="cp">200 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="20.00" data-from="0">
+          <span class="cn">Rekonstrukcja paznokcia</span><span class="cp">20 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="30.00" data-from="0">
+          <span class="cn">Rekonstrukcja 2 paznokci</span><span class="cp">30 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="50.00" data-from="0">
+          <span class="cn">Ściągnięcie hybrydy / żelu</span><span class="cp">50 zł</span>
+        </label>
+      </details>
+      <details class="calc-cat">
+        <summary><span data-i18n="cat_pedicure_name">Педикюр</span></summary>
+        <label class="calc-row">
+          <input type="checkbox" data-price="110.00" data-from="0">
+          <span class="cn">Pedicure higieniczny</span><span class="cp">110 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="150.00" data-from="0">
+          <span class="cn">Pedicure hybrydowy (bez stopy)</span><span class="cp">150 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="170.00" data-from="0">
+          <span class="cn">Pedicure hybrydowy + stopy</span><span class="cp">170 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="120.00" data-from="0">
+          <span class="cn">Pedicure hybrydowy (osoba po szkoleniu)</span><span class="cp">120 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="130.00" data-from="0">
+          <span class="cn">Pedicure hybrydowy + stopy (osoba po szkoleniu)</span><span class="cp">130 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="120.00" data-from="0">
+          <span class="cn">Pedicure ze zwykłym lakierem</span><span class="cp">120 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="120.00" data-from="0">
+          <span class="cn">Pedicure męski</span><span class="cp">120 zł</span>
+        </label>
+      </details>
+      <details class="calc-cat">
+        <summary><span data-i18n="cat_rzesy_name">Наращивание ресниц</span></summary>
+        <label class="calc-row">
+          <input type="checkbox" data-price="150.00" data-from="0">
+          <span class="cn">Przedłużanie rzęs 1:1</span><span class="cp">150 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="160.00" data-from="0">
+          <span class="cn">Przedłużanie rzęs 1:2</span><span class="cp">160 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="170.00" data-from="0">
+          <span class="cn">Przedłużanie rzęs 1:3</span><span class="cp">170 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="180.00" data-from="0">
+          <span class="cn">Przedłużanie rzęs 4:1</span><span class="cp">180 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="190.00" data-from="0">
+          <span class="cn">Przedłużanie rzęs 5:1</span><span class="cp">190 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="100.00" data-from="0">
+          <span class="cn">Uzupełnienie rzęs (do 3 tygodni)</span><span class="cp">100 zł</span>
+        </label>
+      </details>
+      <details class="calc-cat">
+        <summary><span data-i18n="cat_brwi_name">Брови и ресницы</span></summary>
+        <label class="calc-row">
+          <input type="checkbox" data-price="50.00" data-from="0">
+          <span class="cn">Regulacja brwi damska (wosk, pincet)</span><span class="cp">50 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="100.00" data-from="0">
+          <span class="cn">Regulacja brwi damska (wosk, geometria + farba)</span><span class="cp">100 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="60.00" data-from="0">
+          <span class="cn">Korekta brwi (bez farbowania)</span><span class="cp">60 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="100.00" data-from="0">
+          <span class="cn">Laminacja brwi + botox</span><span class="cp">100 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="130.00" data-from="0">
+          <span class="cn">Laminacja brwi + botox + koloryzacja</span><span class="cp">130 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="160.00" data-from="0">
+          <span class="cn">Laminacja rzęs + botox</span><span class="cp">160 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="180.00" data-from="0">
+          <span class="cn">Laminacja rzęs + farbowanie + botox</span><span class="cp">180 zł</span>
+        </label>
+      </details>
+      <details class="calc-cat">
+        <summary><span data-i18n="cat_masaz_name">Массаж</span></summary>
+        <label class="calc-row">
+          <input type="checkbox" data-price="100.00" data-from="0">
+          <span class="cn">Masaż kręgosłupa – kobiety</span><span class="cp">100 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="150.00" data-from="0">
+          <span class="cn">Masaż kręgosłupa – mężczyźni</span><span class="cp">150 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="200.00" data-from="0">
+          <span class="cn">Masaż klasyczny całego ciała – kobiety</span><span class="cp">200 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="250.00" data-from="0">
+          <span class="cn">Masaż klasyczny całego ciała – mężczyźni</span><span class="cp">250 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="300.00" data-from="0">
+          <span class="cn">Masaż relaksacyjny całego ciała – kobiety</span><span class="cp">300 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="300.00" data-from="0">
+          <span class="cn">Masaż relaksacyjny całego ciała – mężczyźni</span><span class="cp">300 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="200.00" data-from="0">
+          <span class="cn">Masaż miodowy całego ciała</span><span class="cp">200 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="100.00" data-from="0">
+          <span class="cn">Masaż miodowy wybranej części ciała</span><span class="cp">100 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="180.00" data-from="0">
+          <span class="cn">Masaż antycellulitowy</span><span class="cp">180 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="150.00" data-from="0">
+          <span class="cn">Antycellulitowe owijanie ciała – body wrapping</span><span class="cp">150 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="110.00" data-from="0">
+          <span class="cn">Masaż twarzy</span><span class="cp">110 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="50.00" data-from="0">
+          <span class="cn">Masaż karku, głowy i szyi</span><span class="cp">50 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="50.00" data-from="0">
+          <span class="cn">Masaż rąk</span><span class="cp">50 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="50.00" data-from="0">
+          <span class="cn">Masaż stóp</span><span class="cp">50 zł</span>
+        </label>
+      </details>
+      <details class="calc-cat">
+        <summary><span data-i18n="cat_depilacja_name">Депиляция</span></summary>
+        <label class="calc-row">
+          <input type="checkbox" data-price="45.00" data-from="0">
+          <span class="cn">Broda</span><span class="cp">45 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="54.00" data-from="0">
+          <span class="cn">Pachy</span><span class="cp">54 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="135.00" data-from="1">
+          <span class="cn">Bikini pełne</span><span class="cp">od 135 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="144.00" data-from="0">
+          <span class="cn">Nogi całe</span><span class="cp">144 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="315.00" data-from="0">
+          <span class="cn">Bikini + nogi + pachy</span><span class="cp">315 zł</span>
+        </label>
+      </details>
+      <details class="calc-cat">
+        <summary><span data-i18n="cat_spa_name">Парафин и SPA для рук</span></summary>
+        <label class="calc-row">
+          <input type="checkbox" data-price="100.00" data-from="0">
+          <span class="cn">Spa dla rąk</span><span class="cp">100 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="100.00" data-from="0">
+          <span class="cn">SPA dla rąk – zimowa parafina</span><span class="cp">100 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="100.00" data-from="0">
+          <span class="cn">Spa dla nóg</span><span class="cp">100 zł</span>
+        </label>
+      </details>
+      <details class="calc-cat">
+        <summary><span data-i18n="cat_blizny_name">Шрамы и растяжки</span></summary>
+        <label class="calc-row">
+          <input type="checkbox" data-price="0.00" data-from="0">
+          <span class="cn">Konsultacja</span><span class="cp">Darmowa</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="399.00" data-from="0">
+          <span class="cn">Redukcja blizn do 5 cm</span><span class="cp">399 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="499.00" data-from="0">
+          <span class="cn">Redukcja blizn do 10 cm</span><span class="cp">499 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="599.00" data-from="0">
+          <span class="cn">Redukcja większych blizn</span><span class="cp">599 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="349.00" data-from="0">
+          <span class="cn">Blizna po cesarskim cięciu</span><span class="cp">349 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="449.00" data-from="0">
+          <span class="cn">Stare i trudne blizny pooperacyjne</span><span class="cp">449 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="469.00" data-from="0">
+          <span class="cn">Redukcja rozstępów biustu</span><span class="cp">469 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="545.00" data-from="0">
+          <span class="cn">Redukcja rozstępów pośladków</span><span class="cp">545 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="549.00" data-from="0">
+          <span class="cn">Redukcja rozstępów rąk</span><span class="cp">549 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="649.00" data-from="0">
+          <span class="cn">Redukcja rozstępów ud</span><span class="cp">649 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="699.00" data-from="0">
+          <span class="cn">Redukcja rozstępów boków</span><span class="cp">699 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="745.00" data-from="0">
+          <span class="cn">Redukcja rozstępów brzucha</span><span class="cp">745 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="1099.00" data-from="0">
+          <span class="cn">Redukcja rozstępów brzucha + boki</span><span class="cp">1099 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="249.00" data-from="0">
+          <span class="cn">Redukcja przebarwień, plamy pigmentowe</span><span class="cp">249 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="449.00" data-from="0">
+          <span class="cn">Ślady potrądzikowe</span><span class="cp">449 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="199.00" data-from="0">
+          <span class="cn">Stymulacja wzrostu brwi</span><span class="cp">199 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="229.00" data-from="0">
+          <span class="cn">Stymulacja wzrostu włosów – skóra głowy</span><span class="cp">229 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="249.00" data-from="0">
+          <span class="cn">Hydro Lips</span><span class="cp">249 zł</span>
+        </label>
+      </details>
+      <details class="calc-cat">
+        <summary><span data-i18n="cat_wlosy_name">Волосы</span></summary>
+        <label class="calc-row">
+          <input type="checkbox" data-price="600.00" data-from="0">
+          <span class="cn">Przedłużanie bio proteinowych włosów</span><span class="cp">600 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="600.00" data-from="0">
+          <span class="cn">Przedłużanie naturalnych włosów</span><span class="cp">600 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="150.00" data-from="0">
+          <span class="cn">Pojedynczy warkoczyk z kanekalonem</span><span class="cp">150 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="200.00" data-from="0">
+          <span class="cn">Dwa warkoczyki z kanekalonem</span><span class="cp">200 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="350.00" data-from="0">
+          <span class="cn">Warkoczyki z kanekalonem – cała głowa</span><span class="cp">350 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="350.00" data-from="0">
+          <span class="cn">Afrykańskie warkoczyki (box braids)</span><span class="cp">350 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="220.00" data-from="0">
+          <span class="cn">Bąbelkowe warkocze z kanekalonem</span><span class="cp">220 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="80.00" data-from="1">
+          <span class="cn">Strzyżenie damskie</span><span class="cp">od 80 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="60.00" data-from="0">
+          <span class="cn">Strzyżenie męskie</span><span class="cp">60 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="70.00" data-from="1">
+          <span class="cn">Modelowanie / stylizacja</span><span class="cp">od 70 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="150.00" data-from="1">
+          <span class="cn">Regeneracja włosów (zimna odbudowa)</span><span class="cp">od 150 zł</span>
+        </label>
+        <label class="calc-row">
+          <input type="checkbox" data-price="150.00" data-from="1">
+          <span class="cn">Upięcie okolicznościowe</span><span class="cp">od 150 zł</span>
+        </label>
+      </details></div>
+    <p class="calc-note" data-i18n="calc_note">Цены ориентировочные. Знак «от» означает начальную цену. Итоговую стоимость определяет мастер.</p>
+  </section>
+</main>
+<div class="calc-bar">
+  <div class="sum"><small><span data-i18n="calc_total">Итого</span> · <span id="calcCount">0</span> <span data-i18n="calc_count">выбрано</span></small><span id="calcSum">0 zł</span></div>
+  <div class="cta">
+    <button class="clear" id="calcClear" data-i18n="calc_clear">Очистить</button>
+    <a class="btn solid sm" href="https://badangel86.booksy.com/a/" target="_blank" rel="noopener" data-i18n="btn_book_visit">Записаться на визит</a>
+  </div>
+</div>
+<footer>
+  <div class="brand">BAD&nbsp;ANGEL</div>
+  <div class="soc">
+    <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://badangel86.booksy.com/a/" target="_blank" rel="noopener">Booksy</a>
+  </div>
+  <small>© 2026 Salon Urody BAD ANGEL · aleja Wyzwolenia 5/10, Szczecin</small>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Do góry">↑</button>
+<div class="mcta">
+  <a class="btn solid" href="https://badangel86.booksy.com/a/" target="_blank" rel="noopener" data-i18n="btn_book_visit">Записаться на визит</a>
+</div>
+<div class="lb" id="lightbox">
+  <button class="lb-close" aria-label="Zamknij">&times;</button>
+  <button class="lb-nav lb-prev" aria-label="Poprzednie">‹</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-nav lb-next" aria-label="Następne">›</button>
+</div>
+<script>
+function closeDrawer(){document.getElementById('drawer').classList.remove('open');}
+var bar=document.getElementById('topbar');
+addEventListener('scroll',function(){bar.classList.toggle('solid',scrollY>60);});
+</script>
+</body>
+</html>
