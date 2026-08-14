@@ -52,7 +52,7 @@ def A(path):
     return "/" + path.lstrip("/")
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-VER = "12"  # cache-busting wersja dla styles.css / translations.js / app.js
+VER = "13"  # cache-busting wersja dla styles.css / translations.js / app.js
 BOOKSY = "https://badangel86.booksy.com/a/"
 IG = "https://www.instagram.com/"
 FB = "https://www.facebook.com/"
@@ -683,7 +683,13 @@ body.past-hero .mcta{transform:none}
 .gallery img.hide{display:none}
 
 /* ---- BEFORE / AFTER SLIDER ---- */
-.ba{max-width:720px;margin:44px auto 0;position:relative;aspect-ratio:4/3;border-radius:12px;overflow:hidden;
+/* Dwa zabiegi obok siebie: laminacja brwi i mikroneedling. */
+.ba-pair{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:44px;align-items:start}
+.ba-item{margin:0}
+.ba-item figcaption{margin-top:14px;text-align:center;font-size:12px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);opacity:.9}
+@media(max-width:860px){.ba-pair{grid-template-columns:1fr;gap:34px}}
+.ba{max-width:720px;margin:0 auto;position:relative;aspect-ratio:4/3;border-radius:2px;overflow:hidden;
   border:1px solid var(--line);user-select:none;touch-action:none;cursor:ew-resize}
 .ba .ba-img{position:absolute;inset:0;background-size:cover;background-position:center}
 .ba .ba-after{clip-path:inset(0 0 0 50%)}
@@ -693,6 +699,39 @@ body.past-hero .mcta{transform:none}
 .ba .ba-tag{position:absolute;bottom:14px;font-size:11px;letter-spacing:.16em;font-weight:600;color:#fff;
   background:rgba(0,0,0,.5);padding:5px 11px;border-radius:40px;backdrop-filter:blur(4px)}
 .ba .ba-tag.l{left:14px}.ba .ba-tag.r{right:14px}
+
+/* ---- WYSZUKIWARKA CENNIKA ---- */
+.s-open{background:none;border:0;color:currentColor;cursor:pointer;padding:6px;display:flex;
+  align-items:center;opacity:.7;transition:opacity .2s}
+.s-open:hover{opacity:1}
+.drawer a[data-search-open]{color:var(--gold)}
+.s-box{position:fixed;inset:0;z-index:300;display:none;background:rgba(4,4,6,.82);
+  backdrop-filter:blur(6px);padding:12vh 20px 20px}
+.s-box.on{display:block}
+body.search-open{overflow:hidden}
+.s-panel{max-width:660px;margin:0 auto;background:var(--ink-2);border:1px solid var(--line);
+  border-radius:3px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.s-head{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--line);color:var(--grey)}
+.s-head input{flex:1;background:none;border:0;outline:none;color:var(--white);font-family:var(--sans);
+  font-size:17px;letter-spacing:.01em;min-width:0}
+.s-head input::placeholder{color:var(--grey)}
+.s-head input::-webkit-search-cancel-button{display:none}
+.s-close{background:none;border:0;color:var(--grey);font-size:26px;line-height:1;cursor:pointer;padding:0 2px}
+.s-close:hover{color:var(--white)}
+.s-out{max-height:52vh;overflow-y:auto}
+.s-row{display:grid;grid-template-columns:1fr auto auto;gap:6px 16px;align-items:baseline;
+  padding:13px 18px;border-bottom:1px solid var(--line);transition:background .2s}
+.s-row:hover{background:rgba(244,241,234,.05)}
+/* Pozycje w siatce ustawione wprost — bez tego cena wskakiwala w pierwsza
+   kolumne i wypychala nazwe uslugi na prawo. */
+.s-name{grid-column:1;grid-row:1;color:var(--white);font-size:15px}
+.s-cat{grid-column:1;grid-row:2;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey)}
+.s-dur{grid-column:2;grid-row:1;font-size:12px;color:var(--grey);white-space:nowrap}
+.s-price{grid-column:3;grid-row:1;color:var(--gold);font-size:14px;white-space:nowrap}
+.s-none,.s-hint{padding:16px 18px;color:var(--grey);font-size:12.5px;line-height:1.5}
+.s-hint{border-top:1px solid var(--line)}
+.s-box.has-results .s-hint{display:none}
+@media(max-width:560px){.s-box{padding:8vh 12px 12px}.s-row{padding:12px 14px}}
 """
 
 # ---------------------------------------------------------------------------
@@ -769,6 +808,10 @@ def header_html(page=""):
     <a href="{U()}#kontakt" data-i18n="nav_contact">{P('nav_contact')}</a>
   </nav>
   <div class="nav-cta">
+    <button class="s-open" data-search-open aria-label="{P('search_label')}">
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7">
+        <circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4.2-4.2"></path></svg>
+    </button>
     {lang_switch(page)}
     <a class="btn solid sm" href="{BOOKSY}" target="_blank" rel="noopener" data-i18n="btn_book">{P('btn_book')}</a>
     <button class="burger" aria-label="Menu" onclick="document.getElementById('drawer').classList.add('open')">
@@ -784,8 +827,23 @@ def header_html(page=""):
   <a href="{U()}#zespol" onclick="closeDrawer()" data-i18n="nav_team">{P('nav_team')}</a>
   <a href="{U()}#opinie" onclick="closeDrawer()" data-i18n="nav_reviews">{P('nav_reviews')}</a>
   <a href="{U()}#kontakt" onclick="closeDrawer()" data-i18n="nav_contact">{P('nav_contact')}</a>
+  <a href="#" data-search-open onclick="closeDrawer()" data-i18n="search_label">{P('search_label')}</a>
   <a href="{BOOKSY}" target="_blank" rel="noopener" data-i18n="book_online">{P('book_online')}</a>
   {lang_switch(page)}
+</div>
+
+<div class="s-box" id="searchBox" role="dialog" aria-modal="true" aria-label="{P('search_label')}">
+  <div class="s-panel">
+    <div class="s-head">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7">
+        <circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4.2-4.2"></path></svg>
+      <input id="searchInput" type="search" autocomplete="off" placeholder="{P('search_ph')}"
+             aria-label="{P('search_label')}">
+      <button class="s-close" aria-label="Zamknij">&times;</button>
+    </div>
+    <div class="s-out" id="searchOut"></div>
+    <div class="s-hint">{P('search_hint')}</div>
+  </div>
 </div>"""
 
 
@@ -997,13 +1055,29 @@ def build_index():
   <section class="block" id="efekty" style="background:#0b0b0c">
     <div class="wrap">
       <div class="section-head reveal"><h2 data-i18n="ba_title">{P('ba_title')}</h2><p data-i18n="ba_sub">{P('ba_sub')}</p></div>
-      <div class="ba reveal" id="baSlider">
-        <div class="ba-img ba-before" style="background-image:url('/assets/ba-before.jpg')"></div>
-        <div class="ba-img ba-after" style="background-image:url('/assets/ba-after.jpg')"></div>
-        <span class="ba-tag l" data-i18n="ba_before">{P('ba_before')}</span>
-        <span class="ba-tag r" data-i18n="ba_after">{P('ba_after')}</span>
-        <div class="ba-line"></div>
-        <div class="ba-handle">⇄</div>
+      <div class="ba-pair">
+        <figure class="ba-item reveal">
+          <div class="ba" id="baSlider">
+            <div class="ba-img ba-before" style="background-image:url('/assets/ba2-before.jpg')"></div>
+            <div class="ba-img ba-after" style="background-image:url('/assets/ba2-after.jpg')"></div>
+            <span class="ba-tag l" data-i18n="ba_before">{P('ba_before')}</span>
+            <span class="ba-tag r" data-i18n="ba_after">{P('ba_after')}</span>
+            <div class="ba-line"></div>
+            <div class="ba-handle" aria-label="{P('ba_handle_label')}">⇄</div>
+          </div>
+          <figcaption data-i18n="ba_cap_brwi">{P('ba_cap_brwi')}</figcaption>
+        </figure>
+        <figure class="ba-item reveal">
+          <div class="ba" id="baSlider2">
+            <div class="ba-img ba-before" style="background-image:url('/assets/ba-before.jpg')"></div>
+            <div class="ba-img ba-after" style="background-image:url('/assets/ba-after.jpg')"></div>
+            <span class="ba-tag l" data-i18n="ba_before">{P('ba_before')}</span>
+            <span class="ba-tag r" data-i18n="ba_after">{P('ba_after')}</span>
+            <div class="ba-line"></div>
+            <div class="ba-handle" aria-label="{P('ba_handle_label')}">⇄</div>
+          </div>
+          <figcaption data-i18n="ba_cap_blizny">{P('ba_cap_blizny')}</figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -1316,8 +1390,25 @@ window.I18N = {data};
 """
 
 
+def build_search_index():
+    """Indeks wyszukiwarki: wszystkie pozycje cennika ze wszystkich kategorii.
+
+    Nazwy uslug zostaja po polsku (tak jak w cenniku i w Booksy), ale kazda
+    pozycja niesie swoj slug kategorii — dzieki temu wpisanie "манікюр" albo
+    "lashes" trafia w kategorie, a nie w pusto.
+    """
+    items = []
+    for c in CATEGORIES:
+        for name, desc, dur, price in c["items"]:
+            items.append({"n": name, "d": dur, "p": price, "c": c["slug"]})
+    cat_names = {c["slug"]: {l: I18N.get(f"cat_{c['slug']}_name", {}).get(l, c["name"])
+                             for l in LANGS} for c in CATEGORIES}
+    return ("window.__SEARCH = " + json.dumps(items, ensure_ascii=False) + ";\n"
+            "window.__CATNAMES = " + json.dumps(cat_names, ensure_ascii=False) + ";\n")
+
+
 def build_app_js():
-    return r"""// Auto-generowane przez build.py — funkcje interaktywne.
+    return build_search_index() + r"""// Auto-generowane przez build.py — funkcje interaktywne.
 (function(){
   "use strict";
   var $ = function(s,r){return (r||document).querySelector(s);};
@@ -1325,8 +1416,79 @@ def build_app_js():
   var visibleGallery = function(){ return $$(".gallery img").filter(function(im){return im.offsetParent!==null;}); };
 
   document.addEventListener("DOMContentLoaded", function(){
-    reveal(); toTop(); faq(); lightbox(); calc(); filter(); beforeAfter(); share(); stickyCta();
+    reveal(); toTop(); faq(); lightbox(); calc(); filter(); beforeAfter(); share(); stickyCta(); search();
   });
+
+  // Wyszukiwarka po cenniku: 92 pozycje z dziewieciu kategorii w jednym polu.
+  // Dopasowuje nazwe uslugi (po polsku, tak jak w Booksy) ORAZ nazwe kategorii
+  // w jezyku strony, wiec "манікюр" tez cos znajdzie.
+  function search(){
+    var box=$("#searchBox"); if(!box || !window.__SEARCH) return;
+    var input=$("#searchInput",box), out=$("#searchOut",box), items=window.__SEARCH;
+    var lang=(document.documentElement.lang||"pl").slice(0,2);
+    var cats=window.__CATNAMES||{}, base=(lang==="pl"?"/":"/"+lang+"/");
+    var T=window.I18N||{};
+
+    // Nazwy uslug sa po polsku, wiec wpisane cyrylica "ламинирование" samo
+    // z siebie nic nie znajdzie. Kilkanascie najczestszych hasel mapujemy
+    // recznie na polski rdzen.
+    var ALIAS={"ламин":"lamin","ламінув":"lamin","наращ":"przedluz","нарощ":"przedluz",
+      "педикюр":"pedicure","маникюр":"manicure","манікюр":"manicure","массаж":"masaz",
+      "масаж":"masaz","брови":"brwi","бровей":"brwi","ресниц":"rzes","вій":"rzes",
+      "депиляц":"depilac","депіляц":"depilac","стрижк":"strzyz","волос":"wlos",
+      "гель":"zel","гел":"zel","шрам":"blizn","рубц":"blizn","коса":"warkocz","косич":"warkocz"};
+    function norm(s){
+      s=(s||"").toLowerCase();
+      try{ s=s.normalize("NFD").replace(/[̀-ͯ]/g,""); }catch(e){}
+      return s.replace(/ł/g,"l").replace(/ż|ź/g,"z").replace(/ę/g,"e").replace(/ą/g,"a")
+              .replace(/ś/g,"s").replace(/ć/g,"c").replace(/ó/g,"o").replace(/ń/g,"n");
+    }
+    function expand(q){
+      var out=[q];
+      for(var k in ALIAS){ if(q.indexOf(k)>=0) out.push(ALIAS[k]); }
+      return out;
+    }
+    function catName(slug){ return (cats[slug]&&cats[slug][lang])||slug; }
+
+    function open(){ box.classList.add("on"); document.body.classList.add("search-open"); input.focus(); }
+    function close(){ box.classList.remove("on"); document.body.classList.remove("search-open"); input.value=""; render(""); }
+
+    function render(q){
+      var nq=norm(q).trim();
+      if(!nq){ out.innerHTML=""; box.classList.remove("has-results"); return; }
+      var terms=expand(nq);
+      var hits=items.filter(function(it){
+        var n=norm(it.n), c=norm(catName(it.c));
+        return terms.some(function(t){ return n.indexOf(t)>=0 || c.indexOf(t)>=0; });
+      }).slice(0,12);
+      box.classList.add("has-results");
+      if(!hits.length){
+        var none=(T.search_none&&T.search_none[lang])||"Brak wyników";
+        out.innerHTML='<div class="s-none">'+none+"</div>";
+        return;
+      }
+      out.innerHTML=hits.map(function(it){
+        return '<a class="s-row" href="'+base+"usluga-"+it.c+'.html">'+
+               '<span class="s-name">'+it.n+"</span>"+
+               '<span class="s-cat">'+catName(it.c)+"</span>"+
+               '<span class="s-dur">'+(it.d||"")+"</span>"+
+               '<span class="s-price">'+it.p+"</span></a>";
+      }).join("");
+    }
+
+    input.addEventListener("input", function(){ render(input.value); });
+    $$("[data-search-open]").forEach(function(b){
+      b.addEventListener("click", function(e){ e.preventDefault(); open(); });
+    });
+    var closeBtn=$(".s-close",box);
+    if(closeBtn) closeBtn.addEventListener("click", close);
+    box.addEventListener("click", function(e){ if(e.target===box) close(); });
+    addEventListener("keydown", function(e){
+      if(e.key==="Escape" && box.classList.contains("on")) close();
+      else if(e.key==="/" && !box.classList.contains("on") &&
+              !/^(INPUT|TEXTAREA)$/.test((e.target.tagName||""))){ e.preventDefault(); open(); }
+    });
+  }
 
   // Pasek "Zapisz sie" na dole dubluje przycisk z hero: na pierwszym ekranie
   // telefonu widac bylo trzy razy to samo CTA. Pokazujemy go dopiero za hero.
@@ -1397,15 +1559,35 @@ def build_app_js():
     });
   }
 
+  // Suwakow przed/po jest teraz kilka, wiec kazdy dostaje wlasna obsluge.
+  // Doszla klawiatura: strzalki przesuwaja podzial, bo sam pointer wykluczal
+  // czesc uzytkownikow.
   function beforeAfter(){
-    var ba=$("#baSlider"); if(!ba) return;
-    var after=$(".ba-after",ba), line=$(".ba-line",ba), handle=$(".ba-handle",ba), drag=false;
-    function set(p){ p=Math.max(0,Math.min(100,p)); after.style.clipPath="inset(0 0 0 "+p+"%)"; line.style.left=p+"%"; handle.style.left=p+"%"; }
-    function fromX(x){ var r=ba.getBoundingClientRect(); set((x-r.left)/r.width*100); }
-    ba.addEventListener("pointerdown", function(e){ drag=true; fromX(e.clientX); try{ba.setPointerCapture(e.pointerId);}catch(_){} });
-    ba.addEventListener("pointermove", function(e){ if(drag){ e.preventDefault(); fromX(e.clientX); } });
-    addEventListener("pointerup", function(){ drag=false; });
-    set(50);
+    $$(".ba").forEach(function(ba){
+      var after=$(".ba-after",ba), line=$(".ba-line",ba), handle=$(".ba-handle",ba), drag=false, pos=50;
+      if(!after||!line||!handle) return;
+      function set(p){
+        pos=Math.max(0,Math.min(100,p));
+        after.style.clipPath="inset(0 0 0 "+pos+"%)";
+        line.style.left=pos+"%"; handle.style.left=pos+"%";
+        handle.setAttribute("aria-valuenow", Math.round(pos));
+      }
+      function fromX(x){ var r=ba.getBoundingClientRect(); set((x-r.left)/r.width*100); }
+      ba.addEventListener("pointerdown", function(e){ drag=true; fromX(e.clientX); try{ba.setPointerCapture(e.pointerId);}catch(_){} });
+      ba.addEventListener("pointermove", function(e){ if(drag){ e.preventDefault(); fromX(e.clientX); } });
+      addEventListener("pointerup", function(){ drag=false; });
+      handle.setAttribute("tabindex","0");
+      handle.setAttribute("role","slider");
+      handle.setAttribute("aria-valuemin","0");
+      handle.setAttribute("aria-valuemax","100");
+      handle.addEventListener("keydown", function(e){
+        if(e.key==="ArrowLeft"){ e.preventDefault(); set(pos-4); }
+        else if(e.key==="ArrowRight"){ e.preventDefault(); set(pos+4); }
+        else if(e.key==="Home"){ e.preventDefault(); set(0); }
+        else if(e.key==="End"){ e.preventDefault(); set(100); }
+      });
+      set(50);
+    });
   }
 
   function share(){

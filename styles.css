@@ -384,7 +384,13 @@ body.past-hero .mcta{transform:none}
 .gallery img.hide{display:none}
 
 /* ---- BEFORE / AFTER SLIDER ---- */
-.ba{max-width:720px;margin:44px auto 0;position:relative;aspect-ratio:4/3;border-radius:12px;overflow:hidden;
+/* Dwa zabiegi obok siebie: laminacja brwi i mikroneedling. */
+.ba-pair{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:44px;align-items:start}
+.ba-item{margin:0}
+.ba-item figcaption{margin-top:14px;text-align:center;font-size:12px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);opacity:.9}
+@media(max-width:860px){.ba-pair{grid-template-columns:1fr;gap:34px}}
+.ba{max-width:720px;margin:0 auto;position:relative;aspect-ratio:4/3;border-radius:2px;overflow:hidden;
   border:1px solid var(--line);user-select:none;touch-action:none;cursor:ew-resize}
 .ba .ba-img{position:absolute;inset:0;background-size:cover;background-position:center}
 .ba .ba-after{clip-path:inset(0 0 0 50%)}
@@ -394,3 +400,36 @@ body.past-hero .mcta{transform:none}
 .ba .ba-tag{position:absolute;bottom:14px;font-size:11px;letter-spacing:.16em;font-weight:600;color:#fff;
   background:rgba(0,0,0,.5);padding:5px 11px;border-radius:40px;backdrop-filter:blur(4px)}
 .ba .ba-tag.l{left:14px}.ba .ba-tag.r{right:14px}
+
+/* ---- WYSZUKIWARKA CENNIKA ---- */
+.s-open{background:none;border:0;color:currentColor;cursor:pointer;padding:6px;display:flex;
+  align-items:center;opacity:.7;transition:opacity .2s}
+.s-open:hover{opacity:1}
+.drawer a[data-search-open]{color:var(--gold)}
+.s-box{position:fixed;inset:0;z-index:300;display:none;background:rgba(4,4,6,.82);
+  backdrop-filter:blur(6px);padding:12vh 20px 20px}
+.s-box.on{display:block}
+body.search-open{overflow:hidden}
+.s-panel{max-width:660px;margin:0 auto;background:var(--ink-2);border:1px solid var(--line);
+  border-radius:3px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.s-head{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--line);color:var(--grey)}
+.s-head input{flex:1;background:none;border:0;outline:none;color:var(--white);font-family:var(--sans);
+  font-size:17px;letter-spacing:.01em;min-width:0}
+.s-head input::placeholder{color:var(--grey)}
+.s-head input::-webkit-search-cancel-button{display:none}
+.s-close{background:none;border:0;color:var(--grey);font-size:26px;line-height:1;cursor:pointer;padding:0 2px}
+.s-close:hover{color:var(--white)}
+.s-out{max-height:52vh;overflow-y:auto}
+.s-row{display:grid;grid-template-columns:1fr auto auto;gap:6px 16px;align-items:baseline;
+  padding:13px 18px;border-bottom:1px solid var(--line);transition:background .2s}
+.s-row:hover{background:rgba(244,241,234,.05)}
+/* Pozycje w siatce ustawione wprost — bez tego cena wskakiwala w pierwsza
+   kolumne i wypychala nazwe uslugi na prawo. */
+.s-name{grid-column:1;grid-row:1;color:var(--white);font-size:15px}
+.s-cat{grid-column:1;grid-row:2;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey)}
+.s-dur{grid-column:2;grid-row:1;font-size:12px;color:var(--grey);white-space:nowrap}
+.s-price{grid-column:3;grid-row:1;color:var(--gold);font-size:14px;white-space:nowrap}
+.s-none,.s-hint{padding:16px 18px;color:var(--grey);font-size:12.5px;line-height:1.5}
+.s-hint{border-top:1px solid var(--line)}
+.s-box.has-results .s-hint{display:none}
+@media(max-width:560px){.s-box{padding:8vh 12px 12px}.s-row{padding:12px 14px}}
