@@ -6,8 +6,17 @@
   var visibleGallery = function(){ return $$(".gallery img").filter(function(im){return im.offsetParent!==null;}); };
 
   document.addEventListener("DOMContentLoaded", function(){
-    reveal(); toTop(); faq(); lightbox(); calc(); filter(); beforeAfter(); share();
+    reveal(); toTop(); faq(); lightbox(); calc(); filter(); beforeAfter(); share(); stickyCta();
   });
+
+  // Pasek "Zapisz sie" na dole dubluje przycisk z hero: na pierwszym ekranie
+  // telefonu widac bylo trzy razy to samo CTA. Pokazujemy go dopiero za hero.
+  function stickyCta(){
+    var bar=document.querySelector(".mcta"), hero=$("#hero");
+    if(!bar||!hero) return;
+    function upd(){ document.body.classList.toggle("past-hero", scrollY > hero.offsetHeight*0.72); }
+    upd(); addEventListener("scroll", upd, {passive:true}); addEventListener("resize", upd);
+  }
 
   function reveal(){
     var els=$$(".reveal");

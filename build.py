@@ -28,7 +28,7 @@ def P(key):
     return I18N[key]["pl"]
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-VER = "10"  # cache-busting wersja dla styles.css / translations.js / app.js
+VER = "11"  # cache-busting wersja dla styles.css / translations.js / app.js
 BOOKSY = "https://badangel86.booksy.com/a/"
 IG = "https://www.instagram.com/"
 FB = "https://www.facebook.com/"
@@ -382,8 +382,16 @@ header nav a:hover{opacity:.6}
 #hero.has-wall .bg::after{content:none}
 @media (min-width:1500px){#hero .wall{grid-template-columns:repeat(6,1fr)}}
 @media (max-width:1100px){#hero .wall{grid-template-columns:repeat(4,1fr)}}
-@media (max-width:860px){#hero.has-wall .wall{display:none}
-  #hero.has-wall .bg{background:radial-gradient(120% 90% at 50% 0%,#22222a 0%,#121216 45%,#08080a 100%)}}
+/* Telefon: ściana zostaje, ale w dwóch kolumnach. Kolumny 3-5 są display:none,
+   więc przeglądarka nie ściąga ich zdjęć (obrazki mają loading=lazy) — na
+   telefonie dociąga się 8 miniatur zamiast 20. */
+@media (max-width:860px){
+  #hero .wall{grid-template-columns:repeat(2,1fr);gap:6px;inset:-6% -4%}
+  #hero .wall .col:nth-child(n+3){display:none}
+  #hero.has-wall .bg{background:
+    radial-gradient(64% 34% at 50% 44%,rgba(8,8,10,.96) 0%,rgba(8,8,10,.9) 60%,rgba(8,8,10,.62) 100%),
+    linear-gradient(180deg,rgba(8,8,10,.94) 0%,rgba(8,8,10,.5) 26%,rgba(8,8,10,.5) 62%,rgba(8,8,10,.97) 100%)}
+}
 
 /* Jeden wyśrodkowany stos zamiast top/bottom — wcześniej logo trzymało się góry,
    przyciski dna, a między nimi zostawało ~450px pustki. */
@@ -400,20 +408,32 @@ header nav a:hover{opacity:.6}
 /* SECTION headers */
 .section-head{text-align:center;margin-bottom:var(--sp-5)}
 .section-head h2{font-family:var(--serif);font-size:clamp(36px,5vw,60px);font-weight:400;letter-spacing:-.01em}
-.section-head p{margin-top:14px;color:var(--grey);font-weight:300;letter-spacing:.03em}
+/* Złota kreska pod nagłówkiem sekcji — jedyny powtarzalny element strukturalny,
+   ten sam akcent co w wordmarku. */
+.section-head h2::after{content:"";display:block;width:34px;height:1px;background:var(--gold);
+  margin:20px auto 0;opacity:.85}
+.section-head p{margin-top:18px;color:var(--grey);font-weight:300;letter-spacing:.03em}
 section.block{padding:var(--sp-6) 24px}
 
 /* SERVICE CARDS (photo) — 9 kategorii, więc 3 kolumny dają pełne 3x3.
    Przy 4 kolumnach ostatnia karta zostawała sama w rzędzie. */
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#0b0b0c;
-  transition:transform .3s,border-color .3s;text-decoration:none}
-.card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.32)}
-.card .thumb{aspect-ratio:4/5;background-size:cover;background-position:center}
-.card .cap{padding:22px 20px 24px}
-.card h3{font-family:var(--serif);font-size:24px;font-weight:400}
-.card .price{font-size:13px;color:var(--grey);margin-top:6px;letter-spacing:.04em}
-.card .go{font-size:12px;letter-spacing:.06em;color:#fff;margin-top:14px;opacity:.55;transition:opacity .3s}
+/* Karta bez ramki i bez zaokrągleń: zdjęcie ma być kartą, a nie zawartością
+   pudełka. Podpis trzyma się zdjęcia cienką złotą kreską. */
+.card{display:flex;flex-direction:column;overflow:hidden;background:var(--ink-2);
+  transition:transform .35s cubic-bezier(.2,.7,.3,1);text-decoration:none;position:relative}
+.card::after{content:"";position:absolute;inset:0;pointer-events:none;
+  box-shadow:inset 0 0 0 1px var(--line);transition:box-shadow .35s}
+.card:hover{transform:translateY(-5px)}
+.card:hover::after{box-shadow:inset 0 0 0 1px rgba(194,160,102,.5)}
+.card .thumb{aspect-ratio:4/5;background-size:cover;background-position:center;transition:filter .35s}
+.card:hover .thumb{filter:brightness(1.06)}
+.card .cap{padding:20px 20px 22px;position:relative}
+.card .cap::before{content:"";position:absolute;top:0;left:20px;width:26px;height:1px;background:var(--gold);opacity:.8}
+.card h3{font-family:var(--serif);font-size:25px;font-weight:400;letter-spacing:.005em}
+.card .price{font-size:13px;color:var(--gold);margin-top:6px;letter-spacing:.05em}
+.card .go{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--white);
+  margin-top:14px;opacity:.5;transition:opacity .3s}
 .card:hover .go{opacity:1}
 
 /* SPLIT */
@@ -518,10 +538,23 @@ footer small{color:#4a4a50;font-size:12px}
   .price-item .amt{font-size:20px}
 }
 @media(max-width:560px){
-  .grid{grid-template-columns:1fr}
+  /* Wcześniej 1 kolumna: 9 usług = ponad 6 ekranów przewijania, zanim
+     zobaczysz ostatnią. Dwie kolumny z niższą kartą mieszczą je w trzech. */
+  .grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .card .thumb{aspect-ratio:1/1}
+  .card .cap{padding:12px 12px 14px}
+  .card .cap::before{left:12px;width:20px}
+  .card h3{font-size:19px}
+  .card .price{font-size:12px;margin-top:4px}
+  /* Cała karta jest linkiem, a w dwóch kolumnach ten podpis łamał się na dwie
+     linijki i tylko zagęszczał kadr. */
+  .card .go{display:none}
   .team{grid-template-columns:1fr 1fr}
   .price-item .book{width:100%}
   .price-item .book .btn{width:100%}
+  section.block{padding:var(--sp-5) 16px}
+  .section-head{margin-bottom:var(--sp-4)}
+  .panel .top{padding-top:76px}
 }
 
 /* ---- REVEAL (animacje scrollem) ---- */
@@ -547,7 +580,11 @@ footer small{color:#4a4a50;font-size:12px}
 .mcta{position:fixed;left:0;right:0;bottom:0;z-index:95;display:none;padding:11px 14px;
   background:rgba(8,8,9,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
 .mcta .btn{display:block;min-width:0;width:100%}
+/* Pasek wchodzi dopiero za hero (klasa past-hero z app.js) i wjeżdża z dołu. */
+.mcta{transform:translateY(110%);transition:transform .32s cubic-bezier(.2,.7,.3,1)}
+body.past-hero .mcta{transform:none}
 @media(max-width:760px){.mcta{display:block}.to-top{bottom:78px;right:16px}}
+@media(prefers-reduced-motion:reduce){.mcta{transition:none}}
 
 /* ---- OPEN NOW BADGE ---- */
 .open-badge{display:inline-flex;align-items:center;gap:9px;font-size:13px;letter-spacing:.03em;margin-top:14px;
@@ -786,7 +823,8 @@ def hero_wall_html(cols=5):
         if not mine:
             continue
         imgs = "".join(
-            f'<img src="assets/wall/{n}" alt="" decoding="async" width="360" height="450">'
+            f'<img src="assets/wall/{n}" alt="" loading="lazy" decoding="async" '
+            f'width="300" height="375">'
             for n in mine + mine)
         out += f'<div class="col">{imgs}</div>'
     return out
@@ -1263,8 +1301,17 @@ def build_app_js():
   var visibleGallery = function(){ return $$(".gallery img").filter(function(im){return im.offsetParent!==null;}); };
 
   document.addEventListener("DOMContentLoaded", function(){
-    reveal(); toTop(); faq(); lightbox(); calc(); filter(); beforeAfter(); share();
+    reveal(); toTop(); faq(); lightbox(); calc(); filter(); beforeAfter(); share(); stickyCta();
   });
+
+  // Pasek "Zapisz sie" na dole dubluje przycisk z hero: na pierwszym ekranie
+  // telefonu widac bylo trzy razy to samo CTA. Pokazujemy go dopiero za hero.
+  function stickyCta(){
+    var bar=document.querySelector(".mcta"), hero=$("#hero");
+    if(!bar||!hero) return;
+    function upd(){ document.body.classList.toggle("past-hero", scrollY > hero.offsetHeight*0.72); }
+    upd(); addEventListener("scroll", upd, {passive:true}); addEventListener("resize", upd);
+  }
 
   function reveal(){
     var els=$$(".reveal");
