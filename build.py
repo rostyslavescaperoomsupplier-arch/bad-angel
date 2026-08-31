@@ -11,6 +11,8 @@ import glob
 import json
 from datetime import date
 from i18n import LANGS, LANG_LABEL, HTML_KEYS, REVIEWS, flat as _i18n_flat
+from seo_content import SEO as CAT_SEO
+from landing_content import LANDINGS
 
 _ROOT = os.path.dirname(os.path.abspath(__file__))
 with open(os.path.join(_ROOT, "site_data.json"), encoding="utf-8") as _f:
@@ -38,6 +40,15 @@ def P(key):
     return e.get(CUR) or e.get("pl", "")
 
 
+def T(d):
+    """Tekst z gotowego slownika {pl,uk,ru,en} w jezyku budowanej strony.
+
+    Dluzsze akapity SEO nie ida do translations.js — kazdy jezyk ma wlasny
+    URL, wiec nie ma czego podmieniac w przegladarce, a plik JS zostaje maly.
+    """
+    return d.get(CUR) or d.get("pl", "")
+
+
 def U(page=""):
     """Adres strony w aktualnym jezyku, np. U('portfolio.html') -> /uk/portfolio.html"""
     return ("/" if CUR == "pl" else f"/{CUR}/") + page
@@ -52,8 +63,10 @@ def A(path):
     return "/" + path.lstrip("/")
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-VER = "13"  # cache-busting wersja dla styles.css / translations.js / app.js
+VER = "14"  # cache-busting wersja dla styles.css / translations.js / app.js
 BOOKSY = "https://badangel86.booksy.com/a/"
+# Numer telefonu — mocny sygnal lokalny (NAP) dla Google. Uzupelnic!
+PHONE = ""
 IG = "https://www.instagram.com/"
 FB = "https://www.facebook.com/"
 
@@ -610,6 +623,18 @@ body.past-hero .mcta{transform:none}
 .open-badge.closed::before{background:#e06060}
 
 /* ---- FAQ ---- */
+.svc-seo{background:#0e0e10}
+.prose{max-width:820px;margin:34px auto 0}
+.prose p{color:#b9b9bf;font-weight:300;line-height:1.8;font-size:16px;margin:0 0 20px}
+.prose p:last-child{margin-bottom:0}
+.rel-block{background:#0b0b0c;padding-bottom:70px}
+.rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:34px}
+@media(max-width:760px){.rel-grid{grid-template-columns:1fr}}
+.rel-card{display:block;padding:22px 24px;border:1px solid var(--line);border-radius:2px;
+  text-decoration:none;transition:border-color .3s,background .3s}
+.rel-card:hover{border-color:var(--gold);background:#121214}
+.rel-n{display:block;font-family:var(--serif);font-size:19px;color:#fff;margin-bottom:6px}
+.rel-d{display:block;font-size:13px;color:#8a8a91;font-weight:300;line-height:1.6}
 .faq{max-width:820px;margin:52px auto 0}
 .faq-item{border-bottom:1px solid var(--line)}
 .faq-q{width:100%;text-align:left;background:none;border:0;color:#fff;font-family:var(--serif);font-size:clamp(19px,2.4vw,23px);
@@ -737,19 +762,75 @@ body.search-open{overflow:hidden}
 # ---------------------------------------------------------------------------
 # SZABLONY
 # ---------------------------------------------------------------------------
+_FONT_CSS = ("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500"
+             "&family=Inter:wght@300;400;500;600&display=swap")
+# Arkusz z Google Fonts blokowal pierwsze malowanie strony (LCP). Ladujemy go
+# asynchronicznie: media="print" -> przegladarka nie czeka, onload wlacza go dla ekranu.
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
-         '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500'
-         '&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">')
+         f'<link rel="stylesheet" href="{_FONT_CSS}" media="print"'
+         ' onload="this.media=\'all\'">'
+         f'<noscript><link rel="stylesheet" href="{_FONT_CSS}"></noscript>')
 
 
-def head(title, desc, page="", extra=""):
-    canonical = SITE_URL + U(page)
-    # hreflang dla wszystkich wersji + x-default na polska (jezyk glowny)
-    alts = "".join(
-        f'<link rel="alternate" hreflang="{l}" href="{SITE_URL}{U_lang(l, page)}">\n'
-        for l in LANGS)
-    alts += f'<link rel="alternate" hreflang="x-default" href="{SITE_URL}{U_lang("pl", page)}">'
+SALON_ID = SITE_URL + "/#salon"
+
+
+def salon_ld(rating=False):
+    d = {
+        "@context": "https://schema.org", "@type": "BeautySalon",
+        "@id": SALON_ID, "name": "Salon Urody BAD ANGEL",
+        "alternateName": ["BAD ANGEL Szczecin", "Salon Urody BAD ANGEL Szczecin"],
+        "url": SITE_URL + "/",
+        "image": f"{SITE_URL}/assets/feature-nails.jpg",
+        "logo": f"{SITE_URL}/assets/emblem.png",
+        "address": {"@type": "PostalAddress", "streetAddress": "aleja Wyzwolenia 5/10",
+                    "postalCode": "70-552", "addressLocality": "Szczecin",
+                    "addressRegion": "zachodniopomorskie", "addressCountry": "PL"},
+        "geo": {"@type": "GeoCoordinates", "latitude": 53.4337, "longitude": 14.5518},
+        "hasMap": "https://www.google.com/maps/search/?api=1&query="
+                  "Salon+Urody+BAD+ANGEL+aleja+Wyzwolenia+5%2F10+Szczecin",
+        "areaServed": [{"@type": "City", "name": "Szczecin"},
+                       {"@type": "AdministrativeArea", "name": "województwo zachodniopomorskie"}],
+        "openingHoursSpecification": [{
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday",
+                          "Friday", "Saturday", "Sunday"],
+            "opens": "09:00", "closes": "20:00"}],
+        "priceRange": "50-600 PLN",
+        "currenciesAccepted": "PLN",
+        "paymentAccepted": "Gotówka, karta płatnicza",
+        "availableLanguage": [{"@type": "Language", "name": n} for n in
+                              ("Polski", "Українська", "Русский", "English")],
+        "knowsAbout": [c["name"] for c in CATEGORIES],
+        "makesOffer": [
+            {"@type": "Offer", "itemOffered": {
+                "@type": "Service", "name": f"{c['name']} Szczecin",
+                "url": f"{SITE_URL}/usluga-{c['slug']}.html"}}
+            for c in CATEGORIES],
+        "sameAs": [BOOKSY],
+        "potentialAction": {"@type": "ReserveAction", "target": BOOKSY,
+                            "name": "Rezerwacja online"},
+    }
+    if PHONE:
+        d["telephone"] = PHONE
+    if rating:
+        d["aggregateRating"] = {"@type": "AggregateRating", "ratingValue": "4.9",
+                                "reviewCount": REVIEWS_COUNT, "bestRating": "5"}
+    return d
+
+
+def head(title, desc, page="", extra="", alt_langs=True, canonical=None):
+    canonical = canonical or (SITE_URL + U(page))
+    # hreflang dla wszystkich wersji + x-default na polska (jezyk glowny).
+    # Strony jednojezyczne (landingi na polskie frazy) daja alt_langs=False.
+    if alt_langs:
+        alts = "".join(
+            f'<link rel="alternate" hreflang="{l}" href="{SITE_URL}{U_lang(l, page)}">\n'
+            for l in LANGS)
+        alts += f'<link rel="alternate" hreflang="x-default" href="{SITE_URL}{U_lang("pl", page)}">'
+    else:
+        alts = '<link rel="alternate" hreflang="pl" href="' + canonical + '">'
     return f"""<!DOCTYPE html>
 <html lang="{CUR}">
 <head>
@@ -759,6 +840,7 @@ def head(title, desc, page="", extra=""):
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{canonical}">
 {alts}
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta name="theme-color" content="#08080a">
 <meta name="geo.region" content="PL-ZP">
 <meta name="geo.placename" content="Szczecin">
@@ -772,17 +854,18 @@ def head(title, desc, page="", extra=""):
 <meta property="og:url" content="{canonical}">
 <meta property="og:image" content="{OG_IMAGE}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="{A('assets/emblem.png')}">
+<link rel="icon" type="image/png" sizes="32x32" href="{A('assets/favicon-32.png')}">
+<link rel="apple-touch-icon" href="{A('assets/apple-touch-icon.png')}">
 {FONTS}
 <link rel="stylesheet" href="{A('styles.css')}?v={VER}">
 <script>document.documentElement.classList.add('js')</script>
 <script defer src="{A('translations.js')}?v={VER}"></script>
 <script defer src="{A('app.js')}?v={VER}"></script>
-{extra}</head>
+{ld(salon_ld())}{extra}</head>
 <body>"""
 
 
-def lang_switch(page=""):
+def lang_switch(page="", alt_page=None):
     """Przelacznik jezyka jako linki.
 
     Wczesniej podmienial teksty w JS na jednym adresie — Google widzial wtedy
@@ -791,12 +874,13 @@ def lang_switch(page=""):
     out = ""
     for l in LANGS:
         cls = ' class="active"' if l == CUR else ""
-        out += (f'<a href="{U_lang(l, page)}" hreflang="{l}" data-lang="{l}"{cls}'
+        target = page if (l == CUR or alt_page is None) else alt_page
+        out += (f'<a href="{U_lang(l, target)}" hreflang="{l}" data-lang="{l}"{cls}'
                 f' rel="alternate">{LANG_LABEL[l]}</a>')
     return f'<div class="lang-switch">{out}</div>'
 
 
-def header_html(page=""):
+def header_html(page="", alt_page=None):
     return f"""
 <header id="topbar">
   <a href="{U()}" class="brand">BAD&nbsp;ANGEL</a>
@@ -812,7 +896,7 @@ def header_html(page=""):
       <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7">
         <circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4.2-4.2"></path></svg>
     </button>
-    {lang_switch(page)}
+    {lang_switch(page, alt_page)}
     <a class="btn solid sm" href="{BOOKSY}" target="_blank" rel="noopener" data-i18n="btn_book">{P('btn_book')}</a>
     <button class="burger" aria-label="Menu" onclick="document.getElementById('drawer').classList.add('open')">
       <span></span><span></span><span></span>
@@ -829,7 +913,7 @@ def header_html(page=""):
   <a href="{U()}#kontakt" onclick="closeDrawer()" data-i18n="nav_contact">{P('nav_contact')}</a>
   <a href="#" data-search-open onclick="closeDrawer()" data-i18n="search_label">{P('search_label')}</a>
   <a href="{BOOKSY}" target="_blank" rel="noopener" data-i18n="book_online">{P('book_online')}</a>
-  {lang_switch(page)}
+  {lang_switch(page, alt_page)}
 </div>
 
 <div class="s-box" id="searchBox" role="dialog" aria-modal="true" aria-label="{P('search_label')}">
@@ -881,6 +965,92 @@ addEventListener('scroll',function(){{bar.classList.toggle('solid',scrollY>60);}
 def bg(img_path, fallback):
     """Warstwa: zdjęcie (gdy istnieje) nad gradientem-fallbackiem."""
     return f"background:url('{A(img_path)}') center/cover, {fallback};"
+
+
+# --- zdjecia: wymiary i teksty alternatywne --------------------------------
+# Atrybuty width/height blokuja przeskakiwanie ukladu przy ladowaniu (CLS),
+# co Google liczy do Core Web Vitals. Wymiary trzymamy w image_sizes.json,
+# bo build.py leci tez w GitHub Actions, gdzie nie ma Pillow.
+_SIZES_FILE = os.path.join(ROOT, "image_sizes.json")
+try:
+    with open(_SIZES_FILE, encoding="utf-8") as _f:
+        IMG_SIZES = json.load(_f)
+except (OSError, ValueError):
+    IMG_SIZES = {}
+_SIZES_DIRTY = False
+
+
+def img_dims(rel):
+    """(szerokosc, wysokosc) zdjecia albo None."""
+    global _SIZES_DIRTY
+    rel = rel.lstrip("/")
+    if rel not in IMG_SIZES:
+        try:
+            from PIL import Image
+            with Image.open(os.path.join(ROOT, rel)) as im:
+                IMG_SIZES[rel] = list(im.size)
+        except Exception:
+            return None
+        _SIZES_DIRTY = True
+    v = IMG_SIZES.get(rel)
+    return tuple(v) if v else None
+
+
+def save_img_sizes():
+    if _SIZES_DIRTY:
+        with open(_SIZES_FILE, "w", encoding="utf-8") as f:
+            json.dump(dict(sorted(IMG_SIZES.items())), f, indent=0, sort_keys=True)
+        print("napisano image_sizes.json")
+
+
+def dim_attr(rel):
+    d = img_dims(rel)
+    return f' width="{d[0]}" height="{d[1]}"' if d else ""
+
+
+# Zroznicowane opisy alt — wczesniej kazde zdjecie w galerii mialo ten sam
+# tekst, wiec Google Images widzialo 60 identycznych podpisow.
+ALT_PHRASES = {
+    "manicure": ["Manicure hybrydowy", "Paznokcie żelowe", "Manicure klasyczny",
+                 "Przedłużanie paznokci", "Stylizacja paznokci", "Manicure japoński"],
+    "pedicure": ["Pedicure hybrydowy", "Pedicure klasyczny", "Pedicure z opracowaniem stopy",
+                 "Stylizacja paznokci u stóp"],
+    "rzesy": ["Przedłużanie rzęs metodą objętościową", "Rzęsy 1:1 — efekt naturalny",
+              "Rzęsy 3:1", "Przedłużanie rzęs"],
+    "brwi": ["Laminacja brwi", "Henna pudrowa brwi", "Regulacja i stylizacja brwi",
+             "Laminacja rzęs"],
+    "masaz": ["Masaż relaksacyjny", "Masaż pleców", "Masaż klasyczny"],
+    "blizny": ["Mikroneedling twarzy", "Zabieg na blizny", "Terapia mikroigłowa"],
+    "wlosy": ["Warkoczyki", "Przedłużanie włosów", "Stylizacja włosów"],
+    "depilacja": ["Depilacja woskiem", "Depilacja"],
+    "spa": ["Zabieg SPA na dłonie", "Pielęgnacja SPA"],
+}
+
+
+def gallery_alt(slug, name, i):
+    """Alt: fraza z rotacji + marka + miasto. Rozny dla kazdego zdjecia."""
+    ph = ALT_PHRASES.get(slug)
+    lead = ph[i % len(ph)] if ph else name
+    return f"{lead} — Salon Urody BAD ANGEL, Szczecin (praca nr {i + 1})"
+
+
+def breadcrumb_ld(trail):
+    """BreadcrumbList — Google pokazuje sciezke zamiast golego URL-a w wynikach."""
+    return {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": i + 1, "name": nm,
+             "item": SITE_URL + url}
+            for i, (nm, url) in enumerate(trail)],
+    }
+
+
+def ld(*objs):
+    """Bloki JSON-LD do wstawienia w <head>."""
+    return "".join(
+        f'<script type="application/ld+json">{json.dumps(o, ensure_ascii=False)}</script>\n'
+        for o in objs)
 
 
 def parse_price(s):
@@ -997,8 +1167,8 @@ def build_index():
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
-            {"@type": "Question", "name": I18N[f"faq_q{i}"]["pl"],
-             "acceptedAnswer": {"@type": "Answer", "text": I18N[f"faq_a{i}"]["pl"]}}
+            {"@type": "Question", "name": P(f"faq_q{i}"),
+             "acceptedAnswer": {"@type": "Answer", "text": P(f"faq_a{i}")}}
             for i in range(4) if f"faq_q{i}" in I18N
         ],
     }
@@ -1143,6 +1313,51 @@ def build_index():
 # ---------------------------------------------------------------------------
 # STRONA USŁUGI
 # ---------------------------------------------------------------------------
+def landing_links_html(slug):
+    """Z huba kategorii w dol, do stron pod konkretne frazy. Tylko PL —
+    landingi celuja w polskie zapytania i istnieja tylko w korzeniu."""
+    ls = landings_for(slug) if CUR == "pl" else []
+    if not ls:
+        return ""
+    cards = "".join(
+        f'<a class="rel-card" href="/{l["slug"]}.html">'
+        f'<span class="rel-n">{l["h1"]}</span>'
+        f'<span class="rel-d">{l["lead"]}</span></a>' for l in ls)
+    return f"""
+  <section class="block rel-block" style="background:#0e0e10;padding-bottom:0">
+    <div class="wrap">
+      <div class="section-head reveal"><h2>Szczegółowo o zabiegach</h2></div>
+      <div class="rel-grid reveal">{cards}</div>
+    </div>
+  </section>"""
+
+
+def related_services_html(slug, n=3):
+    """Linki do innych usług z opisowym anchor textem.
+
+    Podstrony usług byly wczesniej slepymi zaulkami — robot wchodzil i wracal
+    na strone glowna. Krzyzowe linki rozkladaja moc linkowa po calym serwisie.
+    """
+    others = [c for c in CATEGORIES if c["slug"] != slug][:n + 2]
+    # bierzemy sasiadow z listy, zeby na kazdej stronie zestaw byl inny
+    idx = next((i for i, c in enumerate(CATEGORIES) if c["slug"] == slug), 0)
+    pool = [CATEGORIES[(idx + k) % len(CATEGORIES)] for k in range(1, n + 1)] or others
+    cards = ""
+    for c in pool:
+        nm = P(f"cat_{c['slug']}_name") or c["name"]
+        lead = P(f"cat_{c['slug']}_lead") or c["lead"]
+        cards += (f'<a class="rel-card" href="{U("usluga-" + c["slug"] + ".html")}">'
+                  f'<span class="rel-n">{nm} {P("seo_in_szczecin")}</span>'
+                  f'<span class="rel-d">{lead}</span></a>')
+    return f"""
+  <section class="block rel-block">
+    <div class="wrap">
+      <div class="section-head reveal"><h2 data-i18n="rel_title">{P('rel_title') or 'Zobacz też'}</h2></div>
+      <div class="rel-grid reveal">{cards}</div>
+    </div>
+  </section>"""
+
+
 def build_service(c):
     rows = ""
     for name, desc, dur, price in c["items"]:
@@ -1154,36 +1369,103 @@ def build_service(c):
         <div class="book"><a class="btn solid sm" href="{BOOKSY}" target="_blank" rel="noopener" data-i18n="btn_book">{P('btn_book')}</a></div>
       </div>"""
 
+    cname = P(f"cat_{c['slug']}_name") or c['name']
+    cintro = P(f"cat_{c['slug']}_intro") or c['intro']
+    page = f"usluga-{c['slug']}.html"
+    url = SITE_URL + U(page)
+
+    # Katalog ofert z cenami — Google moze pokazac widelki cenowe w wynikach.
+    offers = []
+    for name, desc, dur, price in c["items"]:
+        val, _ = parse_price(price)
+        if not val:
+            continue
+        offers.append({
+            "@type": "Offer", "name": name, "price": f"{val:g}",
+            "priceCurrency": "PLN", "url": url,
+            "availability": "https://schema.org/InStock",
+        })
+
     svc_ld = {
         "@context": "https://schema.org",
         "@type": "Service",
-        "name": f"{c['name']} Szczecin",
+        "name": f"{cname} Szczecin",
+        "serviceType": cname,
+        "description": cintro,
         "provider": {"@type": "BeautySalon", "name": "Salon Urody BAD ANGEL",
+                     **({"telephone": PHONE} if PHONE else {}),
                      "address": {"@type": "PostalAddress", "streetAddress": "aleja Wyzwolenia 5/10",
                                  "postalCode": "70-552", "addressLocality": "Szczecin", "addressCountry": "PL"}},
-        "areaServed": "Szczecin",
-        "url": f"{SITE_URL}/usluga-{c['slug']}.html",
+        "areaServed": {"@type": "City", "name": "Szczecin"},
+        "url": url,
+        "image": f"{SITE_URL}/assets/usluga-{c['slug']}.jpg",
     }
-    cname = P(f"cat_{c['slug']}_name") or c['name']
-    cintro = P(f"cat_{c['slug']}_intro") or c['intro']
-    html = head(f"{cname} Szczecin — Salon Urody BAD ANGEL",
+    if offers:
+        svc_ld["hasOfferCatalog"] = {"@type": "OfferCatalog", "name": f"Cennik — {cname}",
+                                     "itemListElement": offers}
+
+    blocks = [svc_ld, breadcrumb_ld([
+        (P('crumb_home') or "Strona główna", U()),
+        (P('nav_services') or "Usługi", U() + "#uslugi"),
+        (cname, U(page)),
+    ])]
+
+    seo = CAT_SEO.get(c["slug"])
+    if seo and seo.get("faq"):
+        blocks.append({
+            "@context": "https://schema.org", "@type": "FAQPage",
+            "mainEntity": [
+                {"@type": "Question", "name": T(qa["q"]),
+                 "acceptedAnswer": {"@type": "Answer", "text": T(qa["a"])}}
+                for qa in seo["faq"]],
+        })
+
+    html = head(f"{cname} Szczecin — cennik, opinie | Salon Urody BAD ANGEL",
                 f"{cname} {P('seo_in_szczecin')} — Salon Urody BAD ANGEL, aleja Wyzwolenia 5/10. {cintro} {P('seo_booksy')}",
-                page=f"usluga-{c['slug']}.html",
-                extra=f'<script type="application/ld+json">{json.dumps(svc_ld, ensure_ascii=False)}</script>\n')
-    html += header_html(f"usluga-{c['slug']}.html")
+                page=page, extra=ld(*blocks))
+    html += header_html(page)
+
     # Galeria — zdjęcia z assets/gallery/<slug>/
     gdir = os.path.join(ROOT, "assets", "gallery", c["slug"])
     gfiles = sorted(os.path.basename(p) for p in glob.glob(os.path.join(gdir, "*.jpg")))
     gallery = ""
     if gfiles:
-        imgs = "".join(
-            f'<img loading="lazy" src="/assets/gallery/{c["slug"]}/{fn}" alt="{c["name"]} — Salon Urody BAD ANGEL Szczecin">'
-            for fn in gfiles)
+        imgs = ""
+        for i, fn in enumerate(gfiles):
+            rel = f"assets/gallery/{c['slug']}/{fn}"
+            imgs += (f'<img loading="lazy" decoding="async" src="/{rel}"{dim_attr(rel)}'
+                     f' alt="{gallery_alt(c["slug"], c["name"], i)}">')
         gallery = f"""
   <section class="block" style="background:#000;padding-top:40px">
     <div class="section-head reveal"><h2 data-i18n="gallery_title">{P('gallery_title')}</h2><p>{len(gfiles)} <span data-i18n="gallery_photos">{P('gallery_photos')}</span></p></div>
     <div class="gallery"><div class="cols">{imgs}</div></div>
   </section>"""
+
+    # Rozszerzony opis + FAQ — bez tego strona usługi to sam cennik,
+    # a Google nie ma z czego zrozumieć, na jakie zapytania odpowiada.
+    seo_html = ""
+    if seo:
+        paras = "".join(f"<p>{T(t)}</p>" for t in seo["text"])
+        faq_items = "".join(
+            f'<div class="faq-item"><button class="faq-q">{T(qa["q"])}</button>'
+            f'<div class="faq-a"><p>{T(qa["a"])}</p></div></div>'
+            for qa in seo["faq"])
+        faq_block = ""
+        if faq_items:
+            faq_block = f"""
+  <section class="block" id="faq" style="background:#0b0b0c">
+    <div class="wrap">
+      <div class="section-head reveal"><h2 data-i18n="faq_title">{P('faq_title')}</h2></div>
+      <div class="faq">{faq_items}</div>
+    </div>
+  </section>"""
+        seo_html = f"""
+  <section class="block svc-seo">
+    <div class="wrap">
+      <div class="section-head reveal"><h2>{T(seo['h'])}</h2></div>
+      <div class="prose reveal">{paras}</div>
+    </div>
+  </section>{faq_block}"""
 
     html += f"""
 <main>
@@ -1193,7 +1475,7 @@ def build_service(c):
     <div class="crumbs"><a href="{U()}" data-i18n="crumb_home">{P('crumb_home')}</a> &nbsp;/&nbsp; <a href="{U()}#uslugi" data-i18n="nav_services">{P('nav_services')}</a> &nbsp;/&nbsp; <span data-i18n="cat_{c['slug']}_name">{cname}</span></div>
     <div class="inner">
       <div class="eyebrow" data-i18n="cat_{c['slug']}_tag">{c['tag']}</div>
-      <h1 data-i18n="cat_{c['slug']}_name">{cname}</h1>
+      <h1 data-i18n="cat_{c['slug']}_name">{cname} {P('seo_in_szczecin')}</h1>
       <p class="lead" data-i18n="cat_{c['slug']}_lead">{c['lead']}</p>
     </div>
   </section>
@@ -1207,7 +1489,10 @@ def build_service(c):
       <a class="btn ghost" href="{U()}#uslugi" data-i18n="svc_other">{P('svc_other')}</a>
     </div>
   </section>
+{landing_links_html(c['slug'])}
+{seo_html}
 {gallery}
+{related_services_html(c['slug'])}
 </main>"""
     html += footer_html()
     return html
@@ -1216,6 +1501,153 @@ def build_service(c):
 # ---------------------------------------------------------------------------
 # STRONA MASTRA
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# STRONY POD KONKRETNE FRAZY (tylko PL)
+# ---------------------------------------------------------------------------
+def landings_for(parent_slug):
+    return [x for x in LANDINGS if x["parent"] == parent_slug]
+
+
+def landing_items(l, cat):
+    """Pozycje z cennika kategorii pasujace do frazy tej strony."""
+    out = [it for it in cat["items"]
+           if any(m.lower() in it[0].lower() for m in l["match"])]
+    return out or cat["items"]
+
+
+def build_landing(l):
+    """Strona pod jedno zapytanie, np. "manicure hybrydowy szczecin".
+
+    Konkurencja z miasta ma pod te frazy osobne adresy z fraza w URL-u i to
+    one wychodza w wynikach, a nie ogolna strona kategorii. Tresc jest inna
+    niz na stronie uslugi — inaczej obie konkurowalyby o to samo zapytanie.
+    """
+    cat = next(c for c in CATEGORIES if c["slug"] == l["parent"])
+    page = f"{l['slug']}.html"
+    url = f"{SITE_URL}/{page}"
+    items = landing_items(l, cat)
+
+    rows = ""
+    for name, desc, dur, price in items:
+        d = f'<div class="desc">{desc}</div>' if desc else ""
+        rows += f"""
+      <div class="price-item">
+        <div class="txt"><h3>{name}</h3>{d}<div class="dur">{dur}</div></div>
+        <div class="amt">{price}</div>
+        <div class="book"><a class="btn solid sm" href="{BOOKSY}" target="_blank" rel="noopener">Rezerwuj</a></div>
+      </div>"""
+
+    offers = []
+    for name, desc, dur, price in items:
+        val, _ = parse_price(price)
+        if val:
+            offers.append({"@type": "Offer", "name": name, "price": f"{val:g}",
+                           "priceCurrency": "PLN", "url": url,
+                           "availability": "https://schema.org/InStock"})
+
+    svc_ld = {
+        "@context": "https://schema.org", "@type": "Service",
+        "name": l["h1"], "description": l["desc"], "url": url,
+        "provider": {"@type": "BeautySalon", "name": "Salon Urody BAD ANGEL",
+                     "url": SITE_URL + "/",
+                     **({"telephone": PHONE} if PHONE else {}),
+                     "address": {"@type": "PostalAddress", "streetAddress": "aleja Wyzwolenia 5/10",
+                                 "postalCode": "70-552", "addressLocality": "Szczecin",
+                                 "addressCountry": "PL"},
+                     "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9",
+                                         "reviewCount": REVIEWS_COUNT}},
+        "areaServed": {"@type": "City", "name": "Szczecin"},
+        "image": f"{SITE_URL}/assets/usluga-{cat['slug']}.jpg",
+    }
+    if offers:
+        svc_ld["hasOfferCatalog"] = {"@type": "OfferCatalog",
+                                     "name": f"Cennik — {l['h1']}",
+                                     "itemListElement": offers}
+
+    blocks = [svc_ld, breadcrumb_ld([("Strona główna", "/"),
+                                     (cat["name"], f"/usluga-{cat['slug']}.html"),
+                                     (l["h1"], "/" + page)]),
+              {"@context": "https://schema.org", "@type": "FAQPage",
+               "mainEntity": [{"@type": "Question", "name": q,
+                               "acceptedAnswer": {"@type": "Answer", "text": a}}
+                              for q, a in l["faq"]]}]
+
+    html = head(l["title"], l["desc"], page=page, extra=ld(*blocks),
+                alt_langs=False, canonical=url)
+    html += header_html(page, alt_page=f"usluga-{cat['slug']}.html")
+
+    gfiles = sorted(os.path.basename(x) for x in
+                    glob.glob(os.path.join(ROOT, "assets", "gallery", cat["slug"], "*.jpg")))[:12]
+    gallery = ""
+    if gfiles:
+        imgs = ""
+        for i, name in enumerate(gfiles):
+            rel = f"assets/gallery/{cat['slug']}/{name}"
+            imgs += (f'<img loading="lazy" decoding="async" src="/{rel}"{dim_attr(rel)}'
+                     f' alt="{l["h1"]} — praca salonu BAD ANGEL, Szczecin (nr {i + 1})">')
+        gallery = f"""
+  <section class="block" style="background:#000;padding-top:40px">
+    <div class="section-head reveal"><h2>Nasze prace</h2></div>
+    <div class="gallery"><div class="cols">{imgs}</div></div>
+  </section>"""
+
+    paras = "".join(f"<p>{t}</p>" for t in l["text"])
+    faq_items = "".join(
+        f'<div class="faq-item"><button class="faq-q">{q}</button>'
+        f'<div class="faq-a"><p>{a}</p></div></div>' for q, a in l["faq"])
+
+    i = LANDINGS.index(l)
+    sibs = [LANDINGS[(i + k) % len(LANDINGS)] for k in range(1, 4)]
+    siblings = "".join(
+        f'<a class="rel-card" href="/{o["slug"]}.html">'
+        f'<span class="rel-n">{o["h1"]}</span>'
+        f'<span class="rel-d">{o["lead"]}</span></a>' for o in sibs)
+
+    html += f"""
+<main>
+  <section class="subhero">
+    <div class="bg" style="{bg('assets/usluga-' + cat['slug'] + '.jpg', 'linear-gradient(150deg,#20202a,#0a0a0c)')}"></div>
+    <div class="scrim"></div>
+    <div class="crumbs"><a href="/">Strona główna</a> &nbsp;/&nbsp; <a href="/usluga-{cat['slug']}.html">{cat['name']}</a> &nbsp;/&nbsp; <span>{l['h1']}</span></div>
+    <div class="inner">
+      <div class="eyebrow">{l['eyebrow']}</div>
+      <h1>{l['h1']}</h1>
+      <p class="lead">{l['lead']}</p>
+    </div>
+  </section>
+
+  <section class="block svc-seo">
+    <div class="wrap"><div class="prose reveal">{paras}</div></div>
+  </section>
+
+  <section class="pricelist">
+    <div class="section-head reveal" style="margin-bottom:26px"><h2>Cennik — {l['h1']}</h2>
+      <p>Ceny takie same jak w Booksy · aleja Wyzwolenia 5/10, Szczecin</p></div>
+    {rows}
+    <div class="btns" style="margin-top:50px">
+      <a class="btn solid" href="{BOOKSY}" target="_blank" rel="noopener">Zarezerwuj wizytę</a>
+      <a class="btn ghost" href="/usluga-{cat['slug']}.html">Pełny cennik: {cat['name']}</a>
+    </div>
+  </section>
+
+  <section class="block" id="faq" style="background:#0b0b0c">
+    <div class="wrap">
+      <div class="section-head reveal"><h2>Częste pytania</h2></div>
+      <div class="faq">{faq_items}</div>
+    </div>
+  </section>
+{gallery}
+  <section class="block rel-block">
+    <div class="wrap">
+      <div class="section-head reveal"><h2>Zobacz też</h2></div>
+      <div class="rel-grid reveal">{siblings}</div>
+    </div>
+  </section>
+</main>"""
+    html += footer_html()
+    return html
+
+
 def build_master(m):
     mrole = P("role_" + m['slug']) or m['role']
     cat_by_slug = {c["slug"]: c for c in CATEGORIES}
@@ -1628,6 +2060,9 @@ def build_sitemap():
     """Sitemap ze wszystkimi jezykami i wzajemnymi hreflang-ami."""
     today = date.today().isoformat()
     urls = ""
+    for l in LANDINGS:  # jednojezyczne, bez hreflang
+        urls += (f"  <url>\n    <loc>{SITE_URL}/{l['slug']}.html</loc>\n"
+                 f"    <lastmod>{today}</lastmod>\n  </url>\n")
     for p in all_pages():
         links = "".join(
             f'    <xhtml:link rel="alternate" hreflang="{l}" href="{SITE_URL}{U_lang(l, p)}"/>\n'
@@ -1643,8 +2078,89 @@ def build_sitemap():
             f"{urls}</urlset>\n")
 
 
+# Roboty asystentow AI. Czesc z nich (Google-Extended, Applebot-Extended)
+# domyslnie NIE indeksuje tresci do odpowiedzi, dopoki nie dostanie zgody.
+AI_BOTS = [
+    "GPTBot", "OAI-SearchBot", "ChatGPT-User",            # OpenAI / ChatGPT
+    "ClaudeBot", "Claude-User", "Claude-SearchBot",        # Anthropic / Claude
+    "PerplexityBot", "Perplexity-User",                    # Perplexity
+    "Google-Extended",                                     # Gemini, AI Overviews
+    "Applebot", "Applebot-Extended",                       # Siri, Apple Intelligence
+    "Bingbot", "msnbot",                                   # Bing, Copilot
+    "DuckAssistBot", "Amazonbot", "meta-externalagent",
+    "CCBot", "cohere-ai", "YouBot", "Diffbot", "Timpibot",
+]
+
+
+def build_llms_txt():
+    """/llms.txt — zwiezle fakty o salonie dla asystentow AI.
+
+    ChatGPT, Perplexity czy Claude odpowiadaja z tego, co zdolaja wyczytac,
+    i lubia zwiezly tekst z konkretami. Strona HTML jest dla ludzi, ten plik
+    dla modeli: adres, godziny, pelny cennik i mapa podstron w jednym miejscu.
+    """
+    L = []
+    L.append("# Salon Urody BAD ANGEL — Szczecin")
+    L.append("")
+    L.append("> Salon urody w ścisłym centrum Szczecina (aleja Wyzwolenia 5/10, "
+             "wejście od ul. Małopolskiej). Manicure, pedicure, przedłużanie rzęs, "
+             "brwi i laminacja, masaż, depilacja woskiem, mikroneedling blizn "
+             f"i rozstępów, fryzjer i warkoczyki. Ocena 4.9/5 z {REVIEWS_COUNT} opinii. "
+             "Obsługa po polsku, ukraińsku, rosyjsku i angielsku.")
+    L.append("")
+    L.append("## Fakty")
+    L.append(f"- Nazwa: Salon Urody BAD ANGEL")
+    L.append("- Adres: aleja Wyzwolenia 5/10, 70-552 Szczecin, Polska "
+             "(wejście od ul. Małopolskiej)")
+    L.append("- Dzielnica: Centrum / Śródmieście, obok placu Rodła")
+    if PHONE:
+        L.append(f"- Telefon: {PHONE}")
+    L.append("- Godziny otwarcia: poniedziałek – niedziela, 09:00 – 20:00")
+    L.append(f"- Ocena: 4.9/5 ({REVIEWS_COUNT} opinii, Booksy)")
+    L.append(f"- Rezerwacja: wyłącznie online przez Booksy — {BOOKSY}")
+    L.append("- Płatność: gotówka i karta")
+    L.append("- Języki obsługi: polski, ukraiński, rosyjski, angielski")
+    L.append("- Udogodnienia: parking, Wi-Fi")
+    L.append(f"- Strona: {SITE_URL}/")
+    L.append("")
+    L.append("## Cennik (PLN, ceny zgodne z Booksy)")
+    for c in CATEGORIES:
+        L.append("")
+        L.append(f"### {c['name']} — {SITE_URL}/usluga-{c['slug']}.html")
+        L.append(c["intro"])
+        for name, desc, dur, price in c["items"]:
+            L.append(f"- {name} — {price} — {dur}")
+    L.append("")
+    L.append("## Strony szczegółowe")
+    for l in LANDINGS:
+        L.append(f"- [{l['h1']}]({SITE_URL}/{l['slug']}.html): {l['desc']}")
+    L.append("")
+    L.append("## Zespół")
+    for m in MASTERS:
+        L.append(f"- {m['name']} — {SITE_URL}/mistrz-{m['slug']}.html")
+    L.append("")
+    L.append("## Częste pytania")
+    for c in CATEGORIES:
+        blk = CAT_SEO.get(c["slug"])
+        if not blk:
+            continue
+        for qa in blk["faq"]:
+            L.append(f"- **{qa['q']['pl']}** {qa['a']['pl']}")
+    for l in LANDINGS:
+        for q, a in l["faq"]:
+            L.append(f"- **{q}** {a}")
+    L.append("")
+    L.append("## Wersje językowe")
+    for lang in LANGS:
+        L.append(f"- {LANG_LABEL[lang]}: {SITE_URL}{U_lang(lang)}")
+    L.append("")
+    return "\n".join(L)
+
+
 def build_robots():
-    return f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n"
+    ai = "".join(f"User-agent: {b}\nAllow: /\n\n" for b in AI_BOTS)
+    return (f"User-agent: *\nAllow: /\n\n{ai}"
+            f"Sitemap: {SITE_URL}/sitemap.xml\n")
 
 
 def build_lang(lang):
@@ -1669,6 +2185,9 @@ def build_lang(lang):
         wl(f"usluga-{c['slug']}.html", build_service(c))
     for m in MASTERS:
         wl(f"mistrz-{m['slug']}.html", build_master(m))
+    if lang == "pl":
+        for l in LANDINGS:
+            wl(f"{l['slug']}.html", build_landing(l))
 
     # sprzatanie stron po usunietych mistrzyniach/uslugach
     valid = ({f"usluga-{c['slug']}.html" for c in CATEGORIES}
@@ -1686,6 +2205,7 @@ def main():
     CUR = "pl"
     w("sitemap.xml", build_sitemap())
     w("robots.txt", build_robots())
+    w("llms.txt", build_llms_txt())
     if DOMAIN:
         w("CNAME", DOMAIN + "\n")
     w("styles.css", CSS.strip() + "\n")
@@ -1695,6 +2215,7 @@ def main():
         build_lang(lang)
     CUR = "pl"
     w("README.md", build_readme())
+    save_img_sizes()
     print(f"Gotowe — {len(LANGS)} jezyki x {len(all_pages())} stron.")
 
 

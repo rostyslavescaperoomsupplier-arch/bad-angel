@@ -13,6 +13,7 @@ UI = {
  "nav_team":     {"pl":"Zespół","uk":"Команда","ru":"Команда","en":"Team"},
  "nav_reviews":  {"pl":"Opinie","uk":"Відгуки","ru":"Отзывы","en":"Reviews"},
  "nav_contact":  {"pl":"Kontakt","uk":"Контакти","ru":"Контакты","en":"Contact"},
+ "rel_title":    {"pl":"Zobacz też","uk":"Дивіться також","ru":"Смотрите также","en":"See also"},
  "btn_book":     {"pl":"Rezerwuj","uk":"Записатися","ru":"Записаться","en":"Book now"},
  "book_online":  {"pl":"Rezerwacja online →","uk":"Онлайн-запис →","ru":"Онлайн-запись →","en":"Book online →"},
  "hero_eyebrow": {"pl":"Salon Urody · Szczecin","uk":"Салон краси · Щецін","ru":"Салон красоты · Щецин","en":"Beauty Salon · Szczecin"},

@@ -1,0 +1,446 @@
+{
+"assets/gallery/blizny/01.jpg": [
+1280,
+935
+],
+"assets/gallery/blizny/02.jpg": [
+671,
+1160
+],
+"assets/gallery/blizny/03.jpg": [
+1170,
+1160
+],
+"assets/gallery/blizny/04.jpg": [
+1103,
+733
+],
+"assets/gallery/blizny/05.jpg": [
+1280,
+762
+],
+"assets/gallery/blizny/06.jpg": [
+1280,
+754
+],
+"assets/gallery/brwi/01.jpg": [
+1400,
+1867
+],
+"assets/gallery/brwi/02.jpg": [
+651,
+1280
+],
+"assets/gallery/brwi/03.jpg": [
+960,
+1280
+],
+"assets/gallery/brwi/05.jpg": [
+1207,
+1280
+],
+"assets/gallery/brwi/06.jpg": [
+1280,
+960
+],
+"assets/gallery/manicure/01.jpg": [
+1280,
+1242
+],
+"assets/gallery/manicure/02.jpg": [
+1216,
+1235
+],
+"assets/gallery/manicure/03.jpg": [
+1400,
+1867
+],
+"assets/gallery/manicure/04.jpg": [
+1279,
+1280
+],
+"assets/gallery/manicure/09.jpg": [
+1279,
+1280
+],
+"assets/gallery/manicure/11.jpg": [
+960,
+1280
+],
+"assets/gallery/manicure/12.jpg": [
+960,
+1280
+],
+"assets/gallery/manicure/13.jpg": [
+960,
+1280
+],
+"assets/gallery/manicure/14.jpg": [
+960,
+1280
+],
+"assets/gallery/manicure/15.jpg": [
+960,
+1280
+],
+"assets/gallery/manicure/16.jpg": [
+960,
+1280
+],
+"assets/gallery/manicure/19.jpg": [
+1400,
+1867
+],
+"assets/gallery/manicure/21.jpg": [
+1400,
+1867
+],
+"assets/gallery/manicure/22.jpg": [
+760,
+1280
+],
+"assets/gallery/manicure/23.jpg": [
+991,
+1277
+],
+"assets/gallery/manicure/25.jpg": [
+960,
+1280
+],
+"assets/gallery/manicure/26.jpg": [
+940,
+1280
+],
+"assets/gallery/manicure/27.jpg": [
+1011,
+1280
+],
+"assets/gallery/manicure/28.jpg": [
+746,
+1280
+],
+"assets/gallery/manicure/29.jpg": [
+772,
+1280
+],
+"assets/gallery/manicure/30.jpg": [
+960,
+1280
+],
+"assets/gallery/manicure/31.jpg": [
+1157,
+1185
+],
+"assets/gallery/manicure/32.jpg": [
+1280,
+1243
+],
+"assets/gallery/manicure/33.jpg": [
+1048,
+1238
+],
+"assets/gallery/manicure/35.jpg": [
+960,
+1280
+],
+"assets/gallery/manicure/36.jpg": [
+1024,
+1280
+],
+"assets/gallery/manicure/37.jpg": [
+1024,
+1280
+],
+"assets/gallery/manicure/38.jpg": [
+1280,
+1276
+],
+"assets/gallery/manicure/39.jpg": [
+1280,
+1280
+],
+"assets/gallery/manicure/40.jpg": [
+1024,
+1280
+],
+"assets/gallery/manicure/41.jpg": [
+1024,
+1280
+],
+"assets/gallery/manicure/43.jpg": [
+960,
+1280
+],
+"assets/gallery/manicure/44.jpg": [
+1320,
+1241
+],
+"assets/gallery/manicure/45.jpg": [
+1400,
+1867
+],
+"assets/gallery/manicure/47.jpg": [
+1400,
+1867
+],
+"assets/gallery/manicure/48.jpg": [
+961,
+1280
+],
+"assets/gallery/manicure/50.jpg": [
+960,
+1280
+],
+"assets/gallery/manicure/51.jpg": [
+1126,
+1002
+],
+"assets/gallery/manicure/56.jpg": [
+959,
+1280
+],
+"assets/gallery/manicure/57.jpg": [
+960,
+1280
+],
+"assets/gallery/manicure/58.jpg": [
+960,
+1280
+],
+"assets/gallery/manicure/59.jpg": [
+960,
+1280
+],
+"assets/gallery/manicure/65.jpg": [
+960,
+1280
+],
+"assets/gallery/manicure/66.jpg": [
+960,
+1280
+],
+"assets/gallery/manicure/67.jpg": [
+1320,
+1552
+],
+"assets/gallery/manicure/68.jpg": [
+1319,
+1600
+],
+"assets/gallery/manicure/tg-100.jpg": [
+1320,
+2346
+],
+"assets/gallery/manicure/tg-101.jpg": [
+1400,
+1867
+],
+"assets/gallery/manicure/tg-102.jpg": [
+1400,
+1867
+],
+"assets/gallery/manicure/tg-103.jpg": [
+1400,
+1868
+],
+"assets/gallery/manicure/tg-104.jpg": [
+1400,
+1867
+],
+"assets/gallery/manicure/tg-105.jpg": [
+1400,
+1868
+],
+"assets/gallery/manicure/tg-106.jpg": [
+1400,
+1867
+],
+"assets/gallery/manicure/tg-107.jpg": [
+1400,
+1867
+],
+"assets/gallery/manicure/tg-108.jpg": [
+1400,
+1867
+],
+"assets/gallery/manicure/tg-109.jpg": [
+1400,
+1867
+],
+"assets/gallery/manicure/tg-111.jpg": [
+960,
+1280
+],
+"assets/gallery/manicure/tg-89.jpg": [
+964,
+1280
+],
+"assets/gallery/manicure/tg-90.jpg": [
+960,
+1280
+],
+"assets/gallery/manicure/tg-91.jpg": [
+960,
+1280
+],
+"assets/gallery/manicure/tg-96.jpg": [
+1040,
+1280
+],
+"assets/gallery/manicure/tg-98.jpg": [
+1058,
+1280
+],
+"assets/gallery/masaz/01.jpg": [
+1400,
+1050
+],
+"assets/gallery/masaz/02.jpg": [
+1000,
+667
+],
+"assets/gallery/pedicure/03.jpg": [
+1400,
+1867
+],
+"assets/gallery/pedicure/05.jpg": [
+746,
+1280
+],
+"assets/gallery/pedicure/06.jpg": [
+951,
+1280
+],
+"assets/gallery/pedicure/07.jpg": [
+931,
+1280
+],
+"assets/gallery/pedicure/08.jpg": [
+950,
+1280
+],
+"assets/gallery/pedicure/09.jpg": [
+987,
+1280
+],
+"assets/gallery/pedicure/10.jpg": [
+1025,
+1280
+],
+"assets/gallery/pedicure/12.jpg": [
+1400,
+1867
+],
+"assets/gallery/pedicure/16.jpg": [
+960,
+1280
+],
+"assets/gallery/pedicure/17.jpg": [
+1400,
+1867
+],
+"assets/gallery/pedicure/18.jpg": [
+1024,
+1280
+],
+"assets/gallery/pedicure/19.jpg": [
+720,
+1280
+],
+"assets/gallery/pedicure/20.jpg": [
+900,
+1125
+],
+"assets/gallery/pedicure/21.jpg": [
+1280,
+960
+],
+"assets/gallery/pedicure/23.jpg": [
+960,
+1280
+],
+"assets/gallery/pedicure/24.jpg": [
+960,
+1280
+],
+"assets/gallery/pedicure/25.jpg": [
+1320,
+1358
+],
+"assets/gallery/pedicure/26.jpg": [
+1320,
+1653
+],
+"assets/gallery/rzesy/01.jpg": [
+720,
+1280
+],
+"assets/gallery/rzesy/02.jpg": [
+1147,
+1280
+],
+"assets/gallery/rzesy/03.jpg": [
+1206,
+1166
+],
+"assets/gallery/rzesy/07.jpg": [
+919,
+640
+],
+"assets/gallery/rzesy/08.jpg": [
+1280,
+1280
+],
+"assets/gallery/rzesy/09.jpg": [
+1023,
+1280
+],
+"assets/gallery/wlosy/01.jpg": [
+960,
+1280
+],
+"assets/gallery/wlosy/02.jpg": [
+700,
+700
+],
+"assets/gallery/wlosy/03.jpg": [
+399,
+501
+],
+"assets/gallery/wlosy/04.jpg": [
+960,
+1280
+],
+"assets/gallery/wlosy/05.jpg": [
+447,
+447
+],
+"assets/gallery/wlosy/06.jpg": [
+960,
+1280
+],
+"assets/gallery/wlosy/07.jpg": [
+960,
+1280
+],
+"assets/gallery/wlosy/08.jpg": [
+1024,
+1280
+],
+"assets/gallery/wlosy/09.jpg": [
+878,
+1215
+],
+"assets/gallery/wlosy/10.jpg": [
+726,
+1280
+],
+"assets/gallery/wlosy/11.jpg": [
+964,
+1280
+],
+"assets/gallery/wlosy/12.jpg": [
+1170,
+1526
+]
+}
