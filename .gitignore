@@ -11,3 +11,6 @@
 # brelok 3D — osobny materiał, nie część strony
 /3д/
 bot-worker/.wrangler/
+
+# raport z sync_reviews.py — pobierany na zadanie, nie zrodlo prawdy
+reviews_booksy.json

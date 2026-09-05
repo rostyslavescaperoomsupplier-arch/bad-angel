@@ -7,6 +7,7 @@ strony mastrów (mistrz-*.html) oraz README z listą potrzebnych zdjęć.
 Rezerwacja każdej usługi prowadzi na Booksy.
 """
 import os
+import re
 import glob
 import json
 from datetime import date
@@ -18,12 +19,35 @@ _ROOT = os.path.dirname(os.path.abspath(__file__))
 with open(os.path.join(_ROOT, "site_data.json"), encoding="utf-8") as _f:
     SITE_DATA = json.load(_f)
 REVIEWS_COUNT = str(SITE_DATA["reviews"])
+# Ocena i liczba opinii pochodza z profilu Booksy salonu (business 353903) i
+# trafiaja tu przez sync_reviews.py. Nigdy nie wpisujemy ich na sztywno: te
+# same liczby ida do znacznikow AggregateRating, a Google karze rozjazd miedzy
+# tym, co deklaruje strona, a tym, co widzi klient przy rezerwacji.
+RATING = str(SITE_DATA.get("rating", ""))
+# Gwiazdki przy ocenie ogolnej rysujemy z tej samej liczby. Piec pelnych
+# gwiazdek obok "4.4" to obietnica, ktorej dane nie potwierdzaja — zaokraglamy
+# do najblizszej pelnej, tak jak robi to Booksy.
+STARS = ("★" * round(float(RATING)) + "☆" * (5 - round(float(RATING)))) if RATING else "★★★★★"
+
+def _fill_rating(obj):
+    """{RATING} w tekstach landingow — ta sama liczba co w reszcie serwisu."""
+    if isinstance(obj, str):
+        return obj.replace("{RATING}", RATING).replace("{REVIEWS}", REVIEWS_COUNT)
+    if isinstance(obj, list):
+        return [_fill_rating(x) for x in obj]
+    if isinstance(obj, dict):
+        return {k: _fill_rating(v) for k, v in obj.items()}
+    return obj
+
+
+LANDINGS = _fill_rating(LANDINGS)
 
 I18N = _i18n_flat()
 for _key, _langs in I18N.items():
     for _lang, _text in _langs.items():
-        if isinstance(_text, str) and "{REVIEWS}" in _text:
-            _langs[_lang] = _text.replace("{REVIEWS}", REVIEWS_COUNT)
+        if isinstance(_text, str):
+            _langs[_lang] = (_text.replace("{REVIEWS}", REVIEWS_COUNT)
+                                  .replace("{RATING}", RATING))
 
 # Jezyk aktualnie generowanej strony. Polski jest jezykiem glownym: lezy
 # w korzeniu (te same nazwy plikow co dotad, zeby nie stracic zaindeksowanych
@@ -67,7 +91,7 @@ VER = "14"  # cache-busting wersja dla styles.css / translations.js / app.js
 BOOKSY = "https://badangel86.booksy.com/a/"
 # Numer telefonu — mocny sygnal lokalny (NAP) dla Google. Uzupelnic!
 PHONE = ""
-IG = "https://www.instagram.com/"
+IG = "https://www.instagram.com/badangel_wyzwolenia"
 FB = "https://www.facebook.com/"
 
 # Domena własna: badangelsalonpiękności.pl (punycode dla DNS/GitHub Pages).
@@ -815,7 +839,7 @@ def salon_ld(rating=False):
     if PHONE:
         d["telephone"] = PHONE
     if rating:
-        d["aggregateRating"] = {"@type": "AggregateRating", "ratingValue": "4.9",
+        d["aggregateRating"] = {"@type": "AggregateRating", "ratingValue": RATING,
                                 "reviewCount": REVIEWS_COUNT, "bestRating": "5"}
     return d
 
@@ -965,6 +989,44 @@ addEventListener('scroll',function(){{bar.classList.toggle('solid',scrollY>60);}
 def bg(img_path, fallback):
     """Warstwa: zdjęcie (gdy istnieje) nad gradientem-fallbackiem."""
     return f"background:url('{A(img_path)}') center/cover, {fallback};"
+
+
+# --- ceny w tekstach ------------------------------------------------------
+# Cennik zyje w site_data.json i zmienia go bot z Telegrama. Gdyby ceny byly
+# wpisane na sztywno w akapitach i FAQ, po pierwszej podwyzce strona klamalaby
+# klientowi i Google. Zamiast liczby piszemy {cena:Nazwa pozycji}, a build
+# podstawia aktualna wartosc i krzyczy, gdy pozycja zniknela z cennika.
+_PRICE_MISSES = []
+
+
+def price_of(cat_slug, item_name):
+    cat = next((c for c in CATEGORIES if c["slug"] == cat_slug), None)
+    if not cat:
+        return None
+    for name, desc, dur, price in cat["items"]:
+        if name.strip().lower() == item_name.strip().lower():
+            return price.split("(")[0].strip()
+    return None
+
+
+def fill_prices(text, cat_slug):
+    def sub(m):
+        want = m.group(1)
+        slug, _, name = want.rpartition("|")
+        val = price_of(slug or cat_slug, name)
+        if val is None:
+            _PRICE_MISSES.append((cat_slug, name))
+            return "—"
+        return val
+    return re.sub(r"\{cena:([^}]+)\}", sub, text)
+
+
+def report_price_misses():
+    if _PRICE_MISSES:
+        print("\nUWAGA — pozycje cennika, do ktorych odwoluje sie tresc, nie istnieja:")
+        for slug, name in sorted(set(_PRICE_MISSES)):
+            print(f"  [{slug}] {name}")
+        print("Popraw nazwe w seo_content.py / landing_content.py albo w site_data.json.\n")
 
 
 # --- zdjecia: wymiary i teksty alternatywne --------------------------------
@@ -1159,7 +1221,7 @@ def build_index():
                                        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday",
                                                      "Friday", "Saturday", "Sunday"],
                                        "opens": "09:00", "closes": "20:00"}],
-        "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": REVIEWS_COUNT},
+        "aggregateRating": {"@type": "AggregateRating", "ratingValue": RATING, "reviewCount": REVIEWS_COUNT},
         "priceRange": "50-600 PLN",
         "sameAs": [BOOKSY],
     }
@@ -1187,7 +1249,7 @@ def build_index():
     <div class="top">
       <div class="eyebrow" data-i18n="hero_eyebrow">{P('hero_eyebrow')}</div>
       <img class="logo" src="/assets/logo.png" alt="BAD ANGEL Beauty Salon">
-      <div class="rating"><span class="stars">★★★★★</span> &nbsp;<span data-i18n="hero_rating">{P('hero_rating')}</span></div>
+      <div class="rating"><span class="stars">{STARS}</span> &nbsp;<span data-i18n="hero_rating">{P('hero_rating')}</span></div>
     </div>
     <div class="bottom"><div class="btns">
       <a class="btn solid" href="{BOOKSY}" target="_blank" rel="noopener" data-i18n="btn_book_visit">{P('btn_book_visit')}</a>
@@ -1261,7 +1323,7 @@ def build_index():
 
   <section class="block" id="opinie" style="background:#0b0b0c">
     <div class="wrap">
-      <div class="section-head reveal"><h2 data-i18n="sec_reviews_title">{P('sec_reviews_title')}</h2><p><span class="stars">★★★★★</span> &nbsp;<span data-i18n="sec_reviews_sub">{P('sec_reviews_sub')}</span></p></div>
+      <div class="section-head reveal"><h2 data-i18n="sec_reviews_title">{P('sec_reviews_title')}</h2><p><span class="stars">{STARS}</span> &nbsp;<span data-i18n="sec_reviews_sub">{P('sec_reviews_sub')}</span></p></div>
       <div class="reviews">{rv}</div>
       <div class="btns" style="margin-top:48px"><a class="btn ghost" href="{BOOKSY}" target="_blank" rel="noopener" data-i18n="all_reviews">{P('all_reviews')}</a></div>
     </div>
@@ -1415,8 +1477,9 @@ def build_service(c):
         blocks.append({
             "@context": "https://schema.org", "@type": "FAQPage",
             "mainEntity": [
-                {"@type": "Question", "name": T(qa["q"]),
-                 "acceptedAnswer": {"@type": "Answer", "text": T(qa["a"])}}
+                {"@type": "Question", "name": fill_prices(T(qa["q"]), c["slug"]),
+                 "acceptedAnswer": {"@type": "Answer",
+                                    "text": fill_prices(T(qa["a"]), c["slug"])}}
                 for qa in seo["faq"]],
         })
 
@@ -1445,10 +1508,10 @@ def build_service(c):
     # a Google nie ma z czego zrozumieć, na jakie zapytania odpowiada.
     seo_html = ""
     if seo:
-        paras = "".join(f"<p>{T(t)}</p>" for t in seo["text"])
+        paras = "".join(f"<p>{fill_prices(T(t), c['slug'])}</p>" for t in seo["text"])
         faq_items = "".join(
-            f'<div class="faq-item"><button class="faq-q">{T(qa["q"])}</button>'
-            f'<div class="faq-a"><p>{T(qa["a"])}</p></div></div>'
+            f'<div class="faq-item"><button class="faq-q">{fill_prices(T(qa["q"]), c["slug"])}</button>'
+            f'<div class="faq-a"><p>{fill_prices(T(qa["a"]), c["slug"])}</p></div></div>'
             for qa in seo["faq"])
         faq_block = ""
         if faq_items:
@@ -1504,6 +1567,17 @@ def build_service(c):
 # ---------------------------------------------------------------------------
 # STRONY POD KONKRETNE FRAZY (tylko PL)
 # ---------------------------------------------------------------------------
+def _landing_filled(l):
+    """Kopia landingu z podstawionymi aktualnymi cenami."""
+    d = dict(l)
+    f = lambda t: fill_prices(t, l["parent"])
+    for k in ("title", "desc", "h1", "lead"):
+        d[k] = f(d[k])
+    d["text"] = [f(t) for t in d["text"]]
+    d["faq"] = [(f(q), f(a)) for q, a in d["faq"]]
+    return d
+
+
 def landings_for(parent_slug):
     return [x for x in LANDINGS if x["parent"] == parent_slug]
 
@@ -1516,6 +1590,7 @@ def landing_items(l, cat):
 
 
 def build_landing(l):
+    l = _landing_filled(l)
     """Strona pod jedno zapytanie, np. "manicure hybrydowy szczecin".
 
     Konkurencja z miasta ma pod te frazy osobne adresy z fraza w URL-u i to
@@ -1554,7 +1629,7 @@ def build_landing(l):
                      "address": {"@type": "PostalAddress", "streetAddress": "aleja Wyzwolenia 5/10",
                                  "postalCode": "70-552", "addressLocality": "Szczecin",
                                  "addressCountry": "PL"},
-                     "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9",
+                     "aggregateRating": {"@type": "AggregateRating", "ratingValue": RATING,
                                          "reviewCount": REVIEWS_COUNT}},
         "areaServed": {"@type": "City", "name": "Szczecin"},
         "image": f"{SITE_URL}/assets/usluga-{cat['slug']}.jpg",
@@ -2105,7 +2180,7 @@ def build_llms_txt():
     L.append("> Salon urody w ścisłym centrum Szczecina (aleja Wyzwolenia 5/10, "
              "wejście od ul. Małopolskiej). Manicure, pedicure, przedłużanie rzęs, "
              "brwi i laminacja, masaż, depilacja woskiem, mikroneedling blizn "
-             f"i rozstępów, fryzjer i warkoczyki. Ocena 4.9/5 z {REVIEWS_COUNT} opinii. "
+             f"i rozstępów, fryzjer i warkoczyki. Ocena {RATING}/5 z {REVIEWS_COUNT} opinii. "
              "Obsługa po polsku, ukraińsku, rosyjsku i angielsku.")
     L.append("")
     L.append("## Fakty")
@@ -2116,7 +2191,7 @@ def build_llms_txt():
     if PHONE:
         L.append(f"- Telefon: {PHONE}")
     L.append("- Godziny otwarcia: poniedziałek – niedziela, 09:00 – 20:00")
-    L.append(f"- Ocena: 4.9/5 ({REVIEWS_COUNT} opinii, Booksy)")
+    L.append(f"- Ocena: {RATING}/5 ({REVIEWS_COUNT} opinii, Booksy)")
     L.append(f"- Rezerwacja: wyłącznie online przez Booksy — {BOOKSY}")
     L.append("- Płatność: gotówka i karta")
     L.append("- Języki obsługi: polski, ukraiński, rosyjski, angielski")
@@ -2216,6 +2291,7 @@ def main():
     CUR = "pl"
     w("README.md", build_readme())
     save_img_sizes()
+    report_price_misses()
     print(f"Gotowe — {len(LANGS)} jezyki x {len(all_pages())} stron.")
 
 
