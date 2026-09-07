@@ -365,6 +365,21 @@ MASTER = {
       "uk":"Допомагає отримати омріяну довжину, об'єм і колір, дбаючи про зручність і стійкість кожної зачіски.",
       "ru":"Помогает получить желаемую длину, объём и цвет, заботясь об удобстве и стойкости каждой причёски.",
       "en":"She helps you achieve your dream length, volume and colour, ensuring every style is comfortable and long-lasting."}]},
+ "emilia":{
+   "role":{"pl":"Stylizacja paznokci, brwi i rzęs","uk":"Стилізація нігтів, брів та вій","ru":"Стилизация ногтей, бровей и ресниц","en":"Nail, brow & lash styling"},
+   "bio":[
+     {"pl":"Stylistka paznokci, brwi i rzęs z ponad 16-letnim doświadczeniem w branży beauty — od 2009 roku pracowała w jednym ze szczecińskich salonów kosmetycznych. Jest też absolwentką Państwowego Liceum Sztuk Plastycznych, co widać w precyzji i wyczuciu koloru w jej stylizacjach.",
+      "uk":"Майстриня нігтів, брів і вій з понад 16-річним досвідом у beauty-індустрії — від 2009 року працювала в одному зі щецинських косметичних салонів. Вона також випускниця Державного ліцею образотворчих мистецтв, і це видно в точності та відчутті кольору в її роботах.",
+      "ru":"Мастер по ногтям, бровям и ресницам с более чем 16-летним опытом в бьюти-индустрии — с 2009 года работала в одном из щецинских косметических салонов. Она также выпускница Государственного лицея изобразительных искусств, и это видно в точности и чувстве цвета в её работах.",
+      "en":"A nail, brow and lash stylist with over 16 years in the beauty industry — since 2009 she worked at one of Szczecin's beauty salons. She is also a graduate of the State School of Fine Arts, which shows in the precision and colour sense of her work."},
+     {"pl":"Wykonuje manicure i pedicure hybrydowy oraz klasyczny (damski i męski), żelowanie na formie i odnowę żelu. Zdobi paznokcie techniką french, ombre i „kocie oko”, maluje też wzory na życzenie. Skórki opracowuje bezpiecznie i bezboleśnie.",
+      "uk":"Виконує гібридний і класичний манікюр та педикюр (жіночий і чоловічий), нарощування гелем на формі та корекцію гелю. Прикрашає нігті технікою френч, омбре та «котяче око», малює візерунки на замовлення. Кутикулу опрацьовує безпечно й безболісно.",
+      "ru":"Выполняет гибридный и классический маникюр и педикюр (женский и мужской), наращивание гелем на форме и коррекцию геля. Украшает ногти техникой френч, омбре и «кошачий глаз», рисует узоры на заказ. Кутикулу обрабатывает безопасно и безболезненно.",
+      "en":"She does gel and classic manicure and pedicure (for women and men), gel extensions on forms and gel refills. She decorates nails with French, ombré and cat-eye effects, and paints custom designs. Cuticles are worked on safely and painlessly."},
+     {"pl":"Zajmuje się również regulacją brwi i koloryzacją henną oraz przedłużaniem i zagęszczaniem rzęs. Dba o sterylność narzędzi i chętnie doradzi, jak zadbać o paznokcie między wizytami.",
+      "uk":"Також займається корекцією брів і фарбуванням хною та нарощуванням і згущенням вій. Дбає про стерильність інструментів і охоче підкаже, як доглядати за нігтями між візитами.",
+      "ru":"Также занимается коррекцией бровей и окрашиванием хной, наращиванием и уплотнением ресниц. Следит за стерильностью инструментов и охотно подскажет, как ухаживать за ногтями между визитами.",
+      "en":"She also shapes brows and tints them with henna, and does lash extensions and volume infills. She keeps her tools sterile and is happy to advise on caring for your nails between visits."}]},
 }
 
 # ---- opinie ----
