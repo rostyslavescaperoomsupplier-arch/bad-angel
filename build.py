@@ -87,7 +87,7 @@ def A(path):
     return "/" + path.lstrip("/")
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-VER = "14"  # cache-busting wersja dla styles.css / translations.js / app.js
+VER = "15"  # cache-busting wersja dla styles.css / translations.js / app.js
 BOOKSY = "https://badangel86.booksy.com/a/"
 # Numer telefonu — mocny sygnal lokalny (NAP) dla Google. Uzupelnic!
 PHONE = ""
@@ -247,6 +247,7 @@ def _masters_from_site_data():
         m.setdefault("gen", m["name"])
         m.setdefault("bio", [])
         m.setdefault("serves", [])
+        m.setdefault("works", "")
         out.append(m)
     return out
 
@@ -550,7 +551,7 @@ section.block{padding:var(--sp-6) 24px}
 /* GALLERY */
 .gallery{padding:20px 24px 40px;max-width:1240px;margin:0 auto}
 .gallery .cols{column-count:4;column-gap:14px}
-.gallery img{width:100%;margin:0 0 14px;border-radius:8px;display:block;break-inside:avoid;
+.gallery img{width:100%;height:auto;margin:0 0 14px;border-radius:8px;display:block;break-inside:avoid;
   border:1px solid var(--line);transition:opacity .3s}
 .gallery img:hover{opacity:.85}
 @media(max-width:1000px){.gallery .cols{column-count:3}}
@@ -1723,6 +1724,23 @@ def build_landing(l):
     return html
 
 
+def master_works(m):
+    """Zdjecia prac mistrzyni — pliki z jej prefiksem w galeriach uslug.
+
+    Zdjecia leza raz, w galerii kategorii; prefiks (np. "em-") mowi, czyja to
+    praca, wiec nic sie nie duplikuje.
+    """
+    pref = (m.get("works") or "").strip()
+    if not pref:
+        return []
+    out = []
+    for c in CATEGORIES:
+        for path in sorted(glob.glob(os.path.join(ROOT, "assets", "gallery",
+                                                  c["slug"], pref + "*.jpg"))):
+            out.append((c["slug"], os.path.basename(path)))
+    return out
+
+
 def build_master(m):
     mrole = P("role_" + m['slug']) or m['role']
     cat_by_slug = {c["slug"]: c for c in CATEGORIES}
@@ -1732,6 +1750,23 @@ def build_master(m):
             churl = U("usluga-" + s + ".html")
             chips += f'<a class="chip" href="{churl}" data-i18n="cat_{s}_name">{P("cat_" + s + "_name") or cat_by_slug[s]["name"]}</a>'
     bio = "".join(f'<p data-i18n="bio_{m["slug"]}_{i}">{p}</p>' for i, p in enumerate(m["bio"]))
+
+    wfiles = master_works(m)
+    works = ""
+    if wfiles:
+        imgs = ""
+        for i, (cat, fn) in enumerate(wfiles):
+            rel = f"assets/gallery/{cat}/{fn}"
+            imgs += (f'<img loading="lazy" decoding="async" src="/{rel}"{dim_attr(rel)}'
+                     f' alt="{gallery_alt(cat, m["name"], i)} — {m["name"]}, Salon Urody BAD ANGEL Szczecin">')
+        works = f"""
+  <section class="block" style="background:#000;padding:0 0 40px">
+    <div class="section-head reveal">
+      <h2><span data-i18n="master_works_by">{P('master_works_by')}</span> {m['gen']}</h2>
+      <p>{len(wfiles)} <span data-i18n="gallery_photos">{P('gallery_photos')}</span></p>
+    </div>
+    <div class="gallery"><div class="cols">{imgs}</div></div>
+  </section>"""
 
     html = head(f"{m['name']} — {P('role_' + m['slug']) or m['role']} · Salon Urody BAD ANGEL",
                 f"{m['name']} — {m['role']} w Salonie Urody BAD ANGEL w Szczecinie. Poznaj naszą specjalistkę i zarezerwuj wizytę.",
@@ -1758,6 +1793,7 @@ def build_master(m):
       </div>
     </div>
   </section>
+{works}
 </main>"""
     html += footer_html()
     return html

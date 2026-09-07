@@ -107,6 +107,7 @@ UI = {
  "gallery_title":{"pl":"Nasze prace","uk":"Наші роботи","ru":"Наши работы","en":"Our work"},
  "gallery_photos":{"pl":"zdjęć z naszego salonu","uk":"фото з нашого салону","ru":"фото из нашего салона","en":"photos from our salon"},
  "master_services_by":{"pl":"Usługi u","uk":"Послуги у","ru":"Услуги у","en":"Services by"},
+ "master_works_by":{"pl":"Prace","uk":"Роботи","ru":"Работы","en":"Work by"},
  "master_all_team":{"pl":"Cały zespół","uk":"Вся команда","ru":"Вся команда","en":"Whole team"},
  # --- funkcje ---
  "open_now":{"pl":"Otwarte teraz","uk":"Зараз відкрито","ru":"Открыто сейчас","en":"Open now"},

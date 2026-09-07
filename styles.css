@@ -214,7 +214,7 @@ section.block{padding:var(--sp-6) 24px}
 /* GALLERY */
 .gallery{padding:20px 24px 40px;max-width:1240px;margin:0 auto}
 .gallery .cols{column-count:4;column-gap:14px}
-.gallery img{width:100%;margin:0 0 14px;border-radius:8px;display:block;break-inside:avoid;
+.gallery img{width:100%;height:auto;margin:0 0 14px;border-radius:8px;display:block;break-inside:avoid;
   border:1px solid var(--line);transition:opacity .3s}
 .gallery img:hover{opacity:.85}
 @media(max-width:1000px){.gallery .cols{column-count:3}}
