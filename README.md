@@ -36,7 +36,6 @@ Do czasu dodania plików w tych miejscach wyświetla się elegancki ciemny gradi
 - `assets/mistrz-wiktoria.jpg` — Wiktoria (Mikroneedling, blizny i warkoczyki)
 - `assets/mistrz-anna.jpg` — Anna (Mistrzyni fryzjerstwa)
 - `assets/mistrz-aryna.jpg` — Aryna (Przedłużanie włosów i warkoczyki)
-- `assets/mistrz-anastazja.jpg` — Anastazja (manicure i pedicure ( kreatywny inspiracje))
 - `assets/mistrz-fabian.jpg` — Fabian (fizjoterapeuta , masażysta)
 - `assets/mistrz-emilia.jpg` — Emilia (Stylizacja paznokci, brwi i rzęs)
 
