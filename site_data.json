@@ -1,5 +1,5 @@
 {
- "reviews": 29,
+ "reviews": 45,
  "services": {
   "manicure": [
    [
@@ -12,7 +12,7 @@
     "Manicure hybrydowy",
     "",
     "1 g 40 min",
-    "130 zł ( 1 godzina )"
+    "130 zł"
    ],
    [
     "Manicure klasyczny ze zwykłym lakierem",
@@ -54,7 +54,7 @@
     "Odnowa żelowa",
     "Skórki, utwardzenie żelowe, lakier hybrydowy.",
     "2 g",
-    "od 130 zł"
+    "150 zł"
    ],
    [
     "Paznokcie żelowe długość 1-2",
@@ -65,19 +65,19 @@
    [
     "Paznokcie żelowe długość 2-3",
     "",
-    "",
+    "2 g",
     "170 zł"
    ],
    [
     "Paznokcie żelowe długość 3-4",
     "",
-    "",
+    "2 g",
     "180 zł"
    ],
    [
     "Paznokcie żelowe długość 8-9",
     "",
-    "",
+    "2 g",
     "190 zł"
    ],
    [
@@ -89,7 +89,7 @@
    [
     "Przedłużanie paznokci 2-3 (dual formy)",
     "",
-    "",
+    "2 g 30 min",
     "170 zł"
    ],
    [
@@ -101,7 +101,7 @@
    [
     "Przedłużanie paznokci 8-9 (dual formy)",
     "",
-    "",
+    "2 g 30 min",
     "200 zł"
    ],
    [
@@ -121,6 +121,18 @@
     "",
     "30 min",
     "50 zł"
+   ],
+   [
+    "Zwykły lakier lub odżywka",
+    "Dodatek do usługi.",
+    "10 min",
+    "10 zł"
+   ],
+   [
+    "Frencz",
+    "Dodatek do usługi.",
+    "15 min",
+    "20 zł"
    ]
   ],
   "pedicure": [
@@ -141,18 +153,6 @@
     "",
     "2 g 30 min",
     "170 zł"
-   ],
-   [
-    "Pedicure hybrydowy (osoba po szkoleniu)",
-    "",
-    "2 g",
-    "120 zł"
-   ],
-   [
-    "Pedicure hybrydowy + stopy (osoba po szkoleniu)",
-    "",
-    "2 g",
-    "130 zł"
    ],
    [
     "Pedicure ze zwykłym lakierem",
@@ -201,8 +201,8 @@
    [
     "Uzupełnienie rzęs (do 3 tygodni)",
     "",
-    "30 min",
-    "100 zł"
+    "1 g",
+    "150 zł"
    ]
   ],
   "brwi": [
@@ -251,28 +251,16 @@
   ],
   "masaz": [
    [
-    "Masaż kręgosłupa – kobiety",
-    "",
-    "30 min",
-    "100 zł"
-   ],
-   [
     "Masaż kręgosłupa – mężczyźni",
     "",
     "45 min",
     "150 zł"
    ],
    [
-    "Masaż klasyczny całego ciała – kobiety",
+    "Masaż klasyczny całego ciała",
     "",
     "1 g 30 min",
     "200 zł"
-   ],
-   [
-    "Masaż klasyczny całego ciała – mężczyźni",
-    "",
-    "1 g 30 min",
-    "250 zł"
    ],
    [
     "Masaż relaksacyjny całego ciała – kobiety",
@@ -281,46 +269,10 @@
     "300 zł"
    ],
    [
-    "Masaż relaksacyjny całego ciała – mężczyźni",
-    "",
-    "2 g 30 min",
-    "300 zł"
-   ],
-   [
-    "Masaż miodowy całego ciała",
-    "",
-    "2 g",
-    "200 zł"
-   ],
-   [
-    "Masaż miodowy wybranej części ciała",
-    "",
-    "1 g",
-    "100 zł"
-   ],
-   [
-    "Masaż antycellulitowy",
+    "Masaż relaksacyjny całego ciała",
     "",
     "1 g",
     "180 zł"
-   ],
-   [
-    "Antycellulitowe owijanie ciała – body wrapping",
-    "",
-    "1 g",
-    "150 zł"
-   ],
-   [
-    "Masaż twarzy",
-    "",
-    "30 min",
-    "110 zł"
-   ],
-   [
-    "Masaż karku, głowy i szyi",
-    "",
-    "30 min",
-    "50 zł"
    ],
    [
     "Masaż rąk",
@@ -333,6 +285,36 @@
     "",
     "30 min",
     "50 zł"
+   ],
+   [
+    "Masaż klasyczny pleców i karku",
+    "",
+    "30 min",
+    "50 zł"
+   ],
+   [
+    "Kobido + masaż transbukalny",
+    "",
+    "1 g 15 min",
+    "220 zł"
+   ],
+   [
+    "Masaż relaksacyjny pleców i nóg – tył ciała",
+    "",
+    "1 g",
+    "140 zł"
+   ],
+   [
+    "Kobido – japoński liftingujący masaż twarzy",
+    "",
+    "1 g",
+    "150 zł"
+   ],
+   [
+    "Masaż relaksacyjny pleców i karku",
+    "",
+    "45 min",
+    "140 zł"
    ]
   ],
   "blizny": [
@@ -379,7 +361,7 @@
     "469 zł"
    ],
    [
-    "Redukcja rozstępów pośladków",
+    "Redukcja rozstępów pośladki",
     "",
     "1 g",
     "545 zł"
@@ -391,13 +373,13 @@
     "549 zł"
    ],
    [
-    "Redukcja rozstępów ud",
+    "Redukcja rozstępów uda",
     "",
     "1 g",
     "649 zł"
    ],
    [
-    "Redukcja rozstępów boków",
+    "Redukcja rozstępów boki",
     "",
     "1 g",
     "699 zł"
@@ -449,13 +431,13 @@
    [
     "Spa dla rąk",
     "Rytuał pielęgnacyjny dłoni.",
-    "30 min",
+    "3 g",
     "100 zł"
    ],
    [
-    "SPA dla rąk – zimowa parafina",
+    "SPA dla rąk (zimowa parafina)",
     "Regenerująca kąpiel parafinowa.",
-    "40 min",
+    "1 g",
     "100 zł"
    ],
    [
@@ -466,18 +448,6 @@
    ]
   ],
   "wlosy": [
-   [
-    "Przedłużanie bio proteinowych włosów",
-    "Przedłużanie z pasmami w komplecie.",
-    "5 g",
-    "600 zł"
-   ],
-   [
-    "Przedłużanie naturalnych włosów",
-    "Zagęszczenie i wydłużenie naturalnymi pasmami.",
-    "6 g",
-    "600 zł"
-   ],
    [
     "Pojedynczy warkoczyk z kanekalonem",
     "",
@@ -509,66 +479,10 @@
     "220 zł"
    ],
    [
-    "Strzyżenie damskie",
-    "Strzyżenie z uwzględnieniem cech i kształtu twarzy.",
-    "1 g",
-    "od 80 zł"
-   ],
-   [
-    "Strzyżenie męskie",
+    "Fryzura – dowolne zaplatanie",
     "",
-    "45 min",
-    "60 zł"
-   ],
-   [
-    "Modelowanie / stylizacja",
-    "Mycie, suszenie i stylizacja.",
-    "45 min",
-    "od 70 zł"
-   ],
-   [
-    "Regeneracja włosów (zimna odbudowa)",
-    "Głęboka pielęgnacja i odbudowa struktury włosa.",
-    "1 g",
-    "od 150 zł"
-   ],
-   [
-    "Upięcie okolicznościowe",
-    "Fryzura na specjalną okazję.",
-    "1 g",
-    "od 150 zł"
-   ]
-  ],
-  "depilacja": [
-   [
-    "Broda",
     "",
-    "30 min",
-    "45 zł"
-   ],
-   [
-    "Pachy",
-    "",
-    "30 min",
-    "54 zł"
-   ],
-   [
-    "Bikini pełne",
-    "",
-    "1 g 15 min",
-    "od 135 zł"
-   ],
-   [
-    "Nogi całe",
-    "",
-    "1 g 15 min",
-    "144 zł"
-   ],
-   [
-    "Bikini + nogi + pachy",
-    "Pakiet kompletny.",
-    "2 g 30 min",
-    "315 zł"
+    "250 zł"
    ]
   ]
  },
@@ -582,29 +496,12 @@
     "manicure",
     "pedicure",
     "brwi",
-    "spa",
-    "depilacja"
+    "spa"
    ],
    "bio": [
     "Mistrzyni manicure i pedicure oraz stylistka brwi. Stawia na estetyczny, naturalny efekt i komfort podczas każdej wizyty. Wykonuje także zabiegi SPA dłoni i depilację.",
     "Manicure i pedicure wykonuje od dwóch lat, a od roku zajmuje się laminacją i koloryzacją brwi — z dbałością o detal i kondycję włosków.",
     "Do każdej klientki podchodzi indywidualnie, dobierając pielęgnację i stylizację do jej potrzeb."
-   ]
-  },
-  {
-   "slug": "lidia",
-   "name": "Lidia",
-   "gen": "Lidii",
-   "role": "Przedłużanie paznokci",
-   "serves": [
-    "manicure",
-    "pedicure",
-    "spa"
-   ],
-   "bio": [
-    "Lidia to specjalistka od długich, efektownych form. Buduje paznokcie z dbałością o architekturę i idealny łuk.",
-    "Wykonuje przedłużanie żelem w każdej długości, odnowy oraz pełny pedicure. Chętnie pracuje z modelkami i cierpliwie dopracowuje każdy detal.",
-    "Atmosfera na jej fotelu jest miła i sympatyczna, a efekt zawsze na miarę oczekiwań."
    ]
   },
   {
@@ -624,38 +521,10 @@
    ]
   },
   {
-   "slug": "anna",
-   "name": "Anna",
-   "gen": "Anny",
-   "role": "Mistrzyni fryzjerstwa",
-   "serves": [
-    "wlosy"
-   ],
-   "bio": [
-    "Doświadczona fryzjerka z ponad 20-letnim stażem w branży beauty. Profesjonalnie włada technikami nowoczesnych strzyżeń, realizując prace o każdym stopniu trudności z uwzględnieniem indywidualnych cech klienta.",
-    "Specjalizuje się w zabiegach głębokiej pielęgnacji, w tym zimnej regeneracji włosów, oraz w tworzeniu stylowych upięć i stylizacji na każdą okazję.",
-    "Odpowiedzialnie podchodzi do jakości usług i pomaga dobrać fryzurę, która podkreśli indywidualność klienta."
-   ]
-  },
-  {
-   "slug": "aryna",
-   "name": "Aryna",
-   "gen": "Aryny",
-   "role": "Przedłużanie włosów i warkoczyki",
-   "serves": [
-    "wlosy"
-   ],
-   "bio": [
-    "Aryna to stylistka włosów specjalizująca się w przedłużaniu i zagęszczaniu włosów oraz kolorowych warkoczykach.",
-    "Wykonuje przedłużanie włosów naturalnych i syntetycznych, a także efektowne warkoczyki — od pojedynczych po pełne, fantazyjne stylizacje.",
-    "Pomaga uzyskać wymarzoną długość, objętość i kolor, dbając o wygodę i trwałość każdej fryzury."
-   ]
-  },
-  {
    "slug": "fabian",
    "name": "Fabian",
    "gen": "Fabian",
-   "role": "fizjoterapeuta , masażysta",
+   "role": "Fizjoterapeuta, masażysta",
    "serves": [
     "masaz"
    ],
@@ -678,7 +547,17 @@
     "Zajmuje się również regulacją brwi i koloryzacją henną oraz przedłużaniem i zagęszczaniem rzęs. Dba o sterylność narzędzi i chętnie doradzi, jak zadbać o paznokcie między wizytami."
    ],
    "works": "em-"
+  },
+  {
+   "slug": "elena",
+   "name": "Elena",
+   "gen": "Eleny",
+   "role": "Stylistka przedłużania rzęs",
+   "serves": [
+    "rzesy"
+   ],
+   "bio": []
   }
  ],
- "rating": "4.4"
+ "rating": "4.6"
 }

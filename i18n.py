@@ -22,10 +22,10 @@ UI = {
    "uk":"Салон краси BAD ANGEL Щецін — манікюр, педикюр, вії, брови, масаж",
    "ru":"Салон красоты BAD ANGEL Щецин — маникюр, педикюр, ресницы, брови, массаж",
    "en":"BAD ANGEL Beauty Salon Szczecin — manicure, pedicure, lashes, brows, massage"},
- "seo_home_desc":{"pl":"Salon Urody BAD ANGEL w Szczecinie, aleja Wyzwolenia 5/10. Manicure, pedicure, przedłużanie rzęs, brwi, masaż, depilacja, włosy. Ocena {RATING} — {n} opinii. Rezerwacja online.",
-   "uk":"Салон краси BAD ANGEL у Щеціні, aleja Wyzwolenia 5/10. Манікюр, педикюр, нарощування вій, брови, масаж, депіляція, волосся. Оцінка {RATING} — {n} відгуків. Запис онлайн.",
-   "ru":"Салон красоты BAD ANGEL в Щецине, aleja Wyzwolenia 5/10. Маникюр, педикюр, наращивание ресниц, брови, массаж, депиляция, волосы. Оценка {RATING} — {n} отзывов. Запись онлайн.",
-   "en":"BAD ANGEL beauty salon in Szczecin, aleja Wyzwolenia 5/10. Manicure, pedicure, lash extensions, brows, massage, waxing, hair. Rated {RATING} from {n} reviews. Book online."},
+ "seo_home_desc":{"pl":"Salon Urody BAD ANGEL w Szczecinie, aleja Wyzwolenia 5/10. Manicure, pedicure, przedłużanie rzęs, brwi, masaż, mikroneedling, warkoczyki. Ocena {RATING} — {n} opinii. Rezerwacja online.",
+   "uk":"Салон краси BAD ANGEL у Щеціні, aleja Wyzwolenia 5/10. Манікюр, педикюр, нарощування вій, брови, масаж, мікронідлінг, косички. Оцінка {RATING} — {n} відгуків. Запис онлайн.",
+   "ru":"Салон красоты BAD ANGEL в Щецине, aleja Wyzwolenia 5/10. Маникюр, педикюр, наращивание ресниц, брови, массаж, микронидлинг, косички. Оценка {RATING} — {n} отзывов. Запись онлайн.",
+   "en":"BAD ANGEL beauty salon in Szczecin, aleja Wyzwolenia 5/10. Manicure, pedicure, lash extensions, brows, massage, microneedling, braids. Rated {RATING} from {n} reviews. Book online."},
  "seo_portfolio_title":{"pl":"Portfolio — Salon Urody BAD ANGEL Szczecin","uk":"Портфоліо — салон краси BAD ANGEL Щецін",
    "ru":"Портфолио — салон красоты BAD ANGEL Щецин","en":"Portfolio — BAD ANGEL Beauty Salon Szczecin"},
  "seo_portfolio_desc":{"pl":"Portfolio prac Salon Urody BAD ANGEL w Szczecinie — manicure, pedicure, rzęsy, brwi.",
@@ -221,14 +221,6 @@ CAT = {
      "uk":"Розслаблюючі, лікувальні та доглядові масажі. Від спини до обличчя, підібрані під ваші потреби.",
      "ru":"Расслабляющие, лечебные и уходовые массажи. От спины до лица, подобранные под ваши потребности.",
      "en":"Relaxing, therapeutic and care massages. From the back to the face, tailored to your needs."}},
- "depilacja":{
-   "name":{"pl":"Depilacja","uk":"Депіляція","ru":"Депиляция","en":"Waxing"},
-   "tag":{"pl":"Gładka skóra","uk":"Гладенька шкіра","ru":"Гладкая кожа","en":"Smooth skin"},
-   "lead":{"pl":"Gładkość, która trwa","uk":"Гладкість, що триває","ru":"Гладкость, которая длится","en":"Smoothness that lasts"},
-   "intro":{"pl":"Depilacja woskiem w komfortowych warunkach. Pojedyncze partie oraz wygodne pakiety.",
-     "uk":"Воскова депіляція в комфортних умовах. Окремі зони та зручні пакети.",
-     "ru":"Восковая депиляция в комфортных условиях. Отдельные зоны и удобные пакеты.",
-     "en":"Wax hair removal in comfortable conditions. Single areas and convenient packages."}},
  "spa":{
    "name":{"pl":"Parafina & SPA dłoni","uk":"Парафін та SPA для рук","ru":"Парафин и SPA для рук","en":"Paraffin & hand SPA"},
    "tag":{"pl":"Pielęgnacja","uk":"Догляд","ru":"Уход","en":"Care"},
@@ -246,32 +238,17 @@ CAT = {
      "ru":"Профессиональная редукция шрамов и растяжек. Заметный эффект уже после первой процедуры, подбирается индивидуально.",
      "en":"Professional scar and stretch-mark reduction. Visible results after the first session, tailored individually."}},
  "wlosy":{
-   "name":{"pl":"Włosy","uk":"Волосся","ru":"Волосы","en":"Hair"},
-   "tag":{"pl":"Fryzjer","uk":"Перукар","ru":"Парикмахер","en":"Hair salon"},
-   "lead":{"pl":"Fryzury, które podkreślają Twój styl","uk":"Зачіски, що підкреслюють твій стиль","ru":"Причёски, которые подчёркивают твой стиль","en":"Hairstyles that highlight your style"},
-   "intro":{"pl":"Przedłużanie włosów (naturalne i syntetyczne), warkoczyki, a także strzyżenia damskie i męskie, modelowanie i regeneracja włosów.",
-     "uk":"Нарощування волосся (натуральне та синтетичне), косички, а також жіночі та чоловічі стрижки, укладки й відновлення волосся.",
-     "ru":"Наращивание волос (натуральное и синтетическое), косички, а также женские и мужские стрижки, укладки и восстановление волос.",
-     "en":"Hair extensions (natural and synthetic), braids, plus women's and men's haircuts, styling and hair restoration."}},
+   "name":{"pl":"Warkoczyki","uk":"Косички","ru":"Косички","en":"Braids"},
+   "tag":{"pl":"Włosy","uk":"Волосся","ru":"Волосы","en":"Hair"},
+   "lead":{"pl":"Fryzura na kilka tygodni, która nie wymaga codziennego układania","uk":"Зачіска на кілька тижнів, що не потребує щоденного укладання","ru":"Причёска на несколько недель, которая не требует ежедневной укладки","en":"A style that lasts for weeks and needs no daily styling"},
+   "intro":{"pl":"Warkoczyki z kanekalonem, afrykańskie box braids i warkocze bąbelkowe — od pojedynczego warkoczyka po całą głowę.",
+     "uk":"Косички з канекалоном, африканські box braids і бульбашкові коси — від однієї косички до всієї голови.",
+     "ru":"Косички с канекалоном, африканские box braids и пузырьковые косы — от одной косички до всей головы.",
+     "en":"Kanekalon braids, African box braids and bubble braids — from a single braid to a full head."}},
 }
 
 # ---- mastrzy: role + bio ----
 MASTER = {
- "angelina":{
-   "role":{"pl":"Manicure, pedicure, brwi i rzęsy","uk":"Манікюр, педикюр, брови та вії","ru":"Маникюр, педикюр, брови и ресницы","en":"Manicure, pedicure, brows & lashes"},
-   "bio":[
-     {"pl":"Wykwalifikowana specjalistka beauty, dla której liczą się estetyka i jakość. Łączy techniczną precyzję, artystyczny smak i uważne podejście do każdego klienta.",
-      "uk":"Кваліфікована beauty-майстриня, для якої важливі естетика та якість. Поєднує технічну точність, художній смак і уважне ставлення до кожного клієнта.",
-      "ru":"Квалифицированный бьюти-специалист, для которого важны эстетика и качество. Сочетает техническую точность, художественный вкус и внимательное отношение к каждому клиенту.",
-      "en":"A qualified beauty specialist for whom aesthetics and quality come first. She blends technical precision, artistic taste and attentive care for every client."},
-     {"pl":"Manicure i pedicure wykonuje z uwzględnieniem anatomii dłoni i stóp — jej pokrycia są trwałe, wygodne i estetyczne. Biegle włada technikami nail-artu, w tym klasycznym i nowoczesnym frenchem.",
-      "uk":"Манікюр і педикюр виконує з урахуванням анатомії рук і стоп — її покриття стійкі, зручні та естетичні. Досконало володіє техніками нейл-арту, зокрема класичним і сучасним френчем.",
-      "ru":"Маникюр и педикюр выполняет с учётом анатомии рук и стоп — её покрытия стойкие, удобные и эстетичные. Владеет техниками нейл-арта, включая классический и современный френч.",
-      "en":"She does manicure and pedicure with attention to the anatomy of hands and feet — her coatings are durable, comfortable and elegant. She is fluent in nail-art, including classic and modern French."},
-     {"pl":"Zajmuje się też stylizacją brwi i rzęs: laminacją z trwałym efektem oraz koloryzacją dobraną indywidualnie do rysów twarzy.",
-      "uk":"Також займається стилізацією брів і вій: ламінуванням зі стійким ефектом та фарбуванням, підібраним індивідуально до рис обличчя.",
-      "ru":"Также занимается стилизацией бровей и ресниц: ламинированием со стойким эффектом и окрашиванием, подобранным индивидуально под черты лица.",
-      "en":"She also styles brows and lashes: lamination with a lasting effect and tinting chosen individually to suit your facial features."}]},
  "weronika":{
    "role":{"pl":"Manicure, pedicure, brwi, SPA i depilacja","uk":"Манікюр, педикюр, брови, SPA та депіляція","ru":"Маникюр, педикюр, брови, SPA и депиляция","en":"Manicure, pedicure, brows, SPA & waxing"},
    "bio":[
@@ -287,21 +264,6 @@ MASTER = {
       "uk":"До кожної клієнтки підходить індивідуально, підбираючи догляд і стилізацію під її потреби.",
       "ru":"К каждой клиентке подходит индивидуально, подбирая уход и стилизацию под её потребности.",
       "en":"She approaches every client individually, tailoring care and styling to her needs."}]},
- "lidia":{
-   "role":{"pl":"Przedłużanie paznokci","uk":"Нарощування нігтів","ru":"Наращивание ногтей","en":"Nail extensions"},
-   "bio":[
-     {"pl":"Lidia to specjalistka od długich, efektownych form. Buduje paznokcie z dbałością o architekturę i idealny łuk.",
-      "uk":"Лідія — спеціалістка з довгих, ефектних форм. Будує нігті з увагою до архітектури й ідеальної арки.",
-      "ru":"Лидия — специалистка по длинным, эффектным формам. Строит ногти с вниманием к архитектуре и идеальной арке.",
-      "en":"Lidia is a specialist in long, striking shapes. She builds nails with care for architecture and the perfect arch."},
-     {"pl":"Wykonuje przedłużanie żelem w każdej długości, odnowy oraz pełny pedicure. Chętnie pracuje z modelkami i cierpliwie dopracowuje każdy detal.",
-      "uk":"Виконує нарощування гелем будь-якої довжини, корекції та повний педикюр. Охоче працює з моделями і терпляче доопрацьовує кожну деталь.",
-      "ru":"Выполняет наращивание гелем любой длины, коррекции и полный педикюр. Охотно работает с моделями и терпеливо дорабатывает каждую деталь.",
-      "en":"She does gel extensions in any length, refills and full pedicure. She enjoys working with models and patiently perfects every detail."},
-     {"pl":"Atmosfera na jej fotelu jest miła i sympatyczna, a efekt zawsze na miarę oczekiwań.",
-      "uk":"Атмосфера в її кріслі приємна й дружня, а результат завжди відповідає очікуванням.",
-      "ru":"Атмосфера в её кресле приятная и дружелюбная, а результат всегда оправдывает ожидания.",
-      "en":"The atmosphere in her chair is warm and friendly, and the result always meets expectations."}]},
  "wiktoria":{
    "role":{"pl":"Mikroneedling, blizny i warkoczyki","uk":"Мікронідлінг, шрами та косички","ru":"Микронидлинг, шрамы и косички","en":"Microneedling, scars & braids"},
    "bio":[
@@ -321,51 +283,6 @@ MASTER = {
       "uk":"Окрім процедур для шкіри, плете також ефектні косички — від поодиноких до повних укладок.",
       "ru":"Помимо процедур для кожи, плетёт также эффектные косички — от единичных до полных укладок.",
       "en":"Besides skin treatments, she also creates striking braids — from single strands to full styles."}]},
- "anna":{
-   "role":{"pl":"Mistrzyni fryzjerstwa","uk":"Майстриня-перукар","ru":"Мастер-парикмахер","en":"Master hairdresser"},
-   "bio":[
-     {"pl":"Doświadczona fryzjerka z ponad 20-letnim stażem w branży beauty. Profesjonalnie włada technikami nowoczesnych strzyżeń, realizując prace o każdym stopniu trudności z uwzględnieniem indywidualnych cech klienta.",
-      "uk":"Досвідчена перукарка з понад 20-річним стажем у б'юті-індустрії. Професійно володіє техніками сучасних стрижок, виконуючи роботи будь-якої складності з урахуванням індивідуальних особливостей клієнта.",
-      "ru":"Опытный парикмахер с более чем 20-летним стажем в индустрии красоты. Профессионально владеет техниками современных стрижек, выполняя работы любой сложности с учётом индивидуальных особенностей клиента.",
-      "en":"An experienced hairdresser with over 20 years in the beauty industry. She has professional command of modern cutting techniques, handling work of any complexity while considering each client's individual features."},
-     {"pl":"Specjalizuje się w zabiegach głębokiej pielęgnacji, w tym zimnej regeneracji włosów, oraz w tworzeniu stylowych upięć i stylizacji na każdą okazję.",
-      "uk":"Спеціалізується на процедурах глибокого догляду, зокрема холодному відновленні волосся, а також на створенні стильних зачісок та укладок на будь-яку нагоду.",
-      "ru":"Специализируется на процедурах глубокого ухода, включая холодное восстановление волос, а также на создании стильных укладок и причёсок для любого повода.",
-      "en":"She specialises in deep-care treatments, including cold hair restoration, and in creating stylish updos and styling for any occasion."},
-     {"pl":"Odpowiedzialnie podchodzi do jakości usług i pomaga dobrać fryzurę, która podkreśli indywidualność klienta.",
-      "uk":"Відповідально ставиться до якості послуг і допомагає підібрати зачіску, що підкреслить індивідуальність клієнта.",
-      "ru":"Ответственно подходит к качеству услуг и помогает подобрать причёску, которая подчеркнёт индивидуальность клиента.",
-      "en":"She takes a responsible approach to service quality and helps choose a hairstyle that highlights each client's individuality."}]},
- "astgik":{
-   "role":{"pl":"Pedicure i manicure","uk":"Педикюр та манікюр","ru":"Педикюр и маникюр","en":"Pedicure & manicure"},
-   "bio":[
-     {"pl":"Astgik to specjalistka pedicure i manicure. Dba o zdrowy wygląd i pielęgnację dłoni oraz stóp, łącząc precyzję z komfortem zabiegu.",
-      "uk":"Астгік — майстриня педикюру та манікюру. Дбає про здоровий вигляд і догляд за руками та стопами, поєднуючи точність із комфортом процедури.",
-      "ru":"Астгик — мастер педикюра и маникюра. Заботится о здоровом виде и уходе за руками и стопами, сочетая точность с комфортом процедуры.",
-      "en":"Astgik is a pedicure and manicure specialist. She cares for the healthy look of your hands and feet, combining precision with a comfortable treatment."},
-     {"pl":"Wykonuje pedicure klasyczny, hybrydowy oraz pełne opracowanie stóp z pielęgnacją pięt. Efekt jest estetyczny i trwały.",
-      "uk":"Виконує класичний і гібридний педикюр та повну обробку стоп із доглядом за п'ятами. Результат естетичний і стійкий.",
-      "ru":"Выполняет классический и гибридный педикюр и полную обработку стоп с уходом за пятками. Результат эстетичный и стойкий.",
-      "en":"She does classic and hybrid pedicure and full foot treatment with heel care. The result is elegant and long-lasting."},
-     {"pl":"Do każdej wizyty podchodzi indywidualnie, aby Twoje stopy były zadbane i wypoczęte.",
-      "uk":"До кожного візиту підходить індивідуально, щоб ваші стопи були доглянуті та відпочилі.",
-      "ru":"К каждому визиту подходит индивидуально, чтобы ваши стопы были ухоженными и отдохнувшими.",
-      "en":"She approaches every visit individually so your feet feel cared for and refreshed."}]},
- "aryna":{
-   "role":{"pl":"Przedłużanie włosów i warkoczyki","uk":"Нарощування волосся та косички","ru":"Наращивание волос и косички","en":"Hair extensions & braids"},
-   "bio":[
-     {"pl":"Aryna to stylistka włosów specjalizująca się w przedłużaniu i zagęszczaniu włosów oraz kolorowych warkoczykach.",
-      "uk":"Арина — стилістка волосся, що спеціалізується на нарощуванні та згущенні волосся, а також кольорових косичках.",
-      "ru":"Арина — стилист по волосам, специализируется на наращивании и уплотнении волос, а также цветных косичках.",
-      "en":"Aryna is a hair stylist specialising in extensions, added volume and colourful braids."},
-     {"pl":"Wykonuje przedłużanie włosów naturalnych i syntetycznych, a także efektowne warkoczyki — od pojedynczych po pełne, fantazyjne stylizacje.",
-      "uk":"Виконує нарощування натурального та синтетичного волосся, а також ефектні косички — від поодиноких до повних, фантазійних укладок.",
-      "ru":"Выполняет наращивание натуральных и синтетических волос, а также эффектные косички — от единичных до полных, фантазийных укладок.",
-      "en":"She does natural and synthetic hair extensions as well as eye-catching braids — from single strands to full, statement styles."},
-     {"pl":"Pomaga uzyskać wymarzoną długość, objętość i kolor, dbając o wygodę i trwałość każdej fryzury.",
-      "uk":"Допомагає отримати омріяну довжину, об'єм і колір, дбаючи про зручність і стійкість кожної зачіски.",
-      "ru":"Помогает получить желаемую длину, объём и цвет, заботясь об удобстве и стойкости каждой причёски.",
-      "en":"She helps you achieve your dream length, volume and colour, ensuring every style is comfortable and long-lasting."}]},
  "emilia":{
    "role":{"pl":"Stylizacja paznokci, brwi i rzęs","uk":"Стилізація нігтів, брів та вій","ru":"Стилизация ногтей, бровей и ресниц","en":"Nail, brow & lash styling"},
    "bio":[
@@ -381,57 +298,59 @@ MASTER = {
       "uk":"Також займається корекцією брів і фарбуванням хною та нарощуванням і згущенням вій. Дбає про стерильність інструментів і охоче підкаже, як доглядати за нігтями між візитами.",
       "ru":"Также занимается коррекцией бровей и окрашиванием хной, наращиванием и уплотнением ресниц. Следит за стерильностью инструментов и охотно подскажет, как ухаживать за ногтями между визитами.",
       "en":"She also shapes brows and tints them with henna, and does lash extensions and volume infills. She keeps her tools sterile and is happy to advise on caring for your nails between visits."}]},
+ "fabian":{
+   "role":{"pl":"Fizjoterapeuta, masażysta","uk":"Фізіотерапевт, масажист","ru":"Физиотерапевт, массажист","en":"Physiotherapist & massage therapist"},
+   "bio":[]},
+ "elena":{
+   "role":{"pl":"Stylistka przedłużania rzęs","uk":"Майстриня з нарощування вій","ru":"Мастер по наращиванию ресниц","en":"Lash extension stylist"},
+   "bio":[]},
 }
 
 # ---- opinie ----
 # Opinie klientow. Zrodlo: profil Booksy salonu (business 353903), pobrane
-# skryptem sync_reviews.py — 2026-09-05. Cytujemy tylko oceny 5/5, z imieniem
-# takim, jakie klient zostawil w Booksy; tekst polski jest oryginalem (poza
-# opinia Oleny, napisana po ukrainsku), reszta jezykow to tlumaczenie.
+# skryptem sync_reviews.py — 2026-09-15. Cytujemy tylko oceny 5/5, z imieniem
+# takim, jakie klient zostawil w Booksy; jezyk oryginalu zaznaczony przy
+# kazdej opinii, reszta to tlumaczenie.
 # Po dodaniu/usunieciu pozycji przelicz numeracje kluczy rev<i>_* automatycznie
 # w flat() — nic recznie sie nie wpisuje.
 REVIEWS = [
- {"id":17267676, "who":"Jack",
-  "text":{"pl":"Rzadko wystawiam opinie, ale ten salon zasłużył. Byłem zaskoczony, że było tak super — cały czas relaks, ani razu nic nie zabolało, do tego profesjonalna obsługa. Na pewno jeszcze wrócę.",
-    "uk":"Рідко пишу відгуки, але цей салон заслужив. Був здивований, що все пройшло так добре — постійний релакс, жодного разу нічого не боліло, до того ж професійне обслуговування. Обов'язково повернуся.",
-    "ru":"Редко пишу отзывы, но этот салон заслужил. Был удивлён, что всё прошло так хорошо — сплошной релакс, ни разу ничего не заболело, плюс профессиональное обслуживание. Обязательно вернусь.",
-    "en":"I rarely leave reviews, but this salon earned one. I was genuinely surprised how good it was — relaxing the whole time, not a moment of pain, and professional service. I will definitely be back."},
-  "svc":{"pl":"Pedicure męski · Stasia","uk":"Чоловічий педикюр · Stasia","ru":"Мужской педикюр · Stasia","en":"Men's pedicure · Stasia"}},
- {"id":17321621, "who":"Lidiia",
-  "text":{"pl":"Polecam z całego serduszka. Schowany frencz jest mega — wygląda bardzo elegancko.",
-    "uk":"Рекомендую від щирого серця. Прихований френч — супер, виглядає дуже елегантно.",
-    "ru":"Рекомендую от всего сердца. Скрытый френч — супер, выглядит очень элегантно.",
-    "en":"I recommend it wholeheartedly. The hidden French is amazing — it looks really elegant."},
-  "svc":{"pl":"Przedłużanie paznokci, dual formy · Stasia","uk":"Нарощування нігтів, дуальні форми · Stasia",
-    "ru":"Наращивание ногтей, дуальные формы · Stasia","en":"Nail extensions, dual forms · Stasia"}},
- {"id":17276360, "who":"Małgorzata",
-  "text":{"pl":"Wizyta w salonie była miła, a Pani Stasia wykonała swoją pracę na 100%. Polecam i na pewno wrócę.",
-    "uk":"Візит у салон був приємним, а пані Stasia виконала свою роботу на 100%. Рекомендую і обов'язково повернуся.",
-    "ru":"Визит в салон был приятным, а пани Stasia сделала свою работу на 100%. Рекомендую и обязательно вернусь.",
-    "en":"A lovely visit, and Stasia did her work 100%. I recommend it and I will certainly come back."},
-  "svc":{"pl":"Manicure · Stasia","uk":"Манікюр · Stasia","ru":"Маникюр · Stasia","en":"Manicure · Stasia"}},
- {"id":17279134, "who":"Emilia",
-  "text":{"pl":"Bardzo serdecznie polecam, miła atmosfera, dobrze wykonany pedicure.",
-    "uk":"Дуже щиро рекомендую: приємна атмосфера, добре зроблений педикюр.",
-    "ru":"Очень искренне рекомендую: приятная атмосфера, хорошо сделанный педикюр.",
-    "en":"I warmly recommend it — a nice atmosphere and a well-done pedicure."},
-  "svc":{"pl":"Pedicure hybrydowy + stopy","uk":"Гібридний педикюр + стопи",
-    "ru":"Гибридный педикюр + стопы","en":"Gel pedicure + foot care"}},
- {"id":17340592, "who":"Paweł",
-  "text":{"pl":"Masaż stóp, podeszw i palców wykonany wzorowo. Będę wracał.",
-    "uk":"Масаж стоп, підошов і пальців зроблений бездоганно. Буду повертатися.",
-    "ru":"Массаж стоп, подошв и пальцев сделан безупречно. Буду возвращаться.",
-    "en":"Foot, sole and toe massage done impeccably. I will be back."},
+ {"id":18101942, "who":"Kristina",  # oryginal: pl
+  "text":{"pl":"Jestem bardzo zadowolona z wyniku. W końcu znalazłam mistrza, który był w stanie dokładnie zrealizować to, czego bym chciała. Chętnie przyjdę jeszcze na przedłużanie rzęs właśnie do tego salonu i do tego samego mistrza. Niesamowita robota, bardzo dziękuję!",
+    "uk":"Дуже задоволена результатом. Нарешті знайшла майстра, який зміг зробити саме те, чого я хотіла. Із задоволенням прийду на нарощування вій знову саме в цей салон і до того ж майстра. Неймовірна робота, дуже дякую!",
+    "ru":"Очень довольна результатом. Наконец нашла мастера, который смог сделать именно то, что я хотела. С удовольствием приду на наращивание ресниц снова именно в этот салон и к тому же мастеру. Потрясающая работа, большое спасибо!",
+    "en":"I am very happy with the result. I finally found a stylist who could do exactly what I wanted. I will gladly come back for lash extensions to this salon and to the same stylist. Amazing work, thank you so much!"},
+  "svc":{"pl":"Przedłużanie rzęs 4:1 · Elena","uk":"Нарощування вій 4:1 · Elena","ru":"Наращивание ресниц 4:1 · Elena","en":"Lash extensions 4:1 · Elena"}},
+ {"id":18061363, "who":"Anastasia",  # oryginal: pl
+  "text":{"pl":"Jestem zachwycona pracą stylistki! Paznokcie są zrobione bardzo starannie i wyglądają przepięknie. W salonie jest ogromny wybór kolorów, więc na pewno każdy znajdzie coś dla siebie. Do tego panuje tam świetna atmosfera, a obsługa jest na najwyższym poziomie. Z przyjemnością tu wrócę!",
+    "uk":"Я в захваті від роботи майстрині! Нігті зроблені дуже акуратно й виглядають чудово. У салоні величезний вибір кольорів, тож кожен знайде щось для себе. До того ж там чудова атмосфера, а обслуговування на найвищому рівні. Із задоволенням повернуся!",
+    "ru":"Я в восторге от работы мастера! Ногти сделаны очень аккуратно и выглядят прекрасно. В салоне огромный выбор цветов, так что каждый найдёт что-то для себя. К тому же там отличная атмосфера, а обслуживание на высшем уровне. С удовольствием вернусь!",
+    "en":"I am delighted with the stylist's work! The nails are done very neatly and look gorgeous. The salon has a huge range of colours, so everyone will find something for themselves. On top of that the atmosphere is great and the service is top level. I will happily be back!"},
+  "svc":{"pl":"Odnowa żelowa · Weronika","uk":"Оновлення гелю · Weronika","ru":"Обновление геля · Weronika","en":"Gel refill · Weronika"}},
+ {"id":18033724, "who":"Irena",  # oryginal: pl
+  "text":{"pl":"Bardzo dziękuję za ten manicure! Praca jest wykonana bardzo czysto i estetycznie. Noszę te paznokcie z ogromną przyjemnością, stylistka to profesjonalistka!",
+    "uk":"Дуже дякую за цей манікюр! Робота виконана дуже чисто й естетично. Ношу ці нігті з величезним задоволенням, майстриня — професіоналка!",
+    "ru":"Большое спасибо за этот маникюр! Работа выполнена очень чисто и эстетично. Ношу эти ногти с огромным удовольствием, мастер — профессионал!",
+    "en":"Thank you so much for this manicure! The work is very clean and neat. I wear these nails with great pleasure — the stylist is a true professional!"},
+  "svc":{"pl":"Manicure higieniczny + odnowa żelowa · Weronika","uk":"Гігієнічний манікюр + оновлення гелю · Weronika","ru":"Гигиенический маникюр + обновление геля · Weronika","en":"Hygienic manicure + gel refill · Weronika"}},
+ {"id":18027418, "who":"Anastasia",  # oryginal: ru
+  "text":{"pl":"Trzeba być gotową poświęcić sporo czasu, ale warto. Jestem bardzo zadowolona z efektu — cały czas dostaję komplementy na ulicy. Po kanekalonie na pewno nie zostaniesz niezauważona.",
+    "uk":"Треба бути готовою витратити чимало часу, але воно того варте. Дуже задоволена роботою — постійно отримую компліменти на вулиці. Після канекалону без уваги точно не залишишся.",
+    "ru":"Нужно быть готовой потратить много времени, но оно того стоит. Очень довольна работой — всё время получаю комплименты на улицах. Без внимания вы не останетесь после выбора сделать канекалон.",
+    "en":"Be ready to spend quite a bit of time, but it is worth it. I am very happy with the result — I get compliments on the street all the time. With kanekalon braids you will not go unnoticed."},
+  "svc":{"pl":"Warkoczyki z kanekalonem – cała głowa","uk":"Косички з канекалоном — уся голова","ru":"Косички с канекалоном — вся голова","en":"Kanekalon braids — full head"}},
+ {"id":18022178, "who":"Olha",  # oryginal: pl
+  "text":{"pl":"Pedicure wykonany perfekcyjnie!",
+    "uk":"Педикюр зроблений ідеально!",
+    "ru":"Педикюр сделан идеально!",
+    "en":"A perfectly done pedicure!"},
+  "svc":{"pl":"Pedicure higieniczny · Weronika","uk":"Гігієнічний педикюр · Weronika","ru":"Гигиенический педикюр · Weronika","en":"Hygienic pedicure · Weronika"}},
+ {"id":17866799, "who":"Paweł",  # oryginal: pl
+  "text":{"pl":"Masaż rewelacyjny jak zawsze.",
+    "uk":"Масаж чудовий, як завжди.",
+    "ru":"Массаж превосходный, как всегда.",
+    "en":"A superb massage, as always."},
   "svc":{"pl":"Masaż stóp · Fabian","uk":"Масаж стоп · Fabian","ru":"Массаж стоп · Fabian","en":"Foot massage · Fabian"}},
- {"id":17347691, "who":"Olena",
-  "text":{"pl":"Stylistka pracowała szybko i profesjonalnie.",
-    "uk":"Стилістка працювала швидко і професійно.",
-    "ru":"Стилист работала быстро и профессионально.",
-    "en":"The stylist worked quickly and professionally."},
-  "svc":{"pl":"Przedłużanie rzęs 1:2 · Elena","uk":"Нарощування вій 1:2 · Elena",
-    "ru":"Наращивание ресниц 1:2 · Elena","en":"Lash extensions 1:2 · Elena"}},
 ]
-
 
 def flat():
     """Splaszczony slownik {key: {pl,uk,ru,en}} do translations.js."""

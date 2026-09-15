@@ -87,7 +87,7 @@ def A(path):
     return "/" + path.lstrip("/")
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-VER = "15"  # cache-busting wersja dla styles.css / translations.js / app.js
+VER = "16"  # cache-busting wersja dla styles.css / translations.js / app.js
 BOOKSY = "https://badangel86.booksy.com/a/"
 # Numer telefonu — mocny sygnal lokalny (NAP) dla Google. Uzupelnic!
 PHONE = ""
@@ -182,17 +182,6 @@ CATEGORIES = [
              ("Masaż rąk", "", "20 min", "72 zł"),
              ("Masaż twarzy", "", "30 min", "81 zł"),
          ]),
-    dict(slug="depilacja", name="Depilacja", tag="Gładka skóra",
-         lead="Gładkość, która trwa",
-         intro="Depilacja woskiem w komfortowych warunkach. "
-               "Pojedyncze partie oraz wygodne pakiety.",
-         items=[
-             ("Broda", "", "30 min", "45 zł"),
-             ("Pachy", "", "30 min", "54 zł"),
-             ("Bikini pełne", "", "1 g 15 min", "od 135 zł"),
-             ("Nogi całe", "", "1 g 15 min", "144 zł"),
-             ("Bikini + nogi + pachy", "Pakiet kompletny.", "2 g 30 min", "315 zł"),
-         ]),
     dict(slug="spa", name="Parafina & SPA dłoni", tag="Pielęgnacja",
          lead="Regeneracja dla zmęczonych dłoni",
          intro="Zabiegi parafinowe i SPA głęboko nawilżają, wygładzają i poprawiają krążenie. "
@@ -217,20 +206,16 @@ CATEGORIES = [
              ("Redukcja rozstępów brzucha", "", "1 g 30 min", "670,50 zł"),
              ("Redukcja rozstępów brzuch + boki", "", "2 g 30 min", "989,10 zł"),
          ]),
-    dict(slug="wlosy", name="Włosy", tag="Fryzjer",
-         lead="Fryzury, które podkreślają Twój styl",
-         intro="Przedłużanie włosów (naturalne i syntetyczne), warkoczyki, a także strzyżenia "
-               "damskie i męskie, modelowanie i regeneracja włosów.",
+    dict(slug="wlosy", name="Warkoczyki", tag="Włosy",
+         lead="Fryzura na kilka tygodni, która nie wymaga codziennego układania",
+         intro="Warkoczyki z kanekalonem, afrykańskie box braids i warkocze bąbelkowe — "
+               "od pojedynczego warkoczyka po całą głowę.",
          items=[
-             ("Przedłużanie włosów naturalne (cena bez włosów)", "Zagęszczenie i wydłużenie włosów naturalnymi pasmami.", "4 g", "od 600 zł"),
-             ("Przedłużanie włosów syntetyczne (cena z włosami)", "Przedłużanie z pasmami syntetycznymi w komplecie.", "4 g", "od 600 zł"),
-             ("Warkoczyki syntetyczne", "Pojedyncze warkoczyki syntetyczne.", "30 min", "od 20 zł"),
-             ("Warkoczyki syntetyczne (pełne)", "Pełna głowa warkoczyków.", "2 g", "od 250 zł"),
-             ("Strzyżenie damskie", "Strzyżenie z uwzględnieniem cech i kształtu twarzy.", "1 g", "od 80 zł"),
-             ("Strzyżenie męskie", "", "45 min", "60 zł"),
-             ("Modelowanie / stylizacja", "Mycie, suszenie i stylizacja.", "45 min", "od 70 zł"),
-             ("Regeneracja włosów (zimna odbudowa)", "Głęboka pielęgnacja i odbudowa struktury włosa.", "1 g", "od 150 zł"),
-             ("Upięcie okolicznościowe", "Fryzura na specjalną okazję.", "1 g", "od 150 zł"),
+             ("Pojedynczy warkoczyk z kanekalonem", "", "1 g", "150 zł"),
+             ("Dwa warkoczyki z kanekalonem", "", "2 g", "200 zł"),
+             ("Warkoczyki z kanekalonem – cała głowa", "", "4 g", "350 zł"),
+             ("Afrykańskie warkoczyki (box braids)", "", "5 g 30 min", "350 zł"),
+             ("Bąbelkowe warkocze z kanekalonem", "", "1 g 30 min", "220 zł"),
          ]),
 ]
 
@@ -253,19 +238,8 @@ def _masters_from_site_data():
 
 # Mastrzy. slug -> mistrz-<slug>.html, zdjęcie assets/mistrz-<slug>.jpg
 MASTERS = [
-    dict(slug="angelina", name="Angelina", gen="Angeliny", role="Manicure, pedicure, brwi i rzęsy",
-         serves=["manicure", "pedicure", "spa", "brwi"],
-         bio=[
-             "Wykwalifikowana specjalistka beauty, dla której liczą się estetyka i jakość. "
-             "Łączy techniczną precyzję, artystyczny smak i uważne podejście do każdego klienta.",
-             "Manicure i pedicure wykonuje z uwzględnieniem anatomii dłoni i stóp — jej pokrycia są "
-             "trwałe, wygodne i estetyczne. Biegle włada technikami nail-artu, w tym klasycznym i "
-             "nowoczesnym frenchem.",
-             "Zajmuje się też stylizacją brwi i rzęs: laminacją z trwałym efektem oraz koloryzacją "
-             "dobraną indywidualnie do rysów twarzy.",
-         ]),
     dict(slug="weronika", name="Weronika", gen="Weroniki", role="Manicure, pedicure, brwi, SPA i depilacja",
-         serves=["manicure", "pedicure", "brwi", "spa", "depilacja"],
+         serves=["manicure", "pedicure", "brwi", "spa"],
          bio=[
              "Mistrzyni manicure i pedicure oraz stylistka brwi. Stawia na estetyczny, naturalny "
              "efekt i komfort podczas każdej wizyty. Wykonuje także zabiegi SPA dłoni i depilację.",
@@ -273,15 +247,6 @@ MASTERS = [
              "koloryzacją brwi — z dbałością o detal i kondycję włosków.",
              "Do każdej klientki podchodzi indywidualnie, dobierając pielęgnację i stylizację do "
              "jej potrzeb.",
-         ]),
-    dict(slug="lidia", name="Lidia", gen="Lidii", role="Przedłużanie paznokci",
-         serves=["manicure", "pedicure", "spa"],
-         bio=[
-             "Lidia to specjalistka od długich, efektownych form. Buduje paznokcie z dbałością "
-             "o architekturę i idealny łuk.",
-             "Wykonuje przedłużanie żelem w każdej długości, odnowy oraz pełny pedicure. "
-             "Chętnie pracuje z modelkami i cierpliwie dopracowuje każdy detal.",
-             "Atmosfera na jej fotelu jest miła i sympatyczna, a efekt zawsze na miarę oczekiwań.",
          ]),
     dict(slug="wiktoria", name="Wiktoria", gen="Wiktorii", role="Mikroneedling, blizny i warkoczyki",
          serves=["blizny", "wlosy"],
@@ -296,35 +261,12 @@ MASTERS = [
              "Oprócz zabiegów na skórę wykonuje także efektowne warkoczyki — od pojedynczych "
              "po pełne stylizacje.",
          ]),
-    dict(slug="anna", name="Anna", gen="Anny", role="Mistrzyni fryzjerstwa",
-         serves=["wlosy"],
-         bio=[
-             "Doświadczona fryzjerka z ponad 20-letnim stażem w branży beauty. Profesjonalnie "
-             "włada technikami nowoczesnych strzyżeń, realizując prace o każdym stopniu trudności "
-             "z uwzględnieniem indywidualnych cech klienta.",
-             "Specjalizuje się w zabiegach głębokiej pielęgnacji, w tym zimnej regeneracji włosów, "
-             "oraz w tworzeniu stylowych upięć i stylizacji na każdą okazję.",
-             "Odpowiedzialnie podchodzi do jakości usług i pomaga dobrać fryzurę, która podkreśli "
-             "indywidualność klienta.",
-         ]),
-    dict(slug="astgik", name="Astgik", gen="Astgik", role="Pedicure i manicure",
-         serves=["pedicure", "manicure", "spa"],
-         bio=[
-             "Astgik to specjalistka pedicure i manicure. Dba o zdrowy wygląd i pielęgnację dłoni "
-             "oraz stóp, łącząc precyzję z komfortem zabiegu.",
-             "Wykonuje pedicure klasyczny, hybrydowy oraz pełne opracowanie stóp z pielęgnacją "
-             "pięt. Efekt jest estetyczny i trwały.",
-             "Do każdej wizyty podchodzi indywidualnie, aby Twoje stopy były zadbane i wypoczęte.",
-         ]),
-    dict(slug="aryna", name="Aryna", gen="Aryny", role="Przedłużanie włosów i warkoczyki",
-         serves=["wlosy"],
-         bio=[
-             "Aryna to stylistka włosów specjalizująca się w przedłużaniu i zagęszczaniu włosów "
-             "oraz kolorowych warkoczykach.",
-             "Wykonuje przedłużanie włosów naturalnych i syntetycznych, a także efektowne "
-             "warkoczyki — od pojedynczych po pełne, fantazyjne stylizacje.",
-             "Pomaga uzyskać wymarzoną długość, objętość i kolor, dbając o wygodę i trwałość każdej fryzury.",
-         ]),
+    dict(slug="fabian", name="Fabian", gen="Fabiana", role="Fizjoterapeuta, masażysta",
+         serves=["masaz"], bio=[]),
+    dict(slug="emilia", name="Emilia", gen="Emilii", role="Stylizacja paznokci, brwi i rzęs",
+         serves=["manicure", "pedicure", "brwi", "rzesy"], bio=[]),
+    dict(slug="elena", name="Elena", gen="Eleny", role="Stylistka przedłużania rzęs",
+         serves=["rzesy"], bio=[]),
 ]
 
 # Mistrzynie też edytowalne przez bota: site_data.json["masters"] nadpisuje listę wyżej.
@@ -1084,8 +1026,7 @@ ALT_PHRASES = {
              "Laminacja rzęs"],
     "masaz": ["Masaż relaksacyjny", "Masaż pleców", "Masaż klasyczny"],
     "blizny": ["Mikroneedling twarzy", "Zabieg na blizny", "Terapia mikroigłowa"],
-    "wlosy": ["Warkoczyki", "Przedłużanie włosów", "Stylizacja włosów"],
-    "depilacja": ["Depilacja woskiem", "Depilacja"],
+    "wlosy": ["Warkoczyki z kanekalonem", "Box braids", "Warkoczyki"],
     "spa": ["Zabieg SPA na dłonie", "Pielęgnacja SPA"],
 }
 
@@ -1154,7 +1095,7 @@ def hero_wall_html(cols=5):
 
 # Karty, na których stockowe assets/usluga-<slug>.jpg zamieniamy na prawdziwą
 # pracę z galerii. Tylko tam, gdzie realne zdjęcie jest mocniejsze od stocku —
-# masaz/depilacja/spa nadal czekają na własne zdjęcia z salonu.
+# masaz/spa nadal czekają na własne zdjęcia z salonu.
 CARD_OVERRIDE = {
     "wlosy": "assets/gallery/wlosy/01.jpg",
     "blizny": "assets/gallery/blizny/06.jpg",
@@ -1978,7 +1919,7 @@ def build_app_js():
     var ALIAS={"ламин":"lamin","ламінув":"lamin","наращ":"przedluz","нарощ":"przedluz",
       "педикюр":"pedicure","маникюр":"manicure","манікюр":"manicure","массаж":"masaz",
       "масаж":"masaz","брови":"brwi","бровей":"brwi","ресниц":"rzes","вій":"rzes",
-      "депиляц":"depilac","депіляц":"depilac","стрижк":"strzyz","волос":"wlos",
+      "волос":"wlos",
       "гель":"zel","гел":"zel","шрам":"blizn","рубц":"blizn","коса":"warkocz","косич":"warkocz"};
     function norm(s){
       s=(s||"").toLowerCase();
@@ -2215,8 +2156,8 @@ def build_llms_txt():
     L.append("")
     L.append("> Salon urody w ścisłym centrum Szczecina (aleja Wyzwolenia 5/10, "
              "wejście od ul. Małopolskiej). Manicure, pedicure, przedłużanie rzęs, "
-             "brwi i laminacja, masaż, depilacja woskiem, mikroneedling blizn "
-             f"i rozstępów, fryzjer i warkoczyki. Ocena {RATING}/5 z {REVIEWS_COUNT} opinii. "
+             "brwi i laminacja, masaż, mikroneedling blizn "
+             f"i rozstępów oraz warkoczyki. Ocena {RATING}/5 z {REVIEWS_COUNT} opinii. "
              "Obsługa po polsku, ukraińsku, rosyjsku i angielsku.")
     L.append("")
     L.append("## Fakty")
@@ -2308,6 +2249,30 @@ def build_lang(lang):
         if os.path.basename(p) not in valid:
             os.remove(p)
             print("usunięto", os.path.relpath(p, ROOT))
+    # adresy, ktore zdazyly trafic do Google, dostaja przekierowanie zamiast 404
+    for name, target in REMOVED_PAGES.items():
+        if name in valid or (sub and not name.startswith(("usluga-", "mistrz-"))):
+            continue
+        wl(name, redirect_html(U_lang(lang, target)))
+
+
+# Strony zdjete ze strony (oferta/zespol wg Booksy, 2026-09-15) -> dokad odsylac.
+# Landingi sa tylko po polsku, wiec w /uk /ru /en powstaja same usluga-/mistrz-.
+REMOVED_PAGES = {
+    "usluga-depilacja.html": "index.html#uslugi",
+    "depilacja-woskiem-szczecin.html": "index.html#uslugi",
+    "mistrz-lidia.html": "index.html#zespol",
+    "mistrz-anna.html": "index.html#zespol",
+    "mistrz-aryna.html": "index.html#zespol",
+}
+
+
+def redirect_html(url):
+    canon = url.split("#")[0].replace("index.html", "")
+    return (f'<!doctype html><html lang="pl"><head><meta charset="utf-8">'
+            f'<meta name="robots" content="noindex"><link rel="canonical" href="{SITE_URL}{canon}">'
+            f'<meta http-equiv="refresh" content="0;url={url}"><title>Przekierowanie</title></head>'
+            f'<body><a href="{url}">Przejdź na stronę salonu</a></body></html>\n')
 
 
 def main():

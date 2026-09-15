@@ -25,19 +25,16 @@ Do czasu dodania plików w tych miejscach wyświetla się elegancki ciemny gradi
 - `assets/usluga-rzesy.jpg` — Przedłużanie rzęs
 - `assets/usluga-brwi.jpg` — Brwi i rzęsy
 - `assets/usluga-masaz.jpg` — Masaż
-- `assets/usluga-depilacja.jpg` — Depilacja
 - `assets/usluga-spa.jpg` — Parafina & SPA dłoni
 - `assets/usluga-blizny.jpg` — Blizny i rozstępy
-- `assets/usluga-wlosy.jpg` — Włosy
+- `assets/usluga-wlosy.jpg` — Warkoczyki
 
 **Mastrzy (kafelek + portret na podstronie):**
 - `assets/mistrz-weronika.jpg` — Weronika (Manicure, pedicure, brwi, SPA i depilacja)
-- `assets/mistrz-lidia.jpg` — Lidia (Przedłużanie paznokci)
 - `assets/mistrz-wiktoria.jpg` — Wiktoria (Mikroneedling, blizny i warkoczyki)
-- `assets/mistrz-anna.jpg` — Anna (Mistrzyni fryzjerstwa)
-- `assets/mistrz-aryna.jpg` — Aryna (Przedłużanie włosów i warkoczyki)
-- `assets/mistrz-fabian.jpg` — Fabian (fizjoterapeuta , masażysta)
+- `assets/mistrz-fabian.jpg` — Fabian (Fizjoterapeuta, masażysta)
 - `assets/mistrz-emilia.jpg` — Emilia (Stylizacja paznokci, brwi i rzęs)
+- `assets/mistrz-elena.jpg` — Elena (Stylistka przedłużania rzęs)
 
 ## Rezerwacja
 Każdy przycisk „Rezerwuj / Zarezerwuj” prowadzi na profil Booksy salonu.
