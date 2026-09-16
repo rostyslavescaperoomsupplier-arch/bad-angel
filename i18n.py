@@ -22,10 +22,10 @@ UI = {
    "uk":"Салон краси BAD ANGEL Щецін — манікюр, педикюр, вії, брови, масаж",
    "ru":"Салон красоты BAD ANGEL Щецин — маникюр, педикюр, ресницы, брови, массаж",
    "en":"BAD ANGEL Beauty Salon Szczecin — manicure, pedicure, lashes, brows, massage"},
- "seo_home_desc":{"pl":"Salon Urody BAD ANGEL w Szczecinie, aleja Wyzwolenia 5/10. Manicure, pedicure, przedłużanie rzęs, brwi, masaż, mikroneedling, warkoczyki. Ocena {RATING} — {n} opinii. Rezerwacja online.",
-   "uk":"Салон краси BAD ANGEL у Щеціні, aleja Wyzwolenia 5/10. Манікюр, педикюр, нарощування вій, брови, масаж, мікронідлінг, косички. Оцінка {RATING} — {n} відгуків. Запис онлайн.",
-   "ru":"Салон красоты BAD ANGEL в Щецине, aleja Wyzwolenia 5/10. Маникюр, педикюр, наращивание ресниц, брови, массаж, микронидлинг, косички. Оценка {RATING} — {n} отзывов. Запись онлайн.",
-   "en":"BAD ANGEL beauty salon in Szczecin, aleja Wyzwolenia 5/10. Manicure, pedicure, lash extensions, brows, massage, microneedling, braids. Rated {RATING} from {n} reviews. Book online."},
+ "seo_home_desc":{"pl":"Salon Urody BAD ANGEL w Szczecinie, aleja Wyzwolenia 5/10. Manicure, pedicure, przedłużanie rzęs, brwi, masaż, mikroneedling. Ocena {RATING} — {n} opinii. Rezerwacja online.",
+   "uk":"Салон краси BAD ANGEL у Щеціні, aleja Wyzwolenia 5/10. Манікюр, педикюр, нарощування вій, брови, масаж, мікронідлінг. Оцінка {RATING} — {n} відгуків. Запис онлайн.",
+   "ru":"Салон красоты BAD ANGEL в Щецине, aleja Wyzwolenia 5/10. Маникюр, педикюр, наращивание ресниц, брови, массаж, микронидлинг. Оценка {RATING} — {n} отзывов. Запись онлайн.",
+   "en":"BAD ANGEL beauty salon in Szczecin, aleja Wyzwolenia 5/10. Manicure, pedicure, lash extensions, brows, massage, microneedling. Rated {RATING} from {n} reviews. Book online."},
  "seo_portfolio_title":{"pl":"Portfolio — Salon Urody BAD ANGEL Szczecin","uk":"Портфоліо — салон краси BAD ANGEL Щецін",
    "ru":"Портфолио — салон красоты BAD ANGEL Щецин","en":"Portfolio — BAD ANGEL Beauty Salon Szczecin"},
  "seo_portfolio_desc":{"pl":"Portfolio prac Salon Urody BAD ANGEL w Szczecinie — manicure, pedicure, rzęsy, brwi.",
@@ -237,14 +237,6 @@ CAT = {
      "uk":"Професійна редукція шрамів і розтяжок. Помітний ефект вже після першої процедури, підбирається індивідуально.",
      "ru":"Профессиональная редукция шрамов и растяжек. Заметный эффект уже после первой процедуры, подбирается индивидуально.",
      "en":"Professional scar and stretch-mark reduction. Visible results after the first session, tailored individually."}},
- "wlosy":{
-   "name":{"pl":"Warkoczyki","uk":"Косички","ru":"Косички","en":"Braids"},
-   "tag":{"pl":"Włosy","uk":"Волосся","ru":"Волосы","en":"Hair"},
-   "lead":{"pl":"Fryzura na kilka tygodni, która nie wymaga codziennego układania","uk":"Зачіска на кілька тижнів, що не потребує щоденного укладання","ru":"Причёска на несколько недель, которая не требует ежедневной укладки","en":"A style that lasts for weeks and needs no daily styling"},
-   "intro":{"pl":"Warkoczyki z kanekalonem, afrykańskie box braids i warkocze bąbelkowe — od pojedynczego warkoczyka po całą głowę.",
-     "uk":"Косички з канекалоном, африканські box braids і бульбашкові коси — від однієї косички до всієї голови.",
-     "ru":"Косички с канекалоном, африканские box braids и пузырьковые косы — от одной косички до всей головы.",
-     "en":"Kanekalon braids, African box braids and bubble braids — from a single braid to a full head."}},
 }
 
 # ---- mastrzy: role + bio ----
@@ -265,7 +257,7 @@ MASTER = {
       "ru":"К каждой клиентке подходит индивидуально, подбирая уход и стилизацию под её потребности.",
       "en":"She approaches every client individually, tailoring care and styling to her needs."}]},
  "wiktoria":{
-   "role":{"pl":"Mikroneedling, blizny i warkoczyki","uk":"Мікронідлінг, шрами та косички","ru":"Микронидлинг, шрамы и косички","en":"Microneedling, scars & braids"},
+   "role":{"pl":"Mikroneedling i blizny","uk":"Мікронідлінг і шрами","ru":"Микронидлинг и шрамы","en":"Microneedling & scars"},
    "bio":[
      {"pl":"Specjalistka mikroneedlingu po szkoleniach w Akademii LIBRO w Warszawie. Skupia się na terapii regeneracyjnej blizn, rozstępów, śladów po trądziku i przebarwień oraz poprawie jakości i gęstości skóry.",
       "uk":"Спеціалістка з мікронідлінгу після навчання в Академії LIBRO у Варшаві. Зосереджена на регенеративній терапії шрамів, розтяжок, слідів від акне та пігментації, а також на покращенні якості й щільності шкіри.",
@@ -278,11 +270,7 @@ MASTER = {
      {"pl":"Każdy etap zabiegu dokładnie wyjaśnia, a efekty jej pracy widoczne są już po pierwszej wizycie.",
       "uk":"Кожен етап процедури детально пояснює, а результати її роботи помітні вже після першого візиту.",
       "ru":"Каждый этап процедуры подробно объясняет, а результаты её работы заметны уже после первого визита.",
-      "en":"She explains every step of the treatment in detail, and the results of her work are visible after the very first visit."},
-     {"pl":"Oprócz zabiegów na skórę wykonuje także efektowne warkoczyki — od pojedynczych po pełne stylizacje.",
-      "uk":"Окрім процедур для шкіри, плете також ефектні косички — від поодиноких до повних укладок.",
-      "ru":"Помимо процедур для кожи, плетёт также эффектные косички — от единичных до полных укладок.",
-      "en":"Besides skin treatments, she also creates striking braids — from single strands to full styles."}]},
+      "en":"She explains every step of the treatment in detail, and the results of her work are visible after the very first visit."}]},
  "emilia":{
    "role":{"pl":"Stylizacja paznokci, brwi i rzęs","uk":"Стилізація нігтів, брів та вій","ru":"Стилизация ногтей, бровей и ресниц","en":"Nail, brow & lash styling"},
    "bio":[
@@ -298,6 +286,9 @@ MASTER = {
       "uk":"Також займається корекцією брів і фарбуванням хною та нарощуванням і згущенням вій. Дбає про стерильність інструментів і охоче підкаже, як доглядати за нігтями між візитами.",
       "ru":"Также занимается коррекцией бровей и окрашиванием хной, наращиванием и уплотнением ресниц. Следит за стерильностью инструментов и охотно подскажет, как ухаживать за ногтями между визитами.",
       "en":"She also shapes brows and tints them with henna, and does lash extensions and volume infills. She keeps her tools sterile and is happy to advise on caring for your nails between visits."}]},
+ "natasha":{
+   "role":{"pl":"Stylistka paznokci","uk":"Майстриня манікюру","ru":"Мастер маникюра","en":"Nail stylist"},
+   "bio":[]},
  "fabian":{
    "role":{"pl":"Fizjoterapeuta, masażysta","uk":"Фізіотерапевт, масажист","ru":"Физиотерапевт, массажист","en":"Physiotherapist & massage therapist"},
    "bio":[]},
@@ -308,7 +299,7 @@ MASTER = {
 
 # ---- opinie ----
 # Opinie klientow. Zrodlo: profil Booksy salonu (business 353903), pobrane
-# skryptem sync_reviews.py — 2026-09-15. Cytujemy tylko oceny 5/5, z imieniem
+# skryptem sync_reviews.py — 2026-09-16. Cytujemy tylko oceny 5/5, z imieniem
 # takim, jakie klient zostawil w Booksy; jezyk oryginalu zaznaczony przy
 # kazdej opinii, reszta to tlumaczenie.
 # Po dodaniu/usunieciu pozycji przelicz numeracje kluczy rev<i>_* automatycznie
@@ -332,12 +323,12 @@ REVIEWS = [
     "ru":"Большое спасибо за этот маникюр! Работа выполнена очень чисто и эстетично. Ношу эти ногти с огромным удовольствием, мастер — профессионал!",
     "en":"Thank you so much for this manicure! The work is very clean and neat. I wear these nails with great pleasure — the stylist is a true professional!"},
   "svc":{"pl":"Manicure higieniczny + odnowa żelowa · Weronika","uk":"Гігієнічний манікюр + оновлення гелю · Weronika","ru":"Гигиенический маникюр + обновление геля · Weronika","en":"Hygienic manicure + gel refill · Weronika"}},
- {"id":18027418, "who":"Anastasia",  # oryginal: ru
-  "text":{"pl":"Trzeba być gotową poświęcić sporo czasu, ale warto. Jestem bardzo zadowolona z efektu — cały czas dostaję komplementy na ulicy. Po kanekalonie na pewno nie zostaniesz niezauważona.",
-    "uk":"Треба бути готовою витратити чимало часу, але воно того варте. Дуже задоволена роботою — постійно отримую компліменти на вулиці. Після канекалону без уваги точно не залишишся.",
-    "ru":"Нужно быть готовой потратить много времени, но оно того стоит. Очень довольна работой — всё время получаю комплименты на улицах. Без внимания вы не останетесь после выбора сделать канекалон.",
-    "en":"Be ready to spend quite a bit of time, but it is worth it. I am very happy with the result — I get compliments on the street all the time. With kanekalon braids you will not go unnoticed."},
-  "svc":{"pl":"Warkoczyki z kanekalonem – cała głowa","uk":"Косички з канекалоном — уся голова","ru":"Косички с канекалоном — вся голова","en":"Kanekalon braids — full head"}},
+ {"id":18114899, "who":"Natalia",  # oryginal: ru
+  "text":{"pl":"Byłam u stylistki Weroniki, jestem bardzo zadowolona! Na pewno jeszcze wrócę.",
+    "uk":"Була в майстрині Вероніки, дуже задоволена! Обов'язково повернуся ще.",
+    "ru":"Была у мастера Вероники, очень довольна! Я ещё вернусь.",
+    "en":"I went to Weronika and I am very happy! I will definitely be back."},
+  "svc":{"pl":"Odnowa żelowa · Weronika","uk":"Оновлення гелю · Weronika","ru":"Обновление геля · Weronika","en":"Gel refill · Weronika"}},
  {"id":18022178, "who":"Olha",  # oryginal: pl
   "text":{"pl":"Pedicure wykonany perfekcyjnie!",
     "uk":"Педикюр зроблений ідеально!",

@@ -1,5 +1,5 @@
 {
- "reviews": 45,
+ "reviews": 47,
  "services": {
   "manicure": [
    [
@@ -234,7 +234,7 @@
     "Laminacja brwi + botox + koloryzacja",
     "",
     "1 g",
-    "130 zł"
+    "180 zł"
    ],
    [
     "Laminacja rzęs + botox",
@@ -247,6 +247,12 @@
     "",
     "1 g",
     "180 zł"
+   ],
+   [
+    "Laminacja rzęs + laminacja brwi",
+    "Pakiet: oba zabiegi podczas jednej wizyty.",
+    "1 g 30 min",
+    "320 zł"
    ]
   ],
   "masaz": [
@@ -446,44 +452,6 @@
     "30 min",
     "100 zł"
    ]
-  ],
-  "wlosy": [
-   [
-    "Pojedynczy warkoczyk z kanekalonem",
-    "",
-    "1 g",
-    "150 zł"
-   ],
-   [
-    "Dwa warkoczyki z kanekalonem",
-    "",
-    "2 g",
-    "200 zł"
-   ],
-   [
-    "Warkoczyki z kanekalonem – cała głowa",
-    "",
-    "4 g",
-    "350 zł"
-   ],
-   [
-    "Afrykańskie warkoczyki (box braids)",
-    "",
-    "5 g 30 min",
-    "350 zł"
-   ],
-   [
-    "Bąbelkowe warkocze z kanekalonem",
-    "",
-    "1 g 30 min",
-    "220 zł"
-   ],
-   [
-    "Fryzura – dowolne zaplatanie",
-    "",
-    "",
-    "250 zł"
-   ]
   ]
  },
  "masters": [
@@ -505,19 +473,28 @@
    ]
   },
   {
+   "slug": "natasha",
+   "name": "Natasha",
+   "gen": "Natashy",
+   "role": "Stylistka paznokci",
+   "serves": [
+    "manicure",
+    "pedicure"
+   ],
+   "bio": []
+  },
+  {
    "slug": "wiktoria",
    "name": "Wiktoria",
    "gen": "Wiktorii",
-   "role": "Mikroneedling, blizny i warkoczyki",
+   "role": "Mikroneedling i blizny",
    "serves": [
-    "blizny",
-    "wlosy"
+    "blizny"
    ],
    "bio": [
     "Specjalistka mikroneedlingu po szkoleniach w Akademii LIBRO w Warszawie. Skupia się na terapii regeneracyjnej blizn, rozstępów, śladów po trądziku i przebarwień oraz poprawie jakości i gęstości skóry.",
     "Posiada międzynarodową akredytację KCCK z wyróżnieniem oraz certyfikat Global Creative Masters. Stale podnosi kwalifikacje — m.in. egzosomy i polinukleotydy w mikroneedlingu.",
-    "Każdy etap zabiegu dokładnie wyjaśnia, a efekty jej pracy widoczne są już po pierwszej wizycie.",
-    "Oprócz zabiegów na skórę wykonuje także efektowne warkoczyki — od pojedynczych po pełne stylizacje."
+    "Każdy etap zabiegu dokładnie wyjaśnia, a efekty jej pracy widoczne są już po pierwszej wizycie."
    ]
   },
   {

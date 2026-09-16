@@ -87,7 +87,7 @@ def A(path):
     return "/" + path.lstrip("/")
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-VER = "16"  # cache-busting wersja dla styles.css / translations.js / app.js
+VER = "17"  # cache-busting wersja dla styles.css / translations.js / app.js
 BOOKSY = "https://badangel86.booksy.com/a/"
 # Numer telefonu — mocny sygnal lokalny (NAP) dla Google. Uzupelnic!
 PHONE = ""
@@ -206,17 +206,6 @@ CATEGORIES = [
              ("Redukcja rozstępów brzucha", "", "1 g 30 min", "670,50 zł"),
              ("Redukcja rozstępów brzuch + boki", "", "2 g 30 min", "989,10 zł"),
          ]),
-    dict(slug="wlosy", name="Warkoczyki", tag="Włosy",
-         lead="Fryzura na kilka tygodni, która nie wymaga codziennego układania",
-         intro="Warkoczyki z kanekalonem, afrykańskie box braids i warkocze bąbelkowe — "
-               "od pojedynczego warkoczyka po całą głowę.",
-         items=[
-             ("Pojedynczy warkoczyk z kanekalonem", "", "1 g", "150 zł"),
-             ("Dwa warkoczyki z kanekalonem", "", "2 g", "200 zł"),
-             ("Warkoczyki z kanekalonem – cała głowa", "", "4 g", "350 zł"),
-             ("Afrykańskie warkoczyki (box braids)", "", "5 g 30 min", "350 zł"),
-             ("Bąbelkowe warkocze z kanekalonem", "", "1 g 30 min", "220 zł"),
-         ]),
 ]
 
 # Cennik jest edytowalny przez bota Telegram: site_data.json["services"] nadpisuje
@@ -248,8 +237,10 @@ MASTERS = [
              "Do każdej klientki podchodzi indywidualnie, dobierając pielęgnację i stylizację do "
              "jej potrzeb.",
          ]),
-    dict(slug="wiktoria", name="Wiktoria", gen="Wiktorii", role="Mikroneedling, blizny i warkoczyki",
-         serves=["blizny", "wlosy"],
+    dict(slug="natasha", name="Natasha", gen="Natashy", role="Stylistka paznokci",
+         serves=["manicure", "pedicure"], bio=[]),
+    dict(slug="wiktoria", name="Wiktoria", gen="Wiktorii", role="Mikroneedling i blizny",
+         serves=["blizny"],
          bio=[
              "Specjalistka mikroneedlingu po szkoleniach w Akademii LIBRO w Warszawie. Skupia się "
              "na terapii regeneracyjnej blizn, rozstępów, śladów po trądziku i przebarwień oraz "
@@ -258,8 +249,6 @@ MASTERS = [
              "Creative Masters. Stale podnosi kwalifikacje — m.in. egzosomy i polinukleotydy w mikroneedlingu.",
              "Każdy etap zabiegu dokładnie wyjaśnia, a efekty jej pracy widoczne są już po "
              "pierwszej wizycie.",
-             "Oprócz zabiegów na skórę wykonuje także efektowne warkoczyki — od pojedynczych "
-             "po pełne stylizacje.",
          ]),
     dict(slug="fabian", name="Fabian", gen="Fabiana", role="Fizjoterapeuta, masażysta",
          serves=["masaz"], bio=[]),
@@ -1026,7 +1015,6 @@ ALT_PHRASES = {
              "Laminacja rzęs"],
     "masaz": ["Masaż relaksacyjny", "Masaż pleców", "Masaż klasyczny"],
     "blizny": ["Mikroneedling twarzy", "Zabieg na blizny", "Terapia mikroigłowa"],
-    "wlosy": ["Warkoczyki z kanekalonem", "Box braids", "Warkoczyki"],
     "spa": ["Zabieg SPA na dłonie", "Pielęgnacja SPA"],
 }
 
@@ -1097,7 +1085,6 @@ def hero_wall_html(cols=5):
 # pracę z galerii. Tylko tam, gdzie realne zdjęcie jest mocniejsze od stocku —
 # masaz/spa nadal czekają na własne zdjęcia z salonu.
 CARD_OVERRIDE = {
-    "wlosy": "assets/gallery/wlosy/01.jpg",
     "blizny": "assets/gallery/blizny/06.jpg",
     # usluga-pedicure.jpg (746x1280) i usluga-brwi.jpg (651x1280) to pionowe
     # składanki dwóch zdjęć. Kadr 4/5 wypadał na szwie i karta pokazywała pół
@@ -1919,8 +1906,7 @@ def build_app_js():
     var ALIAS={"ламин":"lamin","ламінув":"lamin","наращ":"przedluz","нарощ":"przedluz",
       "педикюр":"pedicure","маникюр":"manicure","манікюр":"manicure","массаж":"masaz",
       "масаж":"masaz","брови":"brwi","бровей":"brwi","ресниц":"rzes","вій":"rzes",
-      "волос":"wlos",
-      "гель":"zel","гел":"zel","шрам":"blizn","рубц":"blizn","коса":"warkocz","косич":"warkocz"};
+      "гель":"zel","гел":"zel","шрам":"blizn","рубц":"blizn"};
     function norm(s){
       s=(s||"").toLowerCase();
       try{ s=s.normalize("NFD").replace(/[̀-ͯ]/g,""); }catch(e){}
@@ -2157,7 +2143,7 @@ def build_llms_txt():
     L.append("> Salon urody w ścisłym centrum Szczecina (aleja Wyzwolenia 5/10, "
              "wejście od ul. Małopolskiej). Manicure, pedicure, przedłużanie rzęs, "
              "brwi i laminacja, masaż, mikroneedling blizn "
-             f"i rozstępów oraz warkoczyki. Ocena {RATING}/5 z {REVIEWS_COUNT} opinii. "
+             f"i rozstępów. Ocena {RATING}/5 z {REVIEWS_COUNT} opinii. "
              "Obsługa po polsku, ukraińsku, rosyjsku i angielsku.")
     L.append("")
     L.append("## Fakty")
@@ -2256,7 +2242,7 @@ def build_lang(lang):
         wl(name, redirect_html(U_lang(lang, target)))
 
 
-# Strony zdjete ze strony (oferta/zespol wg Booksy, 2026-09-15) -> dokad odsylac.
+# Strony zdjete ze strony (oferta/zespol wg Booksy, 2026-09-15/16) -> dokad odsylac.
 # Landingi sa tylko po polsku, wiec w /uk /ru /en powstaja same usluga-/mistrz-.
 REMOVED_PAGES = {
     "usluga-depilacja.html": "index.html#uslugi",
@@ -2264,6 +2250,8 @@ REMOVED_PAGES = {
     "mistrz-lidia.html": "index.html#zespol",
     "mistrz-anna.html": "index.html#zespol",
     "mistrz-aryna.html": "index.html#zespol",
+    "usluga-wlosy.html": "index.html#uslugi",
+    "warkoczyki-szczecin.html": "index.html#uslugi",
 }
 
 

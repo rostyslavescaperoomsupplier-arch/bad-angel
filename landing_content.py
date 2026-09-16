@@ -191,29 +191,4 @@ LANDINGS += [
    ("Kiedy można pracować z blizną po cesarskim cięciu?",
     "Nie wcześniej niż pół roku po porodzie i tylko przy w pełni zagojonej, niebolesnej bliźnie. Przy karmieniu piersią i powikłaniach gojenia prosimy o zgodę lekarza."),
   ]),
-
- dict(
-  slug="warkoczyki-szczecin", parent="wlosy",
-  h1="Warkoczyki z kanekalonem — Szczecin",
-  eyebrow="Włosy · Kanekalon i box braids",
-  title="Warkoczyki Szczecin — kanekalon, box braids od 150 zł | BAD ANGEL",
-  desc="Warkoczyki z kanekalonem w Szczecinie: pojedynczy 150 zł, cała głowa 350 zł, box braids 350 zł, bąbelkowe 220 zł. Salon BAD ANGEL, aleja Wyzwolenia 5/10.",
-  lead="Fryzura na kilka tygodni, która nie wymaga codziennego układania",
-  match=["arkocz", "braids", "zaplatanie"],
-  text=[
-   "Zaplatamy warkoczyki z kanekalonem w kilku wariantach: pojedynczy warkocz, dwa warkocze, cała głowa, afrykańskie box braids i warkocze bąbelkowe. Kanekalon dokłada długość i kolor, których własne włosy nie mają, i pozwala zapleść nawet cienkie włosy.",
-   "To praca na kilka godzin — od godziny przy pojedynczym warkoczu do pięciu i pół przy box braids na całą głowę. Warto zjeść przed wizytą i zarezerwować sobie ten dzień. W zamian fryzura trzyma się trzy do sześciu tygodni i rano nie wymaga niczego.",
-   "Kolor kanekalonu ustalamy przy rezerwacji, żeby mieć go na miejscu w dniu wizyty. Jeśli chcesz konkretny odcień albo mieszankę dwóch kolorów, napisz do nas wcześniej — część kolorów zamawiamy pod klienta.",
-   "Dłużej niż sześć tygodni warkoczyków nosić nie warto: odrost zaczyna napinać włosy przy skórze głowy, co kończy się bólem i wypadaniem. Rozplatanie też robimy w salonie, jeśli nie chcesz robić tego sama.",
-  ],
-  faq=[
-   ("Ile kosztują warkoczyki w Szczecinie?",
-    "Pojedynczy warkoczyk z kanekalonem 150 zł, dwa warkoczyki 200 zł, cała głowa 350 zł. Box braids 350 zł, warkocze bąbelkowe 220 zł."),
-   ("Ile trwa zaplatanie?",
-    "Od godziny przy pojedynczym warkoczu, przez dwie godziny przy dwóch, do czterech, pięciu i pół godziny przy całej głowie i box braids."),
-   ("Jak długo można nosić warkoczyki?",
-    "Trzy do sześciu tygodni. Dłużej nie zalecamy, bo odrost napina włosy przy skórze głowy."),
-   ("Czy zaplatacie na krótkich włosach?",
-    "Zależy od długości — potrzebne jest minimum kilkanaście centymetrów, żeby splot się utrzymał. Prześlij zdjęcie przed rezerwacją, ocenimy i powiemy wprost."),
-  ]),
 ]

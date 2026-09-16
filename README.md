@@ -27,11 +27,11 @@ Do czasu dodania plików w tych miejscach wyświetla się elegancki ciemny gradi
 - `assets/usluga-masaz.jpg` — Masaż
 - `assets/usluga-spa.jpg` — Parafina & SPA dłoni
 - `assets/usluga-blizny.jpg` — Blizny i rozstępy
-- `assets/usluga-wlosy.jpg` — Warkoczyki
 
 **Mastrzy (kafelek + portret na podstronie):**
 - `assets/mistrz-weronika.jpg` — Weronika (Manicure, pedicure, brwi, SPA i depilacja)
-- `assets/mistrz-wiktoria.jpg` — Wiktoria (Mikroneedling, blizny i warkoczyki)
+- `assets/mistrz-natasha.jpg` — Natasha (Stylistka paznokci)
+- `assets/mistrz-wiktoria.jpg` — Wiktoria (Mikroneedling i blizny)
 - `assets/mistrz-fabian.jpg` — Fabian (Fizjoterapeuta, masażysta)
 - `assets/mistrz-emilia.jpg` — Emilia (Stylizacja paznokci, brwi i rzęs)
 - `assets/mistrz-elena.jpg` — Elena (Stylistka przedłużania rzęs)
